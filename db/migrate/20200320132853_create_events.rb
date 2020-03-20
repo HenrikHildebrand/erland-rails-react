@@ -3,9 +3,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
     create_table :events do |t|
       t.string :title
       t.datetime :date
-
       t.references :admin, null: false, index: true
-
       t.timestamps
     end
 
