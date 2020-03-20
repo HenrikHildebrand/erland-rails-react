@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Swiper from './Swiper'
 import Slide from '@material-ui/core/Slide';
+import { Redirect } from 'react-router'
 
 const styles = {
     body: {
@@ -19,7 +20,6 @@ const styles = {
 }
 
 class App extends React.Component {
-
     state = {
         loaded: false
     }
@@ -27,16 +27,22 @@ class App extends React.Component {
     componentDidMount() {
         this.setState({
             loaded: true,
-            csrf: this.props.csrf
+            user: this.props.user
         })
     }
 
+    getAuth = () => (
+        {
+            'X-User-Email': this.state.user.email,
+            'X-User-Token': this.state.user.authentication_token
+        }
+    )
     logout = () => {
         fetch('/users/sign_out', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'X_CSRF_Token': this.state.csrf
+                ...this.getAuth()
             }
         }).then(()=> {
             this.setState({loaded: false});
@@ -50,6 +56,7 @@ class App extends React.Component {
                 <Swiper>
                     <div  label="Info" style={styles.container}>
                         <a className="btn btn-danger" style={styles.logout} onClick={this.logout} >logout</a>
+                        {/*<a className="btn btn-danger" style={styles.logout} onClick={() => {this.setState({loaded:false}); return(<Redirect to="/users/sign_out" />);}} >logout</a>*/}
                         <h3>Hello {this.props.user.email}!</h3>
                     </div>
                     <div  label="Info" style={styles.container}>
