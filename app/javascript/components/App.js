@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import Swiper from './common/Swiper'
 import Slide from '@material-ui/core/Slide';
 import EventSlider from './events/EventSlider'
+import { connect } from "react-redux";
+import { update } from "./actions/stateActions"
 
 const styles = {
     body: {
@@ -28,12 +30,13 @@ class App extends React.Component {
             loaded: true,
             user: this.props.user
         })
+        this.props.updateState({user: this.props.user, auth: this.getAuth()})
     }
 
     getAuth = () => (
         {
-            'X-User-Email': this.state.user.email,
-            'X-User-Token': this.state.user.authentication_token
+            'X-User-Email': this.props.user.email,
+            'X-User-Token': this.props.user.authentication_token
         }
     )
     logout = () => {
@@ -51,7 +54,13 @@ class App extends React.Component {
 
     render(){
         return(
-            <EventSlider />
+            <div>
+                {this.state.loaded ?
+                    <EventSlider />
+                : null}
+            </div>
+
+
         )
     }
 }

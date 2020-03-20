@@ -1,7 +1,10 @@
 class V1::EventsController < V1::BaseController
     def index
         @events = Event.all
-        render json: @events
+        render json: {
+            all_events: @events,
+            my_events: @events.where(admin_id: current_user.id)
+        }
     end
 
     def show

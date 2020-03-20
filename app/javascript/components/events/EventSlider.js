@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
-import Slider from '../common/Slider'
+import Swiper from '../common/Swiper'
 import EventCard from './EventCard'
 import Swal from 'sweetalert2'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CreateEventCard from "./CreateEventCard"
 import Zoom from '@material-ui/core/Zoom';
-import EventFormDialog from './CreateEventDialog'
+// import EventFormDialog from './CreateEventDialog'
 import Slide from '@material-ui/core/Slide';
+import { connect } from "react-redux";
+import { update } from "../actions/stateActions"
 
 class EventSlider extends Component{
     state = {
@@ -29,8 +31,7 @@ class EventSlider extends Component{
           method: "GET",
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': this.getToken()
+            ...this.props.state.auth
           }
         }).then(response => {
             return response.json()
@@ -42,6 +43,7 @@ class EventSlider extends Component{
                 selectedEvent: {id: null, admin: false},
                 eventSelected: false
             })
+            this.setState({loaded: true})
         }).catch(error => console.log(error))
     }
 
@@ -106,40 +108,51 @@ class EventSlider extends Component{
             this.props.handleSelect(this.state.selectedEvent.id, this.state.selectedEvent.admin)
         }
     }
-    createEventCards = (events, label) => (
-        <div label={label}>
-            {events.map((event, index) => (
-                <Zoom key={index} onExited={this.afterTransition} timeout={this.state.zoomDur} in={this.state.zoom} style={{transitionDelay: this.state.zoom ? 30*(index+1)+"ms" : ""}} >
-                    <div>
-                        <EventCard
-                            key={event.id}
-                            id={event.id}
-                            title={event.title}
-                            admin={event.admin}
-                            invite_only={event.invite_only}
-                            public={event.public}
-                            handleRequest={this.handleRequest}
-                            handleSelect={this.handleSelect}
-                            date={event.date}
-                        />
-                    </div>
-                </Zoom>
-            ))}
-        </div>
-    )
+    createEventCards = (events, label) => {
+        if(events != undefined) {
+            return (
+                <div label={label}>
+                    {events.map((event, index) => (
+                        <Zoom key={index} onExited={this.afterTransition} timeout={this.state.zoomDur}
+                              in={this.state.zoom}
+                              style={{transitionDelay: this.state.zoom ? 30 * (index + 1) + "ms" : ""}}>
+                            <div>
+                                <EventCard
+                                    key={event.id}
+                                    id={event.id}
+                                    title={event.title}
+                                    admin={event.admin}
+                                    invite_only={event.invite_only}
+                                    public={event.public}
+                                    handleRequest={this.handleRequest}
+                                    handleSelect={this.handleSelect}
+                                    date={event.date}
+                                />
+                            </div>
+                        </Zoom>
+                    ))}
+                </div>
+            )
+        }else{
+            return <div label={label}><h3>Inga event</h3></div>
+        }
+    }
+
 
     render(){
-        const myEvents = this.createEventCards(this.state.myEvents, 'Mina')
-        const allEvents = this.createEventCards(this.state.allEvents, 'Alla')
-        const invites = <div><h3>Du har inga inbjudningar</h3></div>
+        const myEvents = this.state.loaded ? this.createEventCards(this.props.state.myEvents, 'Mina') : null
+        const allEvents = this.state.loaded ? this.createEventCards(this.props.state.allEvents, 'Alla') : null
+        const invites = <div label="Inbjudningar"><h3>Du har inga inbjudningar</h3></div>
         return(
             this.state.loaded ? (
-                <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+                <Slide direction="up" in={this.state.loaded} mountOnEnter unmountOnExit>
                     <div>
-                        <Slider>
-                            {events}
-                        </Slider>
-                        <EventFormDialog open={this.state.formOpen}  setOpen={this.openForm} token={this.props.token} />
+                        <Swiper>
+                            {myEvents}
+                            {allEvents}
+                            {invites}
+                        </Swiper>
+                        {/*<EventFormDialog open={this.state.formOpen}  setOpen={this.openForm} token={this.props.token} />*/}
                     </div>
                 </Slide>
                 ): 

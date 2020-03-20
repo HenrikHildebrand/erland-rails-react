@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     ActiveAdmin.routes(self)
 
     namespace :v1 do
-        :events
+        resources :events
     end
 
     get '/signed_out' => 'home#signed_out'
