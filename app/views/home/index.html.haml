@@ -1,0 +1,8 @@
+- if user_signed_in?
+  #root
+    = react_component('index', {user: current_user, csrf: session[:_csrf_token]})
+- else
+  .card.mw-650
+    %h5.card-header Please login to continue!
+    .card-body.pd-20
+      = link_to "login", new_user_session_path, class: 'btn btn-info btn-lg'
