@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import Swiper from './Swiper'
+import Swiper from './common/Swiper'
 import Slide from '@material-ui/core/Slide';
-import { Redirect } from 'react-router'
+import EventSlider from './events/EventSlider'
+import { connect } from "react-redux";
+import { update } from "./actions/stateActions"
 
 const styles = {
     body: {
@@ -29,12 +30,13 @@ class App extends React.Component {
             loaded: true,
             user: this.props.user
         })
+        this.props.updateState({user: this.props.user, auth: this.getAuth()})
     }
 
     getAuth = () => (
         {
-            'X-User-Email': this.state.user.email,
-            'X-User-Token': this.state.user.authentication_token
+            'X-User-Email': this.props.user.email,
+            'X-User-Token': this.props.user.authentication_token
         }
     )
     logout = () => {
@@ -52,28 +54,29 @@ class App extends React.Component {
 
     render(){
         return(
-            <Slide direction="up" in={this.state.loaded} >
-                <Swiper>
-                    <div  label="Info" style={styles.container}>
-                        <a className="btn btn-danger" style={styles.logout} onClick={this.logout} >logout</a>
-                        {/*<a className="btn btn-danger" style={styles.logout} onClick={() => {this.setState({loaded:false}); return(<Redirect to="/users/sign_out" />);}} >logout</a>*/}
-                        <h3>Hello {this.props.user.email}!</h3>
-                    </div>
-                    <div  label="Info" style={styles.container}>
-                        <h3>Other content</h3>
-                    </div>
-                </Swiper>
-            </Slide>
+            <div>
+                {this.state.loaded ?
+                    <EventSlider />
+                : null}
+            </div>
+
+
         )
     }
 }
 
-App.defaultProps = {
-    name: 'Henrik'
+const mapStateToProps = (state) => {
+    return { ...state }
 }
 
-App.propTypes = {
-    name: PropTypes.string
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (currentUser) => { dispatch(update.user(currentUser)) },
+        updateState: (state) => {
+            console.log("[App.js] dispatch")
+            dispatch(update.state(state))
+        }
+    }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
