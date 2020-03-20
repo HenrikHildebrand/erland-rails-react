@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-      sessions: 'users/sessions',
-  }
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  #
-  #
-  #
+    devise_for :users, controllers: {
+        sessions: 'users/sessions',
+    }
+    devise_for :admin_users, ActiveAdmin::Devise.config
+    ActiveAdmin.routes(self)
 
-  get '/signed_out' => 'home#signed_out'
-  root 'home#index'
+    namespace :v1 do
+        :events
+    end
+
+    get '/signed_out' => 'home#signed_out'
+    root 'home#index'
 end
