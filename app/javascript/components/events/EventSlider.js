@@ -3,8 +3,8 @@ import Swiper from '../common/Swiper'
 import EventCard from './EventCard'
 import Swal from 'sweetalert2'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import CreateEventCard from "./CreateEventCard"
 import Zoom from '@material-ui/core/Zoom';
+// import CreateEventCard from "./CreateEventCard"
 // import EventFormDialog from './CreateEventDialog'
 import Slide from '@material-ui/core/Slide';
 import { connect } from "react-redux";
@@ -38,7 +38,7 @@ class EventSlider extends Component{
         }).then(response => {
             this.props.updateState({
                 myEvents: response.my_events,
-                allEvents: response.admin_events,
+                allEvents: response.all_events,
                 loaded: true,
                 selectedEvent: {id: null, admin: false},
                 eventSelected: false
