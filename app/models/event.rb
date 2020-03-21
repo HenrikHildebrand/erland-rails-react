@@ -4,4 +4,6 @@ class Event < ApplicationRecord
   has_and_belongs_to_many :collaborators, join_table: :events_collaborators, class_name: 'User'
   has_and_belongs_to_many :songs, {class_name: 'Song'}
   has_many :facts
+  has_many :questions
+  has_many :answers, through: :questions
 end

@@ -20,6 +20,40 @@ ActiveAdmin.register Question do
   # end
 
 
+  sidebar "Question details", only: :show do
+    attributes_table_for question do
+      row :title
+      row :lat
+      row :lng
+      row :event
+      row('Answers'){|q| q.answers.count}
+    end
+    render partial: 'admin/sidebar_map', locals: {lat: question.lat, lng: question.lng}
+  end
+
+  show do
+    columns do
+      column do
+        panel 'Alternatives' do
+          table_for question.alternatives do
+            column :title
+            column :correct
+          end
+        end
+      end
+
+      column do
+        panel 'Answers' do
+          table_for question.answers do
+            column('User'){|a| link_to(a.user.email, admin_user_path(a.user))}
+            column('Alternative') {|a| a.alternative.title }
+            column('Correct') {|a| a.alternative.correct}
+          end
+        end
+      end
+    end
+  end
+
   form do |f|
     f.semantic_errors *f.object.errors.keys # shows errors on :base
     f.actions         # adds the 'Submit' and 'Cancel' buttons

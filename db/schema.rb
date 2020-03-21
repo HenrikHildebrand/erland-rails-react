@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_153451) do
+ActiveRecord::Schema.define(version: 2020_03_21_154536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,15 @@ ActiveRecord::Schema.define(version: 2020_03_21_153451) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_alternatives_on_question_id"
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "alternative_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alternative_id"], name: "index_answers_on_alternative_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -144,6 +153,8 @@ ActiveRecord::Schema.define(version: 2020_03_21_153451) do
   end
 
   add_foreign_key "alternatives", "questions"
+  add_foreign_key "answers", "alternatives"
+  add_foreign_key "answers", "users"
   add_foreign_key "events", "users", column: "admin_id"
   add_foreign_key "questions", "events"
 end

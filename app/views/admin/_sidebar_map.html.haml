@@ -1,0 +1,76 @@
+%script{src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyD0Mknc1_dWFz7iRLF24lVFm4edmyxw3g4"}
+
+#map.sidebar-map
+= hidden_field_tag :question_lat, lat
+= hidden_field_tag :question_lng, lng
+
+:javascript
+  //The center location of our map.
+  let marker = false;
+  var current_position = false;
+  var center = new google.maps.LatLng(58.7196745760902, 14.93373532274556);
+  if(document.getElementById('question_lng').value && document.getElementById('question_lat').value){
+    try {
+        current_position = {"lng":parseFloat(document.getElementById('question_lng').value),"lat":parseFloat(document.getElementById('question_lat').value)};
+        center = new google.maps.LatLng(current_position.lat, current_position.lng);
+    }
+    catch (e) {
+      console.log("couldnt set marker");
+      console.log(e);
+    }
+
+  }
+  //Map options.
+  let options = {
+    center: center, //Set center.
+    zoom: 7 //The zoom value.
+  };
+  //Create the map object.
+  let map = new google.maps.Map(document.getElementById('map'), options);
+      if(current_position){
+          //Create the marker.
+           marker = new google.maps.Marker({
+              position: current_position,
+              map: map,
+              draggable: true //make it draggable
+      });
+          //Listen for drag events!
+      google.maps.event.addListener(marker, 'dragend', function(event){
+        markerLocation();
+      });
+    }
+  //Listen for any clicks on the map.
+  // google.maps.event.addListener(map, 'click', function(event) {
+  //     //Get the location that the user clicked.
+  //   let clickedLocation = event.latLng;
+  //     //If the marker hasn't been added.
+  //   if(marker === false){
+  //         //Create the marker.
+  //          marker = new google.maps.Marker({
+  //             position: clickedLocation,
+  //             map: map,
+  //             draggable: true //make it draggable
+  //     });
+  //         //Listen for drag events!
+  //     google.maps.event.addListener(marker, 'dragend', function(event){
+  //       markerLocation();
+  //     });
+  //   } else{
+  //         //Marker has already been added, so just change its location.
+  //     marker.setPosition(clickedLocation);
+  //   }
+  //     //Get the marker's location.
+  //   markerLocation();
+  // });
+
+  //This function will get the marker's current location and then add the lat/long
+  //values to our textfields so that we can save the location.
+  function markerLocation(){
+      //Get location.
+    var currentLocation = marker.getPosition();
+      //Add lat and lng values to a field that we can save.
+    document.getElementById('question_lat').value = currentLocation.lat(); //latitude
+    document.getElementById('question_lng').value = currentLocation.lng(); //longitude
+  }
+
+
