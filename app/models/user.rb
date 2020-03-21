@@ -5,7 +5,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :events, class_name: 'Event'
+  has_many :events, class_name: 'Event', foreign_key: 'admin_id'
   has_and_belongs_to_many :events_as_participant, join_table: :events_participants, class_name: 'Event'
-  has_and_belongs_to_many :events_as_collaborators, join_table: :events_collaborators, class_name: 'Event'
+  has_and_belongs_to_many :events_as_collaborator, join_table: :events_collaborators, class_name: 'Event'
+
+
+  def display_name
+    email
+  end
 end

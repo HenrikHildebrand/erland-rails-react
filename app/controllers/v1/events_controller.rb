@@ -3,7 +3,7 @@ class V1::EventsController < V1::BaseController
         @events = Event.all
         render json: {
             all_events: @events,
-            my_events: @events.where(admin_id: current_user.id)
+            my_events: current_user.events
         }
     end
 
