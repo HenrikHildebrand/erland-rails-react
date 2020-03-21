@@ -10,7 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+gem 'sass-rails'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -59,3 +59,6 @@ gem 'activeadmin'
 gem 'devise'
 gem 'simple_token_authentication'
 gem "haml-rails"
+gem 'active_admin_theme'
+gem 'active_admin_datetimepicker'
+gem 'active_admin_role'
