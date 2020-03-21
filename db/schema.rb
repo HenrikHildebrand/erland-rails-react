@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_110038) do
+ActiveRecord::Schema.define(version: 2020_03_21_151326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 2020_03_21_110038) do
     t.bigint "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "invite_only"
+    t.boolean "public"
+    t.integer "initial_credits"
     t.index ["admin_id"], name: "index_events_on_admin_id"
   end
 
@@ -83,11 +86,28 @@ ActiveRecord::Schema.define(version: 2020_03_21_110038) do
     t.index ["user_id"], name: "index_events_participants_on_user_id"
   end
 
+  create_table "events_songs", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "song_id", null: false
+    t.index ["song_id", "event_id"], name: "index_events_songs_on_song_id_and_event_id", unique: true
+  end
+
+  create_table "facts", force: :cascade do |t|
+    t.string "title"
+    t.string "headline"
+    t.string "text"
+    t.bigint "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_facts_on_event_id"
+  end
+
   create_table "songs", force: :cascade do |t|
     t.string "title"
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "public"
   end
 
   create_table "users", force: :cascade do |t|

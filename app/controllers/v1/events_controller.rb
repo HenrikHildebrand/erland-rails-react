@@ -37,7 +37,6 @@ class V1::EventsController < V1::BaseController
         else
             render json: {error: 'Unable to find that event.', status: 400}
         end
-
     end
 
     def update
