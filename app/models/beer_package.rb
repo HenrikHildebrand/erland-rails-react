@@ -1,0 +1,2 @@
+class BeerPackage < ApplicationRecord
+end
