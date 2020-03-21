@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :authentication_token
+  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :authentication_token, :password, :password_confirmation
   #
   # or
   #
@@ -79,4 +79,17 @@ ActiveAdmin.register User do
       end
     end
   end
+
+  form do |f|
+    f.semantic_errors *f.object.errors.keys # shows errors on :base
+    f.actions
+    f.inputs do
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
+      f.input :authentication_token
+    end
+    f.actions
+  end
+
 end

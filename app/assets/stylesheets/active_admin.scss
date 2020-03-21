@@ -25,6 +25,10 @@
   height: 300px !important;
 }
 
+.ui-tabs-anchor {
+  outline: none !important
+}
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //

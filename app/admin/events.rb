@@ -20,7 +20,7 @@ ActiveAdmin.register Event do
   form do |f|
     f.inputs "Add Event" do
       f.input :title
-      f.input :adminGIT
+      f.input :admin
       f.input :date
       f.input :initial_credits
       f.input :songs, collection: Song.all
