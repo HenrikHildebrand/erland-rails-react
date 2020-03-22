@@ -5,7 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 const styles = {
     tabs: {
-        background: '#efefef',
+        background: '#fff',
         boxShadow: '0 1px 0 #aaa'
     },
     slide: { position: 'absolute', top: 0, bottom: 0, left: 0, right: 0},
