@@ -4,6 +4,7 @@ import Slide from '@material-ui/core/Slide';
 import EventSlider from './events/EventSlider'
 import { connect } from "react-redux";
 import { update } from "./actions/stateActions"
+import MenuButton from './common/MenuButton'
 
 const styles = {
     body: {
@@ -56,7 +57,10 @@ class App extends React.Component {
         return(
             <div>
                 {this.state.loaded ?
-                    <EventSlider />
+                    <div>
+                        <EventSlider />
+                        <MenuButton click={this.logout} loaded={this.state.loaded}/>
+                    </div>
                 : null}
             </div>
 
