@@ -6,8 +6,8 @@ import Zoom from '@material-ui/core/Zoom';
 const styles = {
     fab: {
         position: 'absolute',
-        right: 20,
-        bottom: 20,
+        right: 40,
+        bottom: 40,
         outline: 'none'
         // backgroundColor: "#06f"
     },
