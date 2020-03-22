@@ -7,7 +7,7 @@ const styles = {
     fab: {
         position: 'absolute',
         right: 20,
-        top: 60,
+        bottom: 20,
         outline: 'none'
         // backgroundColor: "#06f"
     },
