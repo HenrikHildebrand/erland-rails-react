@@ -17,7 +17,7 @@ class EventSlider extends Component{
         events: [],
         adminEvents: [],
         zoom: true,
-        zoomDur: 1,
+        zoomDur: 300,
         formOpen: false,
         selectedEvent: {id: null, admin: false},
         eventSelected: false
@@ -108,14 +108,15 @@ class EventSlider extends Component{
             this.props.handleSelect(this.state.selectedEvent.id, this.state.selectedEvent.admin)
         }
     }
+
     createEventCards = (events, label) => {
         if(events != undefined) {
             return (
                 <div label={label}>
                     {events.map((event, index) => (
-                        <Zoom key={index} onExited={this.afterTransition} timeout={this.state.zoomDur}
-                              in={this.state.zoom}
-                              style={{transitionDelay: this.state.zoom ? 30 * (index + 1) + "ms" : ""}}>
+                        <Zoom key={index} timeout={this.state.zoomDur}
+                              in={this.state.loaded}
+                              style={{transitionDelay: (600 + 30 * (index + 1)) + "ms"}}>
                             <div>
                                 <EventCard
                                     key={event.id}
@@ -145,7 +146,7 @@ class EventSlider extends Component{
         const invites = <div label="Inbjudningar"><h3>Du har inga inbjudningar</h3></div>
         return(
             this.state.loaded ? (
-                <Slide direction="up" in={this.state.loaded} mountOnEnter unmountOnExit>
+                <Slide direction="up" in={this.props.loaded} timeout={500} mountOnEnter unmountOnExit>
                     <div>
                         <Swiper>
                             {myEvents}

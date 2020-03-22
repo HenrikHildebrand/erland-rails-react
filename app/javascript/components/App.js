@@ -58,7 +58,7 @@ class App extends React.Component {
             <div>
                 {this.state.loaded ?
                     <div>
-                        <EventSlider />
+                        <EventSlider loaded={this.state.loaded} />
                         <MenuButton click={this.logout} loaded={this.state.loaded}/>
                     </div>
                 : null}
