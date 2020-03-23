@@ -8,8 +8,14 @@ const styles = {
         background: '#fff',
         boxShadow: '0 1px 0 #aaa'
     },
-    slide: { position: 'absolute', top: 0, bottom: 0, left: 0, right: 0},
-    contentDiv: { position: 'absolute', top: 48, bottom: 0, left: 0, right: 0}
+    slide: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    },
+    contentDiv: { position: 'absolute', top: 48, bottom: 0, left: 0, right: 0, minHeight: 300}
 };
 
 class Swiper extends React.Component {

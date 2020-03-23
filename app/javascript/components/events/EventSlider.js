@@ -51,7 +51,7 @@ class EventSlider extends Component{
         Swal.fire({
             title: "Stängd!",
             text: "Anmälan har inte öppnat för detta event ännu",
-            type: 'info',
+            icon: 'info',
             showConfirmButton: false,
             timer: 3000,
           })
@@ -61,7 +61,7 @@ class EventSlider extends Component{
         Swal.fire({
             title: "Ej Tillgänglig",
             text: "Denna feature har inte blivit tillgänglig ännu...",
-            type: 'info',
+            icon: 'info',
             showConfirmButton: false,
             timer: 3000,
           })
@@ -79,7 +79,7 @@ class EventSlider extends Component{
             Swal.fire({
                 title: "Event skapades!",
                 text: 'Du finner eventet under "Mina" i event-vyn',
-                type: 'success',
+                icon: 'success',
                 showConfirmButton: false,
                 timer: 3000,
               })
@@ -88,7 +88,7 @@ class EventSlider extends Component{
                 Swal.fire({
                     title: 'Ej tillgänglig!',
                     text: "Du har nått maxgränsen (3 st) för egna event!",
-                    type: 'error',
+                    icon: 'error',
                     showConfirmButton: false,
                     timer: 3000,
                   })
@@ -110,7 +110,7 @@ class EventSlider extends Component{
             Swal.fire({
                 title: "Event skapades!",
                 text: 'Du finner eventet under "Mina" i event-vyn',
-                type: 'success',
+                icon: 'success',
                 showConfirmButton: false,
                 timer: 3000,
             })
@@ -119,7 +119,7 @@ class EventSlider extends Component{
                 Swal.fire({
                     title: 'Ej tillgänglig!',
                     text: "Du har nått maxgränsen (3 st) för egna event!",
-                    type: 'error',
+                    icon: 'error',
                     showConfirmButton: false,
                     timer: 3000,
                 })
@@ -146,7 +146,7 @@ class EventSlider extends Component{
                     {events.map((event, index) => (
                         <Zoom key={index} timeout={this.state.zoomDur}
                               in={this.state.loaded}
-                              style={{transitionDelay: (600 + 30 * (index + 1)) + "ms"}}>
+                              style={{transitionDelay: (400 + 30 * (index + 1)) + "ms"}}>
                             <div>
                                 <EventCard
                                     key={event.id}
@@ -171,16 +171,22 @@ class EventSlider extends Component{
 
 
     render(){
-        const myEvents = this.state.loaded ?<div label="Mina">
-            <Zoom key="createCard" onExited={this.afterTransition} timeout={this.state.zoomDur} in={this.state.zoom} style={{transitionDelay: this.state.zoom ? 30*(0+1)+"ms" : ""}} >
-                <CreateEventCard click={() => this.openForm(true)}/>
-            </Zoom> {this.createEventCards(this.props.state.myEvents, 'Mina')}</div> : null
+        const myEvents = this.state.loaded ?
+            <div label="Mina">
+                <Zoom key="createCard" style={{transitionDelay: 350 + "ms"}} in={this.state.loaded} >
+                    <div>
+                        <CreateEventCard click={() => this.openForm(true)}/>
+                    </div>
+                </Zoom> {this.createEventCards(this.props.state.myEvents, 'Mina')}
+            </div> : null
         const allEvents = this.state.loaded ? this.createEventCards(this.props.state.allEvents, 'Alla') : null
         const invites = <div label="Inbjudningar"><h3>Du har inga inbjudningar</h3></div>
         return(
             this.state.loaded ? (
                 <div>
-                    <Slide direction="down" in={this.props.loaded} timeout={500} mountOnEnter unmountOnExit>
+                    <Zoom timeout={300}
+                        in={this.state.loaded}
+                        >
                         <div>
                             <Swiper>
                                 {myEvents}
@@ -188,7 +194,7 @@ class EventSlider extends Component{
                                 {invites}
                             </Swiper>
                         </div>
-                    </Slide>
+                    </Zoom>
                     <EventFormDialog open={this.state.formOpen}  setOpen={this.openForm} token={this.props.state.auth} />
                 </div>
 

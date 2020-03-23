@@ -8,12 +8,12 @@ const useStyles = makeStyles({
     height: 200,
     margin: "10px auto 10px auto",
     cursor: "pointer",
-    backgroundColor: "#fefefe"
+    backgroundColor: "#ddd"
   },
   add: {
       height: "100%",
       width: "100%",
-      backgroundColor: "#eee",
+      backgroundColor: "#ddd",
   },
   circleDiv: {
     padding: 20,
