@@ -1,7 +1,7 @@
 import React from 'react'
-import Fab from '@material-ui/core/Fab';
+import Fab from '@material-ui/core/Fab/index';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
-import Zoom from '@material-ui/core/Zoom';
+import Zoom from '@material-ui/core/Zoom/index';
 
 const styles = {
     fab: {
@@ -9,7 +9,6 @@ const styles = {
         right: 40,
         bottom: 40,
         outline: 'none'
-        // backgroundColor: "#06f"
     },
     icon: {
         outline: 'none'
@@ -19,7 +18,7 @@ const styles = {
 
 export default (props) => (
     <Zoom in={props.loaded} style={{ transitionDelay: props.loaded ? '500ms' : '0ms' }}>
-        <Fab color="primary" aria-label="add" style={styles.fab} onClick={props.click}>
+        <Fab color="primary" aria-label="add" style={styles.fab} onClick={(event) => props.click(event, !props.open)}>
             <MenuRoundedIcon style={styles.icon} />
         </Fab>
     </Zoom>

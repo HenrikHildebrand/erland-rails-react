@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import Swiper from './common/Swiper'
 import Slide from '@material-ui/core/Slide';
 import EventSlider from './events/EventSlider'
-import { connect } from "react-redux";
-import { update } from "./actions/stateActions"
-import MenuButton from './common/MenuButton'
+import MenuButton from './navigation/MenuButton'
+import RightDrawer from './navigation/RightDrawer'
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 const styles = {
     body: {
@@ -23,7 +23,8 @@ const styles = {
 
 class App extends React.Component {
     state = {
-        loaded: false
+        loaded: false,
+        navOpen: false
     }
 
     componentDidMount() {
@@ -31,7 +32,12 @@ class App extends React.Component {
             loaded: true,
             user: this.props.user
         })
-        this.props.updateState({user: this.props.user, auth: this.getAuth()})
+        this.props.updateState({
+            user: this.props.user,
+            auth: this.getAuth(),
+            authenticated: true
+        })
+        console.log(this.props.state.user)
     }
 
     getAuth = () => (
@@ -53,14 +59,37 @@ class App extends React.Component {
         })
     }
 
+    toggleDrawer = (event, open) => {
+        console.log('hej', open)
+        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+        console.log('hej2')
+        this.setState({ ...this.state, navOpen: open });
+    };
+
+    leaveParty = () => {
+        this.props.updateState({event:false})
+        this.setState({navOpen:false})
+    }
+
     render(){
         return(
             <div>
                 {this.state.loaded ?
                     <div>
-                        <EventSlider loaded={this.state.loaded} />
-                        <MenuButton click={this.logout} loaded={this.state.loaded}/>
+                        <Router>
+                            <EventSlider loaded={this.state.loaded} />
+                            <MenuButton click={this.toggleDrawer} open={this.state.navOpen} loaded={this.state.loaded}/>
+                            <RightDrawer leave={this.leaveParty}
+                                         toggleDrawer={this.toggleDrawer}
+                                         open={this.state.navOpen}
+                                         logout={this.logout}
+                                         authenticated={this.props.state.authenticated}
+                                         img={{url: 'erland.png'}} />
+                        </Router>
                     </div>
+
                 : null}
             </div>
 
@@ -68,6 +97,10 @@ class App extends React.Component {
         )
     }
 }
+
+
+import { connect } from "react-redux";
+import { update } from "./actions/stateActions"
 
 const mapStateToProps = (state) => {
     return { ...state }

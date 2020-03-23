@@ -13,11 +13,15 @@
  */
 
 @import 'login';
+@import "add_event_circle";
+
+
 
 html, body, #root, #root>div {
     height: 100%;
     width: 100%;
-    background-color: #efefef
+    background-color: #efefef;
+    color: #888;
 }
 .container-helper {
     padding: 20px;
@@ -38,3 +42,17 @@ html, body, #root, #root>div {
     outline: 0 !important;
 }
 
+.erland-thumb {
+  width: 40%;
+  margin: 20px;
+  box-shadow: 0 0 10px;
+  -ms-transition: width .2s ease-in-out;
+  -moz-transition: width .2s ease-in-out;
+  -webkit-transition: width .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.logo-size{
+  width: 180px;
+  margin-top: 10px
+}

@@ -7,7 +7,8 @@ const useStyles = makeStyles({
     width: 345,
     height: 200,
     margin: "10px auto 10px auto",
-    cursor: "pointer"
+    cursor: "pointer",
+    backgroundColor: "#fefefe"
   },
   add: {
       height: "100%",

@@ -1,0 +1,32 @@
+
+.add-event-circle {
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  background-color: #ccc;
+  position: relative;
+}
+.add-event-circle::after {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: #eee;
+  height: 10px;
+  margin-top: -5px;
+  top: 50%;
+  left: 10px;
+  right: 10px;
+  z-index: 9;
+}
+.add-event-circle::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: #eee;
+  width: 10px;
+  margin-left: -5px;
+  left: 50%;
+  top: 10px;
+  bottom: 10px;
+  z-index: 9;
+}
