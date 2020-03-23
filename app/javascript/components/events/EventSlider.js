@@ -51,7 +51,7 @@ class EventSlider extends Component{
         Swal.fire({
             title: "Stängd!",
             text: "Anmälan har inte öppnat för detta event ännu",
-            type: 'info',
+            icon: 'info',
             showConfirmButton: false,
             timer: 3000,
           })
