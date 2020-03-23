@@ -1,6 +1,6 @@
 class Question < ApplicationRecord
   belongs_to :event
-  has_many :alternatives
+  has_many :alternatives, dependent: :destroy
   has_many :answers, through: :alternatives
 
 

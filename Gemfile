@@ -62,3 +62,5 @@ gem "haml-rails"
 gem 'active_admin_theme'
 gem 'active_admin_datetimepicker'
 gem 'active_admin_role'
+gem 'omniauth-facebook'
+
