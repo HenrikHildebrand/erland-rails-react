@@ -8,7 +8,7 @@ class V1::EventsController < V1::BaseController
     end
 
     def show
-        @event = Event.find(params[:id])
+        @event = Event.find_by_id(params[:id])
         if @event
             render json: @event
         else
@@ -31,7 +31,7 @@ class V1::EventsController < V1::BaseController
     end
 
     def edit
-        @event = Event.find(params[:id])
+        @event = Event.find_by_id(params[:id])
         if @event
             render json: @event
         else
@@ -40,7 +40,7 @@ class V1::EventsController < V1::BaseController
     end
 
     def update
-        @event = Event.find(params[:id])
+        @event = Event.find_by_id(params[:id])
         if @event
             @event.update(event_params)
             render json: {message: 'Event successfully updated.', status: 200}
@@ -50,7 +50,7 @@ class V1::EventsController < V1::BaseController
     end
 
     def destroy
-        @event = Event.find(params[:id])
+        @event = Event.find_by_id(params[:id])
         if @event
             @event.destroy
             render json: {message: 'Event successfully deleted.', status: 200}

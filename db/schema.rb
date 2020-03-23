@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_104429) do
+ActiveRecord::Schema.define(version: 2020_03_23_170344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,19 @@ ActiveRecord::Schema.define(version: 2020_03_23_104429) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["alternative_id"], name: "index_answers_on_alternative_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "beer_packages", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.boolean "accepted"
+    t.datetime "accepted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_beer_packages_on_event_id"
+    t.index ["receiver_id"], name: "index_beer_packages_on_receiver_id"
+    t.index ["sender_id"], name: "index_beer_packages_on_sender_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -159,6 +172,9 @@ ActiveRecord::Schema.define(version: 2020_03_23_104429) do
   add_foreign_key "alternatives", "questions"
   add_foreign_key "answers", "alternatives"
   add_foreign_key "answers", "users"
+  add_foreign_key "beer_packages", "events"
+  add_foreign_key "beer_packages", "users", column: "receiver_id"
+  add_foreign_key "beer_packages", "users", column: "sender_id"
   add_foreign_key "events", "users", column: "admin_id"
   add_foreign_key "questions", "events"
 end
