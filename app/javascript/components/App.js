@@ -86,7 +86,7 @@ class App extends React.Component {
                                          open={this.state.navOpen}
                                          logout={this.logout}
                                          authenticated={this.props.state.authenticated}
-                                         img={{url: 'erland.png'}} />
+                                         img={{url: this.props.state.user.image}} />
                         </Router>
                     </div>
 

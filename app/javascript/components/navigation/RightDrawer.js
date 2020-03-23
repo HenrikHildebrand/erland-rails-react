@@ -37,14 +37,14 @@ const sideDrawer = (props) => {
 
     const sideList = side => (
         <div
-            style={{padding: 10}}
+            style={{padding: 10, minWidth: 200}}
             className={classes.list}
             role="presentation"
             // onClick={(event) => props.toggleDrawer(event, false)}
             onKeyDown={(event) => props.toggleDrawer(event, false)}
         >
 
-            {/*<img src={props.img.url} style={styles.img} className="rounded-circle erland-thumb" alt="profile_img" />*/}
+            <img src={props.img.url} style={styles.img} className="rounded-circle erland-thumb" alt="profile_img" />
             <Divider />
             {/*<List style={{width: 200}}>*/}
             {/*    {[['Dryck','/beer'], ['Min dryck', '/my-drinks'], ['Sångbok','/songs'], ['Quiz','/quiz'], ['Fakta','/facts']].map((text, index) => (*/}
