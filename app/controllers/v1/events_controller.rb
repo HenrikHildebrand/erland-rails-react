@@ -1,4 +1,6 @@
 class V1::EventsController < V1::BaseController
+    before_action :set_event, only: [:show, :edit, :update, :destroy]
+
     def index
         @events = Event.all
         render json: {
@@ -8,7 +10,6 @@ class V1::EventsController < V1::BaseController
     end
 
     def show
-        @event = Event.find(params[:id])
         if @event
             render json: @event
         else
@@ -31,16 +32,14 @@ class V1::EventsController < V1::BaseController
     end
 
     def edit
-        @event = Event.find(params[:id])
         if @event
             render json: @event
         else
-            render json: {error: 'Unable to find that event.', status: 400}
+            render json: {error: 'Unable to find that event.', status: 404}
         end
     end
 
     def update
-        @event = Event.find(params[:id])
         if @event
             @event.update(event_params)
             render json: {message: 'Event successfully updated.', status: 200}
@@ -50,7 +49,6 @@ class V1::EventsController < V1::BaseController
     end
 
     def destroy
-        @event = Event.find(params[:id])
         if @event
             @event.destroy
             render json: {message: 'Event successfully deleted.', status: 200}
@@ -62,6 +60,10 @@ class V1::EventsController < V1::BaseController
     private
     def event_params
         params.permit(:admin, :title, :date, :collaborators, :participants)
+    end
+
+    def set_event
+        @event = Event.find_by_id(params[:id])
     end
 
 end

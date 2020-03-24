@@ -62,6 +62,7 @@ class App extends React.Component {
 
     toggleDrawer = (event, open) => {
         console.log('hej', open)
+        
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }

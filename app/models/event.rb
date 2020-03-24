@@ -6,4 +6,5 @@ class Event < ApplicationRecord
   has_many :facts
   has_many :questions, dependent: :destroy
   has_many :answers, through: :questions
+  has_many :beer_packages
 end
