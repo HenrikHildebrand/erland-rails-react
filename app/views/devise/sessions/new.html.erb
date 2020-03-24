@@ -1,9 +1,10 @@
-<div class="wrapper fadeInDown">
+<div class="wrapper <%= 'fadeInDown' unless (resource.email.nil? or resource.email != '')%>">
   <div id="formContent">
     <div class="fadeIn first">
         <%= image_tag 'erland.png', id: :icon, alt: 'erland icon' %>
     </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
       <div class="field">
         <%= f.email_field :email, class: 'fadeIn second form-control', placeholder: :email, autocomplete: "email" %>
       </div>

@@ -1,9 +1,17 @@
 const state = {
     authenticated: false,
     loaded: false,
-    allEvents: null,
-    myEvents: null,
-    user: null
+    allEvents: [],
+    myEvents: [],
+    invites: [],
+    user: {},
+    event: {
+        selected: false,
+        questions: [],
+        facts: [],
+        songs: [],
+        participants: [],
+    }
 }
 
 const reducer = (returnState={state}, action) => {

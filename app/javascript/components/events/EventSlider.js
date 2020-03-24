@@ -135,14 +135,18 @@ class EventSlider extends Component{
     
     afterTransition = () => {
         if(this.state.eventSelected){
-            this.props.handleSelect(this.state.selectedEvent.id, this.state.selectedEvent.admin)
+            this.props.updateState({
+                event: {
+                    selected: true
+                }
+            })
         }
     }
 
     createEventCards = (events, label) => {
         if(events != undefined) {
             return (
-                <div label={label}>
+                <div label={label} style={{paddingBottom: 50}}>
                     {events.map((event, index) => (
                         <Zoom key={index} timeout={this.state.zoomDur}
                               in={this.state.loaded}
@@ -184,8 +188,10 @@ class EventSlider extends Component{
         return(
             this.state.loaded ? (
                 <div>
-                    <Zoom timeout={300}
-                        in={this.state.loaded}
+                    <Zoom
+                        timeout={300}
+                        in={!this.state.eventSelected}
+                        onExited={this.afterTransition}
                         >
                         <div>
                             <Swiper>

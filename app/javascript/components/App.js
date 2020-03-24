@@ -5,6 +5,7 @@ import EventSlider from './events/EventSlider'
 import MenuButton from './navigation/MenuButton'
 import RightDrawer from './navigation/RightDrawer'
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import ContentSlider from './ContentSlider'
 
 const styles = {
     body: {
@@ -73,13 +74,19 @@ class App extends React.Component {
         this.setState({navOpen:false})
     }
 
+    isReady = () => (this.props.state.loaded && this.props.state.event && this.props.state.event.selected)
+
     render(){
         return(
             <div>
                 {this.state.loaded ?
                     <div>
                         <Router>
-                            <EventSlider loaded={this.state.loaded} />
+                            { this.isReady() ?
+                                <ContentSlider />
+                            :   <EventSlider loaded={this.state.loaded} />
+                            }
+
                             <MenuButton click={this.toggleDrawer} open={this.state.navOpen} loaded={this.state.loaded}/>
                             <RightDrawer leave={this.leaveParty}
                                          toggleDrawer={this.toggleDrawer}
