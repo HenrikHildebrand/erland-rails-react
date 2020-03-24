@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :answers
+  has_many :wallets
   has_many :sent_beers, :class_name => 'BeerPackage', :foreign_key => 'sender_id'
   has_many :received_beers, :class_name => 'BeerPackage', :foreign_key => 'receiver_id'
 

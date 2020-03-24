@@ -7,4 +7,5 @@ class Event < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :answers, through: :questions
   has_many :beer_packages
+  has_many :wallets
 end
