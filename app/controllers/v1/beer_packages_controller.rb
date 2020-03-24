@@ -18,7 +18,7 @@ class V1::BeerPackagesController < V1::BaseController
         if @beer_package
             render json: @beer_package
         else
-            render json: {message: 'Unable to find that beer package.'}
+            render json: {error: 'Unable to find that beer package.', status: 400}
         end
     end
 
@@ -32,7 +32,8 @@ class V1::BeerPackagesController < V1::BaseController
         if @beer_package.save
             render json: @beer_package
         else
-            render json: {error: 'Unable to create new beer package.', status: 400}
+            @message = @beer_package.errors.messages
+            render json: {error: 'Unable to create new beer package.', message: @message, status: 400}
         end
     end
 
@@ -47,11 +48,11 @@ class V1::BeerPackagesController < V1::BaseController
 
     def update
         @beer_package = BeerPackage.find_by_id(params[:id])
-        if @beer_package
-            @beer_package.update(beer_package_params)
+        if @beer_package.update(beer_package_params)
             render json: {message: 'Beer package successfully updated.', status: 200}
         else
-            render json: {error: 'Unable to update beer package.', status: 400}
+            @message = @beer_package.errors.messages
+            render json: {error: 'Unable to update beer package.', message: @message, status: 400}
         end
     end
 
