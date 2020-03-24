@@ -34,7 +34,8 @@ class V1::BeerPackagesController < V1::BaseController
         if @beer_package.save
             render json: @beer_package
         else
-            render json: {error: 'Unable to create new beer package.', messages: @beer_package.errors.messages, status: 400}
+            @messages = @beer_package.errors.messages
+            render json: {error: 'Unable to create new beer package.', messages: @messages, status: 400}
         end
     end
 
