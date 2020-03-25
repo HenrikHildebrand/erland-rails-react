@@ -58,16 +58,16 @@ const sideDrawer = (props) => {
             {/*</List>*/}
             {props.authenticated ?
                 <div>
-                    {/*<Divider />*/}
-                    {/*<List>*/}
-                    {/*    <Link to="/" onClick={props.leave}>*/}
-                    {/*        <ListItem button key={7} >*/}
-                    {/*            <ExitToAppIcon />*/}
-                    {/*            <ListItemText primary="Lämna fest"/>*/}
-                    {/*        </ListItem>*/}
-                    {/*    </Link>*/}
-                    {/*</List>*/}
-                    {/*<Divider />*/}
+                    <Divider />
+                    <List>
+                        <Link to="/" onClick={props.leave}>
+                            <ListItem button key={7} >
+                                <ExitToAppIcon />
+                                <ListItemText primary="Lämna fest"/>
+                            </ListItem>
+                        </Link>
+                    </List>
+                    <Divider />
                     <List>
                         {/*<Link to="/edit" onClick={event => props.toggleDrawer(event, false)}>*/}
                         {/*    <ListItem button key={8} >*/}

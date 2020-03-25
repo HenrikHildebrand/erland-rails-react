@@ -23,7 +23,7 @@ class ContentSlider extends Component {
                 { this.state.loaded ?
 
                     <Swiper>
-                        <div label="Drinks">
+                        <div label="Drinks" style={{minHeight: 'fit-content'}}>
                             <Leaderboard
                                 user={ {
                                     id:2,

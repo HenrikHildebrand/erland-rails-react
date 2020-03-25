@@ -6,7 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Zoom from '@material-ui/core/Zoom';
 import CreateEventCard from "./CreateEventCard"
 import EventFormDialog from './CreateEventDialog'
-import Slide from '@material-ui/core/Slide';
+import Success from '../success/SuccessIcon'
+// import '../stylesheets/app.scss'
 
 class EventSlider extends Component{
     state = {
@@ -18,7 +19,7 @@ class EventSlider extends Component{
         zoomDur: 300,
         formOpen: false,
         selectedEvent: {id: null, admin: false},
-        eventSelected: false
+        eventSelected: false,
     }
 
     getToken = () => (this.props.token.token_type + ' ' + this.props.token.access_token)
@@ -65,37 +66,6 @@ class EventSlider extends Component{
             showConfirmButton: false,
             timer: 3000,
           })
-    }
-
-    openForm = (open, event=null) => {
-        if(event){
-            let events = [...this.state.events]
-            let adminEvents = [...this.state.adminEvents]
-            events.push(event)
-            events.sort((a, b) =>  new Date(a.date)-new Date(b.date))
-            adminEvents.push(event)
-            adminEvents.sort((a, b) => (b.id-a.id))
-            this.setState({events: events, adminEvents: adminEvents, formOpen: false})
-            Swal.fire({
-                title: "Event skapades!",
-                text: 'Du finner eventet under "Mina" i event-vyn',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 3000,
-              })
-        } else {
-            if(this.state.adminEvents.length > 2){
-                Swal.fire({
-                    title: 'Ej tillgänglig!',
-                    text: "Du har nått maxgränsen (3 st) för egna event!",
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 3000,
-                  })
-            } else {
-                this.setState({formOpen: open})
-            }
-        }
     }
 
     openForm = (open, event=null) => {
@@ -185,6 +155,9 @@ class EventSlider extends Component{
             </div> : null
         const allEvents = this.state.loaded ? this.createEventCards(this.props.state.allEvents, 'Alla') : null
         const invites = <div label="Inbjudningar"><h3>Du har inga inbjudningar</h3></div>
+
+
+
         return(
             this.state.loaded ? (
                 <div>
@@ -194,6 +167,7 @@ class EventSlider extends Component{
                         onExited={this.afterTransition}
                         >
                         <div>
+
                             <Swiper>
                                 {myEvents}
                                 {allEvents}

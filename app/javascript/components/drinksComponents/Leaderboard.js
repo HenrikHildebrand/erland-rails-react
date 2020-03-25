@@ -29,7 +29,7 @@ class Leaderboard extends React.Component {
     componentDidMount = () => {
         // const token = {accessToken: this.props.token, tokenType: this.props.tokenType}
         // subscribeUser(token, this.props.group);
-        fetch("/api/events/" + this.props.event + "/users/all/?format=json",
+        fetch("/v1/users?" + this.props.event + "/users/all/?format=json",
         {
             headers: {
                 Accept: 'application/json',
