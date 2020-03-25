@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     ActiveAdmin.routes(self)
 
     namespace :v1 do
+        resources :users
         resources :events
         resources :beer_packages
     end
