@@ -6,6 +6,7 @@ import MenuButton from './navigation/MenuButton'
 import RightDrawer from './navigation/RightDrawer'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import ContentSlider from './ContentSlider'
+import './stylesheets/app.scss'
 
 const styles = {
     body: {
@@ -55,7 +56,8 @@ class App extends React.Component {
                 ...this.getAuth()
             }
         }).then(()=> {
-            this.setState({loaded: false});
+            this.setState({loaded: false, navOpen: false});
+            this.props.updateState({event: false, auhenticated: false, loaded: false})
             window.location = "/signed_out"
         })
     }
@@ -72,7 +74,7 @@ class App extends React.Component {
 
     leaveParty = () => {
         this.props.updateState({event:false})
-        this.setState({navOpen:false})
+        this.setState({navOpen: false})
     }
 
     isReady = () => (this.props.state.loaded && this.props.state.event && this.props.state.event.selected)

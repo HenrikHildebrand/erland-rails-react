@@ -40,7 +40,12 @@ class Swiper extends React.Component {
 
         return (
             <div style={styles.slide}>
-                <Tabs value={index} variant="fullWidth" onChange={this.handleChange} style={styles.tabs}>
+                <Tabs
+                    value={index}
+                    onChange={this.handleChange}
+                    style={styles.tabs}
+                    variant="fullWidth"
+                    scrollButtons="auto" >
                     {this.props.children.map((el, i) => {
                         return <Tab key={i} className='no-outline' label={el.props.label} />
                     })}

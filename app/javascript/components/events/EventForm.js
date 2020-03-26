@@ -52,7 +52,7 @@ const EventForm = (props) => {
         <div>
             <form id="event-form" style={{height: "100%", paddingBottom: 10}} >
                 <div className="row">
-                    <TextField required id="name" name="name" label="Name" variant="outlined" error={nameError} fullWidth autoFocus />
+                    <TextField required id="name" name="name" label="Name" variant="outlined" error={nameError} fullWidth />
                 </div>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <div className="row" style={{marginTop:10}}>
@@ -85,8 +85,14 @@ const EventForm = (props) => {
                         />
                     </div>
                 </MuiPickersUtilsProvider>
-                <div className="row" style={{position: "absolute", bottom: 0, left: "10%", right: "10%"}}>
-                    <Button type="submit" onClick={(event) => submitForm(event)} variant="contained" fullWidth color="primary">Skapa event</Button>
+                <div className="row" style={{position: "absolute", bottom: 10, left: "10%", right: "10%"}}>
+                    <Button
+                        type="submit"
+                        onClick={(event) => submitForm(event)}
+                        variant="contained"
+                        fullWidth
+                        color="primary"
+                    >Skapa event</Button>
                 </div>
             </form>
         </div>

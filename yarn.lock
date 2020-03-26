@@ -984,6 +984,31 @@
     webpack-cli "^3.3.10"
     webpack-sources "^1.4.3"
 
+"@sweetalert2/theme-bootstrap-4@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@sweetalert2/theme-bootstrap-4/-/theme-bootstrap-4-3.1.4.tgz#93b72df6b7aeb6f52597670434cdd3283cfdbd27"
+  integrity sha512-F9ltvRbEP3CNyLCW3p0vmrDOOqZgSUvK5mLIQso7bJ/JnbVdVLiZ6GRnzdhzf5Rz6LO0U9YS++RWdpN+32UHjw==
+
+"@sweetalert2/theme-borderless@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@sweetalert2/theme-borderless/-/theme-borderless-3.1.4.tgz#a4f696b0dd60a11e24e1d0664558314345aa2e2a"
+  integrity sha512-Zw0STGyUDUs5PWjQlQd5y/BtIpYp3j24ds5nH6mOHkAQIGqyPpaINproRgotfsgnHXQMebQcHxse+8nYeibH6g==
+
+"@sweetalert2/theme-dark@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@sweetalert2/theme-dark/-/theme-dark-3.1.4.tgz#2d6186a9a1854e163493032dbf59366650d315eb"
+  integrity sha512-JiFqylrr7bKw1WSxyu7KmaIUq9iV7C1PD1Paaaxpvr1Bs4mK+lFJrV5TaGEECcke0wkV1koDyxBZllE7V7tRJg==
+
+"@sweetalert2/theme-material-ui@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@sweetalert2/theme-material-ui/-/theme-material-ui-3.1.4.tgz#94ba71623d095e18869741fc39ba88c44cd579fb"
+  integrity sha512-1GIptXeM0KD3MHs3EV9o9qMR52ysCDk5nq0IAhJeXonpkhdhycH7y1pxNiT4wx2Dd289tBKGeblCvHQnEyunDA==
+
+"@sweetalert2/theme-minimal@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@sweetalert2/theme-minimal/-/theme-minimal-3.1.4.tgz#d714ae2231ffc9f1af793e0c4fd6a1b165303023"
+  integrity sha512-0AG5dXi1H+ui2zbZGMBlGgn+qSD9U4wcXw1YkcUD1ymE58apdKxEd4IWtRGOdGohZXEijwXJE/dh+ZRkNjRKvg==
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -7361,10 +7386,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sweetalert2@^9.10.3:
-  version "9.10.3"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-9.10.3.tgz#e2e420173b2dd4133a20023174ad6636a90b6061"
-  integrity sha512-i/lDlar8sSH+/YEQ25NXcs0ASB8Upl4JJqKgFHcDtk62vts2hK6i+iOjyCw02s6feS3Qum+MrOHmZNJPFL/g2g==
+sweetalert2@^9.10.6:
+  version "9.10.6"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-9.10.6.tgz#4f15e6881bd2d6784d2543c8aa4b24e5015cb167"
+  integrity sha512-++Vhmr3IRG9Ufaow7ad8QckEEINmA4bSNAW5dLTdC3jx1DdjyceVAoSfVzuOQgLQ0kQXQpiQqSwhQjVEroPHRQ==
 
 symbol-observable@^1.2.0:
   version "1.2.0"

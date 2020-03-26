@@ -29,7 +29,7 @@ class Leaderboard extends React.Component {
     componentDidMount = () => {
         // const token = {accessToken: this.props.token, tokenType: this.props.tokenType}
         // subscribeUser(token, this.props.group);
-        fetch("/api/events/" + this.props.event + "/users/all/?format=json",
+        fetch("/v1/users?event_id=" + this.props.state.event.id,
         {
             headers: {
                 Accept: 'application/json',
@@ -44,8 +44,7 @@ class Leaderboard extends React.Component {
           return response.json()
         }).then(response => {
           if(response){
-            console.log(response)
-            this.setState({users: response.users, activeUser: response.active_user, loaded: true}); 
+            this.setState({users: response.participants, activeUser: this.props.state.user, loaded: true});
             console.log("AFTERAFTER")
           }
         })
@@ -129,10 +128,10 @@ class Leaderboard extends React.Component {
             }
             return(
               <TableRow key={index} onClick={() => this.setDialogOpen(person, index)} className="do-transition erland-table-row">
-                <TableCell component="th" scope="row" colSpan={this.props.user.id !== person.id ? 2 : 1}>
-                  {this.props.user.id === person.id ? img: person.user.first_name + " " + person.user.last_name }
+                <TableCell component="th" scope="row" colSpan={this.props.state.user.id !== person.id ? 2 : 1}>
+                  {this.props.state.user.id === person.id ? img: person.name}
                 </TableCell>
-                  {this.props.user.id === person.id ?
+                  {this.props.state.user.id === person.id ?
                   <TableCell style={{fontWeight: 'bold'}} component="th" scope="row">
                     {this.state.activeUser.credits}<AttachMoneyIcon />  
                   </TableCell> : null }

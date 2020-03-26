@@ -9,20 +9,13 @@ class V1::WalletsController < V1::BaseController
       # check if event exists
       if event
         # check if looking for user wallet
-        if params[:user_id]
-          @user_wallet = event.wallets.where(user_id: params[:user_id])
-          render json: @user_wallet
+        render json: event.wallets
         # else return the events wallets
-        else
-          @event_wallets = event.wallets
-          render json: @event_wallets
-        end
       else
-        render json: {error: 'Could not find wallet for that event', status: 404}
+        render json: { error: 'Could not find event with wallets', status: 404}
       end
     else
-      # dont know if it make sense to return all wallets for a user
-      render json: {all_wallets: []}
+      render json: {error: 'Could not find wallet for that event', status: 404}
     end
   end
 

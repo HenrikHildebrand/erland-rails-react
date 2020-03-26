@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Leaderboard from './drinksComponents/Leaderboard'
+import Leaderboard from './drinks/Leaderboard'
 import Swiper from './common/Swiper'
 
 
@@ -23,18 +23,8 @@ class ContentSlider extends Component {
                 { this.state.loaded ?
 
                     <Swiper>
-                        <div label="Drinks">
-                            <Leaderboard
-                                user={ {
-                                    id:2,
-                                    beers: 0,
-                                    user: {
-                                        first_name: "Henrik",
-                                        last_name: "Hildebrand"
-                                    },
-                                    credits: 5
-                                }}
-                            />
+                        <div label="Drinks" style={{minHeight: 'fit-content'}}>
+                            <Leaderboard />
                         </div>
                         <div label="Other">
                             <h3>Other stuff</h3>

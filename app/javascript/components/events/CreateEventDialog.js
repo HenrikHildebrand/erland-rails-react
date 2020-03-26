@@ -7,7 +7,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Slide from '@material-ui/core/Slide';
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const styles = theme => ({
     root: {
@@ -46,22 +50,22 @@ const CreateEventDialog = (props) => {
   };
 
   return (
-        <Dialog
-            style={{margin:"5%"}}
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            fullScreen
+    <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        TransitionComponent={Transition}
+        fullScreen
         >
 
-            <DialogTitle id="alert-dialog-title" onClose={handleClose}>
-                Skapa Event
-            </DialogTitle>
-            <DialogContent>
-                <EventForm token={props.token} close={handleClose}/>
-            </DialogContent>
-        </Dialog>
+        <DialogTitle id="alert-dialog-title" onClose={handleClose}>
+            Skapa Event
+        </DialogTitle>
+        <DialogContent>
+            <EventForm token={props.token} close={handleClose}/>
+        </DialogContent>
+    </Dialog>
   );
 }
 
