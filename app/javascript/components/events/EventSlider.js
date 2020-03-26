@@ -6,7 +6,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Zoom from '@material-ui/core/Zoom';
 import CreateEventCard from "./CreateEventCard"
 import EventFormDialog from './CreateEventDialog'
-import Success from '../success/SuccessIcon'
 // import '../stylesheets/app.scss'
 
 class EventSlider extends Component{
@@ -107,6 +106,7 @@ class EventSlider extends Component{
         if(this.state.eventSelected){
             this.props.updateState({
                 event: {
+                    id: this.state.selectedEvent.id,
                     selected: true
                 }
             })

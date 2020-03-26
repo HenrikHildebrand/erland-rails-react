@@ -44,7 +44,7 @@ class Swiper extends React.Component {
                     value={index}
                     onChange={this.handleChange}
                     style={styles.tabs}
-                    variant="scrollable"
+                    variant="fullWidth"
                     scrollButtons="auto" >
                     {this.props.children.map((el, i) => {
                         return <Tab key={i} className='no-outline' label={el.props.label} />
