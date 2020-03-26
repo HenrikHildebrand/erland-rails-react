@@ -2,8 +2,6 @@ class V1::WalletsController < V1::BaseController
   before_action :set_wallet, only: [:show, :edit, :update, :destroy]
 
   def index
-    puts user
-
     if params[:event_id]
       event = find_event
       # check if event exists
