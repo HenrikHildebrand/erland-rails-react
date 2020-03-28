@@ -15,11 +15,12 @@ class User < ApplicationRecord
   has_and_belongs_to_many :events_as_participant, join_table: :events_participants, class_name: 'Event'
   has_and_belongs_to_many :events_as_collaborator, join_table: :events_collaborators, class_name: 'Event'
 
-
+  # TODO
+    # implement that user can only belong to one event_id
+  
   def display_name
     email
   end
-  
   
   # Facebook stuff
 

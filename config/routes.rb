@@ -8,9 +8,15 @@ Rails.application.routes.draw do
 
     namespace :v1 do
         resources :users
-        resources :events
+        resources :events do
+            member do
+                post 'join' => 'events#join'
+                post 'leave' => 'events#leave'
+            end
+        end
         resources :beer_packages
         resources :wallets
+        resources :invites
     end
 
     get '/signed_out' => 'home#signed_out'

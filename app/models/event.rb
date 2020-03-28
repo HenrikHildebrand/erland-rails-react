@@ -8,4 +8,8 @@ class Event < ApplicationRecord
   has_many :answers, through: :questions
   has_many :beer_packages, dependent: :destroy
   has_many :wallets, dependent: :destroy
+  has_many :invites, dependent: :destroy
+
+  # TODO
+    # implement that event can only have unique one user_id
 end
