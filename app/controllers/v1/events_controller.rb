@@ -28,10 +28,10 @@ class V1::EventsController < V1::BaseController
     def create
         @event = Event.new(event_params)
         if @event.save
-            render json: @event
+            render json: {event: @event, status: 201}
         else
-            puts @event.errors.messages
-            render json: {error: 'Unable to create new event.', status: 400}
+            error = @event.errors.messages
+            render json: {message: 'Unable to create new event.', error: error}, status: 400
         end
     end
 
@@ -104,7 +104,7 @@ class V1::EventsController < V1::BaseController
 
     private
     def event_params
-        params.permit(:title, :date, :admin_id)
+        params.require(:event).permit(:title, :date, :admin_id)
     end
 
     def set_event

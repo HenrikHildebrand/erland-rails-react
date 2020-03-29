@@ -2,7 +2,7 @@ class Invite < ApplicationRecord
   belongs_to :event
   before_create :generate_invite_token
 
-  validates_uniqueness_of :event, scope: :event
+  validates_uniqueness_of :event
 
   private
   def generate_invite_token

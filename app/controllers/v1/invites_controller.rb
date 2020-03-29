@@ -24,7 +24,8 @@ class V1::InvitesController < V1::BaseController
         if @invite.save
             render json: @invite
         else
-            render json: {error: 'Unable to create new invite.', status: 400}
+            error = @invite.errors.messages
+            render json: {message: 'Unable to create new invite.', error: error, status: 400}
         end
     end
 

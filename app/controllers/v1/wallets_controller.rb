@@ -35,8 +35,8 @@ class V1::WalletsController < V1::BaseController
     if @wallet.save
       render json: @wallet
     else
-      @messages = @wallet.errors.messages
-      render json: {error: 'Unable to create new wallet.', messages: @messages, status: 400}
+      error = @wallet.errors.messages
+      render json: {message: 'Unable to create new wallet.', error: error, status: 400}
     end
   end
 
