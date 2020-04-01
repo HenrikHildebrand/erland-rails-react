@@ -27,12 +27,12 @@ class V1::UsersController < V1::BaseController
   end
 
   def new
-    @user = User.new
+    @user = V1::User.new
     render json: @user
   end
 
   def create
-    user = User.new(user_params)
+    user = V1::User.new(user_params)
     if @user.save
       render json: @user
     else
@@ -73,11 +73,11 @@ class V1::UsersController < V1::BaseController
   end
 
   def find_event
-    Event.find_by_id(params[:event_id])
+    V1::Event.find_by_id(params[:event_id])
   end
 
   def all_users
-    User.all
+    V1::User.all
   end
 
   def set_user

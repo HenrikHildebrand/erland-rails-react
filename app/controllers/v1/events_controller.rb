@@ -2,7 +2,7 @@ class V1::EventsController < V1::BaseController
     before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave]
 
     def index
-        @events = Event.all
+        @events = V1::Event.all
         render json: {
             all_events: @events,
             my_events: current_user.events
@@ -16,17 +16,17 @@ class V1::EventsController < V1::BaseController
                 participants: @event.participants
             }
         else
-            render json: {message: 'Unable to find that event.'}
+            render json: {message: 'Unable to find that event.'}, status: 400
         end
     end
 
     def new
-        @event = Event.new
+        @event = V1::Event.new
         render json: @event
     end
 
     def create
-        @event = Event.new(event_params)
+        @event = V1::Event.new(event_params)
         if @event.save
             render json: {event: @event, status: 201}
         else
@@ -108,7 +108,7 @@ class V1::EventsController < V1::BaseController
     end
 
     def set_event
-        @event = Event.find_by_id(params[:id])
+        @event = V1::Event.find_by_id(params[:id])
     end
 
 end

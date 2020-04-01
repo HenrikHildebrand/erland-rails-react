@@ -93,4 +93,14 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # Before each test case
+  # - Create a new user 
+  # - Sign in a user
+  # - Set the headers
+  config.before :each do
+    @user = User.create(email: 'test@test.com', password: "password", password_confirmation: "password")
+    @headers = { "ACCEPT": "application/json" }
+    sign_in @user
+  end
 end

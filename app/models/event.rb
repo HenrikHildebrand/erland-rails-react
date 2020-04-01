@@ -1,8 +1,10 @@
 class Event < ApplicationRecord
   belongs_to :admin, class_name: 'User'
+
   has_and_belongs_to_many :participants, join_table: :events_participants, class_name: 'User'
   has_and_belongs_to_many :collaborators, join_table: :events_collaborators, class_name: 'User'
   has_and_belongs_to_many :songs, {class_name: 'Song'}
+  
   has_many :facts, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :answers, through: :questions
@@ -10,7 +12,7 @@ class Event < ApplicationRecord
   has_many :wallets, dependent: :destroy
   has_many :invites, dependent: :destroy
 
-  validates :title, :admin_id, :date, :presence => true
+  validates_presence_of :title, :admin_id, :date
 
   # TODO
     # implement that event can only have unique one user_id

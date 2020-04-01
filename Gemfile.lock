@@ -204,6 +204,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mustache (1.1.1)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
@@ -278,6 +279,10 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.1)
@@ -295,6 +300,10 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.2)
+    rspec_api_documentation (6.1.0)
+      activesupport (>= 3.0.0)
+      mustache (~> 1.0, >= 0.99.4)
+      rspec (~> 3.0)
     ruby_dep (1.5.0)
     ruby_parser (3.14.0)
       sexp_processor (~> 4.9)
@@ -389,6 +398,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.1)
   react-rails
   rspec-rails
+  rspec_api_documentation
   sass-rails
   selenium-webdriver
   shoulda-matchers

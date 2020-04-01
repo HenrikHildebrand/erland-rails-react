@@ -25,12 +25,12 @@ class V1::BeerPackagesController < V1::BaseController
     end
 
     def new
-        @beer_package = BeerPackage.new
+        @beer_package = V1::BeerPackage.new
         render json: @beer_package
     end
 
     def create
-        @beer_package = BeerPackage.new(beer_package_params)
+        @beer_package = V1::BeerPackage.new(beer_package_params)
         if @beer_package.save
             render json: @beer_package
         else
@@ -70,7 +70,7 @@ class V1::BeerPackagesController < V1::BaseController
     end
 
     def set_beer_package
-        @beer_package = BeerPackage.find_by_id(params[:id])
+        @beer_package = V1::BeerPackage.find_by_id(params[:id])
     end
 
     def find_event
@@ -78,6 +78,6 @@ class V1::BeerPackagesController < V1::BaseController
     end
 
     def all_beers_for_current_user
-        BeerPackage.all_beers(current_user.id)
+        V1::BeerPackage.all_beers(current_user.id)
     end
 end

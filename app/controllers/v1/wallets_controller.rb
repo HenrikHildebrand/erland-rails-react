@@ -26,12 +26,12 @@ class V1::WalletsController < V1::BaseController
   end
 
   def new
-    @wallet = Wallet.new
+    @wallet = V1::Wallet.new
     render json: @wallet
   end
 
   def create
-    @wallet = Wallet.new(wallet_params)
+    @wallet = V1::Wallet.new(wallet_params)
     if @wallet.save
       render json: @wallet
     else
@@ -71,11 +71,11 @@ class V1::WalletsController < V1::BaseController
   end
 
   def find_event
-    Event.find_by_id(params[:event_id])
+    V1::Event.find_by_id(params[:event_id])
   end
 
   def set_wallet
-    @wallet = Wallet.find_by_id(params[:id])
+    @wallet = V1::Wallet.find_by_id(params[:id])
   end
 
 end

@@ -53,10 +53,12 @@ group :test do
   gem 'webdrivers'
 
   # for tests
+  gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'rspec_api_documentation'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
