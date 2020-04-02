@@ -104,3 +104,8 @@ RSpec.configure do |config|
     sign_in @user
   end
 end
+
+def response_body
+  JSON.parse(response.body)
+end
+
