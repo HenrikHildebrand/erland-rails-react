@@ -6,11 +6,10 @@ FactoryBot.define do
             association :admin, factory: [:user, :valid_user], strategy: :create
             public { true }
             invite_only { true }
+            initial_credits { 10 }
         end
-        trait :invalid_event do 
-            date { Faker::Date.between(from: Date.today, to: 1.year.from_now) }
-            association :admin, factory: [:user, :valid_user], strategy: :create
+        trait :invalid_event do
+            title { "as" }
         end
-        
     end
 end

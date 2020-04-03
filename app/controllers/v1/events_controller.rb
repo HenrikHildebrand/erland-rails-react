@@ -45,10 +45,15 @@ class V1::EventsController < V1::BaseController
 
     def update
         if @event
-            @event.update(event_params)
-            render json: {message: 'Event successfully updated.'}, status: :ok
+            if @event.update(event_params)
+                render json: @event
+            else
+                error = @event.errors.messages
+                render json: {error: error, message: 'Unable to update event.'}, status: :unprocessable_entity
+            end
         else
-            render json: {error: 'Unable to update event.'}, status: :unprocessable_entity
+            error = @event.errors.messages
+            render json: {error: error, message: 'Unable to update event.'}, status: :unprocessable_entity
         end
     end
 
@@ -104,7 +109,7 @@ class V1::EventsController < V1::BaseController
 
     private
     def event_params
-        params.require(:event).permit(:title, :date, :admin_id, :admin)
+        params.require(:event).permit(:title, :date, :admin_id, :admin, :initial_credits, :invite_only, :public)
     end
 
     def set_event

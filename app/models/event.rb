@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   validates :title, length: { minimum: 3, maximum: 100 }
   validates :initial_credits, numericality: true
   # validates_numericality_of :initial_credits, greater_than_or_equal_to: 0
-  validates_numericality_of :initial_credits, :if => Proc.new{|f| f.display_name.blank? }
+  # validates :initial_credits, numericality: {greater_than: 0}, :if => Proc.new{|f| not f.initial_credits.blank? }
 
   def event_date_larger_than_or_equal_to_today
     if date >= Date.today

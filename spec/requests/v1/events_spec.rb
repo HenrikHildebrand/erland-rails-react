@@ -57,34 +57,33 @@ RSpec.describe "/v1/events", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
 
       it "updates the requested v1_event" do
-        event = V1::Event.create! valid_attributes
-        patch v1_event_url(event),
-              params: invalid_attributes, headers: valid_headers, as: :json
-        event.reload
-        skip("Add assertions for updated state")
+          v1_event = V1::Event.create! valid_attributes
+        patch v1_event_url(v1_event),
+              params: valid_attributes, headers: valid_headers, as: :json
+          v1_event.reload
+          expect(response).to have_http_status(:ok)
+          expect(response_body['title']).to eq(v1_event.title)
+          expect(response_body['admin_id']).to eq(v1_event.admin_id)
       end
 
       it "renders a JSON response with the v1_event" do
-        event = V1::Event.create! valid_attributes
-        patch v1_event_url(event),
-              params: invalid_attributes, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq("application/json; charset=utf-8")
+          v1_event = V1::Event.create! valid_attributes
+          patch v1_event_url(v1_event),
+                params: valid_attributes, headers: valid_headers, as: :json
+          expect(response).to have_http_status(:ok)
+          expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the v1_event" do
-        event = V1::Event.create! valid_attributes
-        patch v1_event_url(event),
-              params: invalid_attributes, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json; charset=utf-8")
+          v1_event = V1::Event.create! valid_attributes
+          patch v1_event_url(v1_event),
+                params: invalid_attributes, headers: valid_headers, as: :json
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end
