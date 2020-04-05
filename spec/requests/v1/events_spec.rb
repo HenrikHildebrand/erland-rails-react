@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "/v1/events", type: :request do
-  let(:valid_attributes) { FactoryBot.build(:event, :valid_event).attributes }
+  let(:valid_attributes) { FactoryBot.build(:valid_not_public_event).attributes }
   let(:invalid_attributes) { FactoryBot.build(:event, :invalid_event).attributes }
   let(:valid_headers) {{ "ACCEPT": "application/json" }}
 
@@ -90,10 +90,48 @@ RSpec.describe "/v1/events", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested v1_event" do
-      event = V1::Event.create! valid_attributes
+      v1_event = V1::Event.create! valid_attributes
       expect {
-        delete v1_event_url(event), headers: valid_headers, as: :json
+        delete v1_event_url(v1_event), headers: valid_headers, as: :json
       }.to change(V1::Event, :count).by(-1)
+    end
+  end
+
+  describe "POST /join" do
+    let(:public_event_attributes) { FactoryBot.build(:valid_public_event).attributes }
+
+    it "adds a new user with valid attributes to public event" do
+      v1_event = V1::Event.create! public_event_attributes
+      expect {
+        post "/v1/events/#{v1_event.id}/join", headers: valid_headers, as: :json
+      }.to change(v1_event.participants, :count).by(1)
+      expect(response).to have_http_status(:ok)
+      expect(response_body['message']).to eq('User successfully added to public event.')
+    end
+    it "adds a new user with valid attributes to private event" do
+      invite = FactoryBot.create(:invite, :valid_invite)
+      event = invite.event
+      invite_token = invite.invite_token
+      expect {
+        post "/v1/events/#{event.id}/join?invite_token=#{invite_token}", headers: valid_headers, as: :json
+      }.to change(event.participants, :count).by(1)
+      expect(response).to have_http_status(:ok)
+      expect(response_body['message']).to eq('User successfully added to private event.')
+    end
+    it "adds a new user with valid attributes to private event and decrements limit" do
+      invite = FactoryBot.create(:invite, :valid_invite)
+      event = invite.event
+      invite_token = invite.invite_token
+      limit = invite.limit
+      post "/v1/events/#{event.id}/join?invite_token=#{invite_token}", headers: valid_headers, as: :json
+      invite.reload
+      expect(invite.limit).to eq(limit-1)
+    end
+    it 'fails to add a user with invalid token to event' do
+      v1_event = V1::Event.create! valid_attributes
+      post "/v1/events/#{v1_event.id}/join?invite_token=invalidtoken", headers: valid_headers, as: :json
+      expect(response_body['error']).to eq('Wrong invite token for event.')
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
     factory :invite do
         trait :valid_invite do
-            association :event, factory: [:event, :valid_event], strategy: :create
+            association :event, factory: [:valid_not_public_event], strategy: :create
             limit { Faker::Number.between(from: 1, to: 10) }
             expire_at { Faker::Date.between(from: Date.today, to: 1.year.from_now) }
         end

@@ -68,18 +68,17 @@ class V1::EventsController < V1::BaseController
 
     def join
         if @event
-            if @event.public
+            if @event.is_public
                 @event.participants << current_user
-                render json: {message: 'User successfully added to event.'}, status: :ok
+                return render json: {message: 'User successfully added to public event.'}, status: :ok
             elsif params[:invite_token]
                 invite = @event.invites.find_by(invite_token: params[:invite_token])
                 if invite 
-                    puts invite.expire_at
                     if Date.today < invite.expire_at and invite.limit > 0
                         invite.limit -= 1
                         invite.save
                         @event.participants << current_user
-                        render json: {message: 'User successfully added to event.'}, status: :ok
+                        return render json: {message: 'User successfully added to private event.'}, status: :ok
                     else
                         error = 'Unable to join the event, either the time expired or the event is full.'
                     end
@@ -92,7 +91,7 @@ class V1::EventsController < V1::BaseController
         else
             error = 'No event with that id existed.'
         end
-        render json: {error: error}, status: 400
+        return render json: {error: error}, status: :unprocessable_entity
     end
 
     def leave
@@ -109,7 +108,7 @@ class V1::EventsController < V1::BaseController
 
     private
     def event_params
-        params.require(:event).permit(:title, :date, :admin_id, :admin, :initial_credits, :invite_only, :public)
+        params.require(:event).permit(:title, :date, :admin_id, :admin, :initial_credits, :invite_only, :is_public)
     end
 
     def set_event

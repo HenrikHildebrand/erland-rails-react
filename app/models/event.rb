@@ -12,14 +12,16 @@ class Event < ApplicationRecord
   has_many :wallets, dependent: :destroy
   has_many :invites, dependent: :destroy
 
-  validates_presence_of :title, :admin_id, :date, :public, :invite_only
+  validates_presence_of :title, :admin_id
+  validates :invite_only, :is_public, inclusion: { in: [true, false] }
   validates :title, length: { minimum: 3, maximum: 100 }
   validates :initial_credits, numericality: true
-  # validates_numericality_of :initial_credits, greater_than_or_equal_to: 0
-  # validates :initial_credits, numericality: {greater_than: 0}, :if => Proc.new{|f| not f.initial_credits.blank? }
+  validate :is_valid_date
 
-  def event_date_larger_than_or_equal_to_today
-    if date >= Date.today
+  def is_valid_date
+    if not date.present?
+      errors.add(:date, "Date must exist.")
+    elsif date < Date.today
       errors.add(:date, "You cannot enter a date in the past.")
     end
   end
