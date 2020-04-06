@@ -99,7 +99,6 @@ RSpec.describe "/v1/events", type: :request do
 
   describe "POST /join" do
     let(:public_event_attributes) { FactoryBot.build(:valid_public_event).attributes }
-
     it "adds a new user with valid attributes to public event" do
       v1_event = V1::Event.create! public_event_attributes
       expect {
@@ -130,8 +129,17 @@ RSpec.describe "/v1/events", type: :request do
     it 'fails to add a user with invalid token to event' do
       v1_event = V1::Event.create! valid_attributes
       post "/v1/events/#{v1_event.id}/join?invite_token=invalidtoken", headers: valid_headers, as: :json
-      expect(response_body['error']).to eq('Wrong invite token for event.')
+      expect(response_body['message']).to eq('Wrong invite token for event.')
       expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+
+  describe "POST /leave" do
+    it "successfully removes current user from an event which its a part of" do
+      v1_event = V1::Event.create! valid_attributes
+      post "/v1/events/#{v1_event.id}/leave", headers: valid_headers, as: :json
+      expect(response_body['message']).to eq('User successfully deleted from event.')
+      expect(response).to have_http_status(:ok)
     end
   end
 end

@@ -18,6 +18,7 @@ class Event < ApplicationRecord
   validates :initial_credits, numericality: true
   validate :is_valid_date
 
+  private
   def is_valid_date
     if not date.present?
       errors.add(:date, "Date must exist.")
