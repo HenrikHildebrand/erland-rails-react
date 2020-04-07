@@ -180,16 +180,14 @@ const dummyData = [
     id:0,
     beers: 0,
     user: {
-      first_name: "Henrik",
-      last_name: "Hildebrand"
+      name: "Henrik Hildebrand"
     }
   },
   {
       id:1,
     beers: 0,
     user: {
-      first_name: "Magnus",
-      last_name: "Brattlöf"
+      name: "Magnus Brattlöf"
     }
   }
 ]

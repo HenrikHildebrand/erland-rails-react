@@ -60,7 +60,7 @@ const AddDialog = (props) => {
       <Divider />
       <div style={{minWidth: 300 ,padding: 10}}>
         <h4>
-          {user ? user.person.user.first_name + " " + user.person.user.last_name : null}
+          {user ? user.person.user.name : null}
         </h4>
         <p>
           Dryck: 1st
