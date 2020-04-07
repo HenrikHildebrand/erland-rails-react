@@ -11,10 +11,7 @@ class V1::EventsController < V1::BaseController
 
     def show
         if @event
-            render json: {
-                event: @event, 
-                participants: @event.participants
-            }, status: :ok
+            render json: @event
         else
             render json: {message: 'Unable to find that event.', error: get_error}, status: :unprocessable_entity
         end

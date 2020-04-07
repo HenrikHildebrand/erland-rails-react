@@ -64,8 +64,8 @@ RSpec.describe "/v1/events", type: :request do
               params: valid_attributes, headers: valid_headers, as: :json
           v1_event.reload
           expect(response).to have_http_status(:ok)
-          expect(response_body['title']).to eq(v1_event.title)
-          expect(response_body['admin_id']).to eq(v1_event.admin_id)
+          expect(response_body['data']['attributes']['title']).to eq(v1_event.title)
+          expect(response_body['data']['attributes']['admin-id']).to eq(v1_event.admin_id)
       end
 
       it "renders a JSON response with the v1_event" do
