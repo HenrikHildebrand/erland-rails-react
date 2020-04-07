@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         resources :beer_packages
         resources :wallets
         resources :invites
+        resources :questions
     end
 
     get '/signed_out' => 'home#signed_out'
