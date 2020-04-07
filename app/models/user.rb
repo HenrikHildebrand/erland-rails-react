@@ -6,12 +6,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :answers
-  has_many :wallets
+  has_many :answers, dependent: :destroy
+  has_many :wallets, dependent: :destroy
   has_many :sent_beers, :class_name => 'BeerPackage', :foreign_key => 'sender_id'
   has_many :received_beers, :class_name => 'BeerPackage', :foreign_key => 'receiver_id'
-
   has_many :events, class_name: 'Event', foreign_key: 'admin_id', dependent: :nullify
+
   has_and_belongs_to_many :events_as_participant, join_table: :events_participants, class_name: 'Event'
   has_and_belongs_to_many :events_as_collaborator, join_table: :events_collaborators, class_name: 'Event'
 
@@ -21,9 +21,8 @@ class User < ApplicationRecord
   def display_name
     email
   end
-  
-  # Facebook stuff
 
+  # Facebook stuff
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -31,6 +30,7 @@ class User < ApplicationRecord
       end
     end
   end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

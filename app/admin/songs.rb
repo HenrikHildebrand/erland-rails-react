@@ -14,5 +14,16 @@ ActiveAdmin.register Song do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
+
+  form do |f|
+    f.semantic_errors *f.object.errors.keys # shows errors on :base
+    f.actions         # adds the 'Submit' and 'Cancel' buttons
+    f.inputs do
+      f.input :title
+      f.input :text, as: :text
+      f.input :public
+    end
+    f.actions         # adds the 'Submit' and 'Cancel' buttons
+  end
 end

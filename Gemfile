@@ -67,11 +67,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'react-rails'
 gem 'activeadmin'
 gem 'devise'
-gem 'simple_token_authentication'
 gem "haml-rails"
 gem 'active_admin_theme'
 gem 'active_admin_datetimepicker'
 gem 'active_admin_role'
 gem 'omniauth-facebook'
 gem 'simple_token_authentication'
+gem 'active_model_serializers', '~> 0.10.0'
 

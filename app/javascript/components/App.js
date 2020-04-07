@@ -6,7 +6,8 @@ import MenuButton from './navigation/MenuButton'
 import RightDrawer from './navigation/RightDrawer'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import ContentSlider from './ContentSlider'
-import './stylesheets/app.scss'
+import './stylesheets/app.css'
+import ErrorBoundary from './error/ErrorBoundary'
 
 const styles = {
     body: {
@@ -81,7 +82,7 @@ class App extends React.Component {
 
     render(){
         return(
-            <div>
+            <ErrorBoundary>
                 {this.state.loaded ?
                     <div>
                         <Router>
@@ -101,7 +102,7 @@ class App extends React.Component {
                     </div>
 
                 : null}
-            </div>
+            </ErrorBoundary>
 
 
         )
