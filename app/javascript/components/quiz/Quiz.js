@@ -6,7 +6,7 @@ import { geolocated } from "react-geolocated";
 import QuestionDialog from "./QuestionDialogComponent"
 import LocationDrawer from "./LocationDrawer"
 import ListIcon from '@material-ui/icons/List';
-import "../../App.css"
+import "../stylesheets/App.scss"
 import {Spring} from 'react-spring/renderprops'
 import Swal from 'sweetalert2'
 import AdminAddBtn from './AdminAddBtn'
