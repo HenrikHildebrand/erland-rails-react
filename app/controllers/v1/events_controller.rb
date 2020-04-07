@@ -1,5 +1,5 @@
 class V1::EventsController < V1::BaseController
-    before_action :set_event, only: [:show, :edit, :update, :destroy]
+    before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave]
 
     def index
         @events = Event.all
@@ -11,7 +11,10 @@ class V1::EventsController < V1::BaseController
 
     def show
         if @event
-            render json: @event
+            render json: {
+                event: @event, 
+                participants: @event.participants
+            }
         else
             render json: {message: 'Unable to find that event.'}
         end
@@ -27,6 +30,7 @@ class V1::EventsController < V1::BaseController
         if @event.save
             render json: @event
         else
+            puts @event.errors.messages
             render json: {error: 'Unable to create new event.', status: 400}
         end
     end
@@ -57,9 +61,50 @@ class V1::EventsController < V1::BaseController
         end
     end
 
+    def join
+        if @event
+            if @event.public
+                @event.participants << current_user
+                render json: {message: 'User successfully added to event.', status: 200}
+            elsif params[:invite_token]
+                invite = @event.invites.find_by(invite_token: params[:invite_token])
+                if invite 
+                    puts invite.expire_at
+                    if Date.today < invite.expire_at and invite.limit > 0
+                        invite.limit -= 1
+                        invite.save
+                        @event.participants << current_user
+                        render json: {message: 'User successfully added to event.', status: 200}
+                    else
+                        error = 'Unable to join the event, either the time expired or the event is full.'
+                    end
+                else
+                    error = 'Wrong invite token for event.'
+                end
+            else
+                error = 'No invite token for the event.'
+            end
+        else
+            error = 'No event with that id existed.'
+        end
+        render json: {error: error, status: 400}
+    end
+
+    def leave
+        if @event
+            if @event.participants.delete(current_user)
+                render json: {message: 'User successfully deleted from event.', status: 200}
+            else
+                render json: {error: 'Unable to delete user from event.', status: 400}
+            end
+        else
+            render json: {error: 'Unable to find event with specified id.', status: 400}
+        end
+    end
+
     private
     def event_params
-        params.permit(:admin, :title, :date, :collaborators, :participants)
+        params.permit(:title, :date, :admin_id)
     end
 
     def set_event

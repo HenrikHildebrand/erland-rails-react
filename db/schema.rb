@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_175118) do
+ActiveRecord::Schema.define(version: 2020_03_27_103256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,15 +106,13 @@ ActiveRecord::Schema.define(version: 2020_03_24_175118) do
   create_table "events_collaborators", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
-    t.index ["event_id"], name: "index_events_collaborators_on_event_id"
-    t.index ["user_id"], name: "index_events_collaborators_on_user_id"
+    t.index ["user_id", "event_id"], name: "index_events_collaborators_on_user_id_and_event_id", unique: true
   end
 
   create_table "events_participants", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
-    t.index ["event_id"], name: "index_events_participants_on_event_id"
-    t.index ["user_id"], name: "index_events_participants_on_user_id"
+    t.index ["user_id", "event_id"], name: "index_events_participants_on_user_id_and_event_id", unique: true
   end
 
   create_table "events_songs", id: false, force: :cascade do |t|
@@ -131,6 +129,16 @@ ActiveRecord::Schema.define(version: 2020_03_24_175118) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_facts_on_event_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "invite_token"
+    t.integer "limit"
+    t.datetime "expire_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_invites_on_event_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -159,12 +167,12 @@ ActiveRecord::Schema.define(version: 2020_03_24_175118) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "authentication_token", limit: 30
     t.string "provider"
     t.string "uid"
     t.string "name"
     t.text "image"
-    t.string "authentication_token", limit: 30
-    t.index ["authentication_token"], name: "index_users_on_authentication_token"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -187,6 +195,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_175118) do
   add_foreign_key "beer_packages", "users", column: "receiver_id"
   add_foreign_key "beer_packages", "users", column: "sender_id"
   add_foreign_key "events", "users", column: "admin_id"
+  add_foreign_key "invites", "events"
   add_foreign_key "questions", "events"
   add_foreign_key "wallets", "events"
   add_foreign_key "wallets", "users"

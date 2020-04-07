@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  # before_create :set_admin
+  
   belongs_to :admin, class_name: 'User'
   has_and_belongs_to_many :participants, join_table: :events_participants, class_name: 'User'
   has_and_belongs_to_many :collaborators, join_table: :events_collaborators, class_name: 'User'
@@ -8,4 +10,13 @@ class Event < ApplicationRecord
   has_many :answers, through: :questions
   has_many :beer_packages, dependent: :destroy
   has_many :wallets, dependent: :destroy
+  has_many :invites, dependent: :destroy
+
+  # TODO
+    # implement that event can only have unique one user_id
+
+    # private
+    # def set_admin
+    #   self.admin = current_user
+    # end
 end
