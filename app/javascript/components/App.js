@@ -6,7 +6,7 @@ import MenuButton from './navigation/MenuButton'
 import RightDrawer from './navigation/RightDrawer'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import ContentSlider from './ContentSlider'
-import './stylesheets/app.scss'
+import './stylesheets/app.css'
 import ErrorBoundary from './error/ErrorBoundary'
 
 const styles = {
