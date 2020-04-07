@@ -3,12 +3,13 @@ class V1::UsersController < V1::BaseController
 
   def index
     if params[:event_id]
-      event = find_event
-      if event
+      @event = find_event
+      if @event
         render json: {
-            participants: event.participants,
-            collaborators: event.collaborators,
-            admin: event.admin
+            participants: @event.participants,
+            collaborators: @event.collaborators,
+            admin: @event.admin,
+            active_user: current_user
         }
       else
         render json: {error: 'Could not find event with users', status: 400}
@@ -83,5 +84,6 @@ class V1::UsersController < V1::BaseController
   def set_user
     @user = current_user
   end
+
 
 end

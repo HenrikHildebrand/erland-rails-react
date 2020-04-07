@@ -5,5 +5,10 @@ class BeerPackage < ApplicationRecord
 
   scope :sent_beers, -> (user_id) { where(sender_id: user_id) }
   scope :received_beers, -> (user_id) { where(receiver_id: user_id) }
-  scope :all_beers, -> (user_id) { sent_beers(user_id).or(received_beers(user_id)) } 
-end 
+  scope :all_beers, -> (user_id) { sent_beers(user_id).or(received_beers(user_id)) }
+
+  scope :accepted, -> {where(accepted: true)}
+  scope :not_accepted, -> {where(accepted: false)}
+  scope :for_event, ->(event){where(event: event)}
+
+end

@@ -34,21 +34,19 @@ ActiveAdmin.register Question do
   show do
     columns do
       column do
-        panel 'Alternatives' do
-          table_for question.alternatives do
-            column :title
-            column :correct
-          end
+        h2 "Alternatives"
+        table_for question.alternatives, class: "index_table index" do
+          column :title
+          column :correct
         end
       end
 
       column do
-        panel 'Answers' do
-          table_for question.answers do
-            column('User'){|a| link_to(a.user.email, admin_user_path(a.user))}
-            column('Alternative') {|a| a.alternative.title }
-            column('Correct') {|a| a.alternative.correct}
-          end
+        h2 "Answers"
+        table_for question.answers, class: "index_table index" do
+          column('User'){|a| link_to(a.user.email, admin_user_path(a.user))}
+          column('Alternative') {|a| a.alternative.title }
+          column('Correct') {|a| a.alternative.correct}
         end
       end
     end
