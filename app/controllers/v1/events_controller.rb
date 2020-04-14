@@ -2,36 +2,32 @@ class V1::EventsController < V1::BaseController
     before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave]
 
     def index
-        @events = Event.all
+        @events = V1::Event.all
         render json: {
             all_events: @events,
             my_events: current_user.events
-        }
+        }, status: :ok
     end
 
     def show
         if @event
-            render json: {
-                event: @event, 
-                participants: @event.participants
-            }
+            render json: @event
         else
-            render json: {message: 'Unable to find that event.'}
+            render json: {message: 'Unable to find that event.', error: get_error}, status: :unprocessable_entity
         end
     end
 
     def new
-        @event = Event.new
+        @event = V1::Event.new
         render json: @event
     end
 
     def create
-        @event = Event.new(event_params)
+        @event = V1::Event.new(event_params)
         if @event.save
-            render json: @event
+            render json: @event, status: :created
         else
-            puts @event.errors.messages
-            render json: {error: 'Unable to create new event.', status: 400}
+            render json: {message: 'Unable to create new event.', error: get_error}, status: :unprocessable_entity
         end
     end
 
@@ -39,76 +35,89 @@ class V1::EventsController < V1::BaseController
         if @event
             render json: @event
         else
-            render json: {error: 'Unable to find that event.', status: 404}
+            render json: {message: 'Unable to find that event.'}, status: 404
         end
     end
 
     def update
         if @event
-            @event.update(event_params)
-            render json: {message: 'Event successfully updated.', status: 200}
+            if @event.update(event_params)
+                render json: @event
+            else
+                render json: {error: get_error, message: 'Unable to update event.'}, status: :unprocessable_entity
+            end
         else
-            render json: {error: 'Unable to update event.', status: 400}
+            render json: {error: get_error, message: 'Unable to update event.'}, status: :unprocessable_entity
         end
     end
 
     def destroy
         if @event
             @event.destroy
-            render json: {message: 'Event successfully deleted.', status: 200}
+            render json: {message: 'Event successfully deleted.'}, status: :ok
         else
-            render json: {error: 'Unable to delete event.', status: 400}
+            render json: {message: 'Unable to delete event.', error: get_error}, status: :unprocessable_entity
         end
     end
 
     def join
         if @event
-            if @event.public
-                @event.participants << current_user
-                render json: {message: 'User successfully added to event.', status: 200}
+            if @event.is_public
+                add_participant_and_create_wallet
+                return render json: {message: 'User successfully added to public event.'}, status: :ok
             elsif params[:invite_token]
                 invite = @event.invites.find_by(invite_token: params[:invite_token])
                 if invite 
-                    puts invite.expire_at
                     if Date.today < invite.expire_at and invite.limit > 0
                         invite.limit -= 1
                         invite.save
-                        @event.participants << current_user
-                        render json: {message: 'User successfully added to event.', status: 200}
+                        add_participant_and_create_wallet
+                        return render json: {message: 'User successfully added to private event.'}, status: :ok
                     else
-                        error = 'Unable to join the event, either the time expired or the event is full.'
+                        message = 'Unable to join the event, either the time expired or the event is full.'
                     end
                 else
-                    error = 'Wrong invite token for event.'
+                    message = 'Wrong invite token for event.'
                 end
             else
-                error = 'No invite token for the event.'
+                message = 'No invite token for the event.'
             end
         else
-            error = 'No event with that id existed.'
+            message = 'No event with that id existed.'
         end
-        render json: {error: error, status: 400}
+        return render json: {message: message, error: get_error}, status: :unprocessable_entity
     end
 
     def leave
         if @event
             if @event.participants.delete(current_user)
-                render json: {message: 'User successfully deleted from event.', status: 200}
+                return render json: {message: 'User successfully deleted from event.'}, status: :ok
             else
-                render json: {error: 'Unable to delete user from event.', status: 400}
+                return render json: {message: 'Unable to delete user from event.', error: get_error}, status: 400
             end
         else
-            render json: {error: 'Unable to find event with specified id.', status: 400}
+            return render json: {message: 'Unable to find event with specified id.', error: get_error}, status: 400
         end
     end
 
     private
     def event_params
-        params.permit(:title, :date, :admin_id)
+        params.require(:event).permit(:title, :date, :admin_id, :admin, :initial_credits, :invite_only, :is_public)
     end
 
+    private
     def set_event
-        @event = Event.find_by_id(params[:id])
+        @event = V1::Event.find_by_id(params[:id])
     end
 
+    private
+    def get_error
+        @event.errors.messages
+    end
+
+    private
+    def add_participant_and_create_wallet
+        current_user.wallets.find_or_create_by(event_id: @event.id, credits: @event.initial_credits)
+        @event.participants << current_user
+    end
 end

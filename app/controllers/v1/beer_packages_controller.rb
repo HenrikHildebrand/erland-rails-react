@@ -6,10 +6,10 @@ class V1::BeerPackagesController < V1::BaseController
             event = find_event
             # Check if event exists
             if event
-                @beer_packages = event.beer_packages.all_beers(params[:user_id])
+                @beer_packages = event.beer_packages.all_beers(current_user)
                 render json: @beer_packages
             else
-                render json: {error: 'Could not find beers for event', status: 404}
+                render json: {error: 'Could not find beers for event'}, status: 404
             end
         else
             render json: {all_beer_packages: all_beers_for_current_user}
@@ -20,22 +20,21 @@ class V1::BeerPackagesController < V1::BaseController
         if @beer_package
             render json: @beer_package
         else
-            render json: {message: 'Unable to find that beer package.', status: 404}
+            render json: {message: 'Unable to find that beer package.'}, status: 404
         end
     end
 
     def new
-        @beer_package = BeerPackage.new
+        @beer_package = V1::BeerPackage.new
         render json: @beer_package
     end
 
     def create
-        @beer_package = BeerPackage.new(beer_package_params)
+        @beer_package = V1::BeerPackage.new(beer_package_params)
         if @beer_package.save
-            render json: @beer_package
+            render json: @beer_package, status: :created
         else
-            @messages = @beer_package.errors.messages
-            render json: {error: 'Unable to create new beer package.', messages: @messages, status: 400}
+            render json: {message: 'Unable to create new beer package.', error: get_errors}, status: :unprocessable_entity
         end
     end
 
@@ -43,24 +42,24 @@ class V1::BeerPackagesController < V1::BaseController
         if @beer_package
             render json: @beer_package
         else
-            render json: {error: 'Unable to find that beer package.', status: 404}
+            render json: {message: 'Unable to find that beer package.', error: get_errors}, status: 404
         end
     end
 
     def update
-        if @beer_package.update_attributes(beer_package_params)
-            render json: {message: 'Beer package successfully updated.', status: 200}
+        if @beer_package.update(beer_package_params)
+            render json: {message: 'Beer package successfully updated.'}, status: :ok
         else
-            render json: {error: 'Unable to update beer package.', messages: @beer_package.errors.messages, status: 400}
+            render json: {message: 'Unable to update beer package.', error: get_errors}, status: :unprocessable_entity
         end
     end
 
     def destroy
         if @beer_package
             @beer_package.destroy
-            render json: {message: 'Beer package successfully deleted.', status: 200}
+            render json: {message: 'Beer package successfully deleted.'}, status: :ok
         else
-            render json: {error: 'Unable to delete beer package.', status: 400}
+            render json: {message: 'Unable to delete beer package.'}, status: 400
         end
     end
 
@@ -70,7 +69,7 @@ class V1::BeerPackagesController < V1::BaseController
     end
 
     def set_beer_package
-        @beer_package = BeerPackage.find_by_id(params[:id])
+        @beer_package = V1::BeerPackage.find_by_id(params[:id])
     end
 
     def find_event
@@ -78,6 +77,10 @@ class V1::BeerPackagesController < V1::BaseController
     end
 
     def all_beers_for_current_user
-        BeerPackage.all_beers(current_user.id)
+        V1::BeerPackage.all_beers(current_user.id)
+    end
+
+    def get_errors
+        @beer_package.errors.messages
     end
 end

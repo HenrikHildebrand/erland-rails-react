@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :title, :date, :invite_only, :public, :initial_credits, :is_admin, :is_collaborator
+  attributes :id, :title, :date, :invite_only, :is_public, :initial_credits, :is_admin, :is_collaborator, :admin_id
 
   has_many :participants
   has_many :collaborators
