@@ -20,15 +20,13 @@ const quiz = (props) => {
 
     return(
         <Aux>
-            <ErrorBoundary>
-                <Map>
-                    <QuestionButton click={() => setOpen(true)}/> 
-                </Map>
-                <QuestionDrawer 
-                    open={open} 
-                    setOpen={setOpen} 
-                    questions={questions}/>
-            </ErrorBoundary>
+            <Map>
+                <QuestionButton click={() => setOpen(true)}/> 
+            </Map>
+            <QuestionDrawer 
+                open={open} 
+                setOpen={setOpen} 
+                questions={questions}/>
         </Aux>
     );
 } 
