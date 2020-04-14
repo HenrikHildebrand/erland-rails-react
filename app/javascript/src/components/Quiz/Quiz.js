@@ -3,6 +3,7 @@ import Aux from '../../hoc/Aux'
 import Map from './Map/Map'
 import QuestionDrawer from './QuestionDrawer/QuestionDrawer'
 import QuestionButton from './Buttons/QuestionButton'
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 
 const questions = [
     {
@@ -19,13 +20,15 @@ const quiz = (props) => {
 
     return(
         <Aux>
-            <Map>
-                <QuestionButton click={() => setOpen(true)}/> 
-            </Map>
-            <QuestionDrawer 
-                open={open} 
-                setOpen={setOpen} 
-                questions={questions}/>
+            <ErrorBoundary>
+                <Map>
+                    <QuestionButton click={() => setOpen(true)}/> 
+                </Map>
+                <QuestionDrawer 
+                    open={open} 
+                    setOpen={setOpen} 
+                    questions={questions}/>
+            </ErrorBoundary>
         </Aux>
     );
 } 
