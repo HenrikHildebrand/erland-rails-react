@@ -4,7 +4,7 @@
         <%= image_tag 'erland.png', id: :icon, alt: 'erland icon' %>
     </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= render "devise/shared/error_messages", resource: f.object %>
       <div class="field">
         <%= f.email_field :email, class: 'fadeIn second form-control', placeholder: :email, autocomplete: "email" %>
       </div>
