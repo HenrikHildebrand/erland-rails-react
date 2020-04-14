@@ -18,6 +18,8 @@ Rails.application.routes.draw do
         resources :wallets
         resources :invites
         resources :questions
+        resources :alternatives
+        resources :answers
         resources :songs
     end
 

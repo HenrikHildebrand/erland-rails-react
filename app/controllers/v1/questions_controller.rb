@@ -67,10 +67,6 @@ class V1::QuestionsController < V1::BaseController
       params.permit(:event_id, :title, :lat, :lng, alternatives_attributes: [:id, :title, :correct])
     end
 
-  def get_event
-    @event = Event.find_by(id: params[:event_id])
-  end
-
   def get_errors
     @v1_question.errors.messages
   end

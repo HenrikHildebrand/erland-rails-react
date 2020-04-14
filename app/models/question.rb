@@ -5,6 +5,8 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :alternatives, allow_destroy: true
 
+  validates_presence_of :title, :event_id
+
   def display_name
     title
   end
