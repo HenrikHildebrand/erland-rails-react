@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -8,6 +8,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const styles = theme => ({
   root: {
     margin: 0,
@@ -58,14 +60,10 @@ const AddDialog = (props) => {
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
       <DialogTitle id="customized-dialog-title" onClose={() => closeClicked()}>Bekräfta mottagare</DialogTitle>
       <Divider />
-      <div style={{minWidth: 300 ,padding: 10}}>
-        <h4>
-          {user ? user.person.user.name : null}
-        </h4>
-        <p>
-          Dryck: 1st
-        </p>
-      </div>
+        <div style={{minWidth: 300 ,padding: 10}}>
+            <h4>{user ? user.person.user.name : null}</h4>
+            <p>Dryck: 1st</p>
+          </div>
       <Divider />
       <div style={{minWidth: 300 ,padding: 10}}>
         {user ? <Button className="no-outline" fullWidth size="medium" variant="contained" color="primary" onClick={() => handleListItemClick(user.index)}>

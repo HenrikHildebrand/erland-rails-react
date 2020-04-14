@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -8,32 +7,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from "react-router-dom"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import {StyleRoot} from "radium"
+
+import classes from './Drawer.module.css'
 
 
 
-
-const sideDrawer = (props) => {
-
-    const classes = makeStyles({
-        list: {
-            width: 2500,
-        },
-        fullList: {
-            width: 'auto',
-        },
-        linkStyle: {
-            color: "black !important",
-            ':hover': {textDecoration: 'none'}
-        }
-    });
-
-    const styles = {
-        img: {
-            width:100,
-            height: 100
-        }
-    };
+const drawer = (props) => {
 
     const sideList = side => (
         <div
@@ -44,7 +23,7 @@ const sideDrawer = (props) => {
             onKeyDown={(event) => props.toggleDrawer(event, false)}
         >
 
-            <img src={props.img.url} style={styles.img} className="rounded-circle erland-thumb" alt="profile_img" />
+            {/* <img src={props.img.url} style={styles.img} className="rounded-circle erland-thumb" alt="profile_img" /> */}
             <Divider />
             {/*<List style={{width: 200}}>*/}
             {/*    {[['Dryck','/beer'], ['Min dryck', '/my-drinks'], ['Sångbok','/songs'], ['Quiz','/quiz'], ['Fakta','/facts']].map((text, index) => (*/}
@@ -85,33 +64,15 @@ const sideDrawer = (props) => {
     );
 
     return (
-        <StyleRoot>
-            <SwipeableDrawer
-                anchor="right"
-                open={props.open ? props.open : false}
-                onClose={(event) => props.toggleDrawer(event, false)}
-                onOpen={(event) => props.toggleDrawer(event, true)}
-            >
-                {sideList('right')}
-            </SwipeableDrawer>
-        </StyleRoot>
+        <SwipeableDrawer
+            anchor="right"
+            open={props.open}
+            onClose={() => props.setOpen(false)}
+            onOpen={() => props.setOpen(true)}
+        >
+            {sideList('right')}
+        </SwipeableDrawer>
     );
 }
-import { connect } from "react-redux";
-import { update } from "../actions/stateActions"
 
-const mapStateToProps = (state) => {
-    return { ...state }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateUser: (currentUser) => { dispatch(update.user(currentUser)) },
-        updateState: (state) => {
-            console.log("[App.js] dispatch")
-            dispatch(update.state(state))
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(sideDrawer);
+export default drawer;

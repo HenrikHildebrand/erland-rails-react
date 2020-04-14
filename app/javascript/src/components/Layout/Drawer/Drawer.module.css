@@ -1,0 +1,16 @@
+.list {
+    width: 250px,
+}
+.fullList {
+    width: auto;
+}
+.linkStyle {
+    color: black !important;
+}
+.linkStyle:hover {
+    text-decoration: none
+}
+.img {
+    width:100;
+    height: 100
+}

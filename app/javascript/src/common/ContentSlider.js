@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense, lazy } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Leaderboard from './drinks/Leaderboard'
-import Swiper from './common/Swiper'
+import Swiper from './Swiper'
 
+const Leaderboard = lazy(() => import('./drinks/Leaderboard'))
 
 
 class ContentSlider extends Component {
@@ -20,18 +20,18 @@ class ContentSlider extends Component {
 
         return(
             <div>
-                { this.state.loaded ?
-
-                    <Swiper>
-                        <div label="Drinks" style={{minHeight: 'fit-content'}}>
+                <Swiper>
+                    <div label="Drinks" style={{minHeight: 'fit-content'}}>
+                        <Suspense fallback={<CircularProgress />}>
                             <Leaderboard />
-                        </div>
-                        <div label="Other">
+                        </Suspense>
+                    </div>
+                    <div label="Other">
+                        <Suspense fallback={<CircularProgress />}>
                             <h3>Other stuff</h3>
-                        </div>
-                    </Swiper>
-                    : <CircularProgress />
-                }
+                        </Suspense>
+                    </div>
+                </Swiper>
             </div>
         );
     }
@@ -40,7 +40,7 @@ class ContentSlider extends Component {
 
 
 import { connect } from "react-redux";
-import { update } from "./actions/stateActions"
+import { update } from "../actions/stateActions"
 
 const mapStateToProps = (state) => {
     return { ...state }

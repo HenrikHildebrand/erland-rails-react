@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Swiper from '../common/Swiper'
+import Swiper from '../Swiper'
 import EventCard from './EventCard'
 import Swal from 'sweetalert2'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -189,7 +189,7 @@ class EventSlider extends Component{
 
 
 import { connect } from "react-redux";
-import { update } from "../actions/stateActions"
+import { update } from "../../actions/stateActions"
 
 const mapStateToProps = (state) => {
     return { ...state }

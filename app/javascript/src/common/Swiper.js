@@ -50,7 +50,7 @@ class Swiper extends React.Component {
                         return <Tab key={i} className='no-outline' label={el.props.label} />
                     })}
                 </Tabs>
-                <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex} style={styles.contentDiv} animateHeight animateTransitions>
+                <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex} style={styles.contentDiv} containerStyle={{minHeight: "100%"}} animateHeight animateTransitions>
                     {this.props.children}
                 </SwipeableViews>
             </div>

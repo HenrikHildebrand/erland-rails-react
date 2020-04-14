@@ -1,0 +1,13 @@
+.Content {
+    margin-top: 16px;
+}
+
+.Header {
+    height: 42px
+}
+
+.MenuButton {
+    position: absolute;
+    right: 36px;
+    bottom: 36px;
+}
