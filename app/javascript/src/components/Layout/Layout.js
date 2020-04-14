@@ -9,7 +9,6 @@ import classes from './Layout.module.css'
 import { Menu } from '@material-ui/core'
 
 const layout = (props) => {
-
     const [open, setOpen] = React.useState(false)
 
     return(
@@ -23,7 +22,11 @@ const layout = (props) => {
             <div className={classes.MenuButton}>
                 <MenuButton loaded={true} open={open} setOpen={setOpen} />
             </div>
-            <Drawer open={open} setOpen={setOpen} />
+            <Drawer 
+                open={open} 
+                setOpen={setOpen} 
+                swipe={props.swipe} 
+                modules={props.modules} />
         </Aux>
     )
 }
