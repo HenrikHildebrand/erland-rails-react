@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_125712) do
+ActiveRecord::Schema.define(version: 2020_04_14_045118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 2020_04_04_125712) do
     t.boolean "invite_only"
     t.boolean "is_public"
     t.integer "initial_credits"
+    t.float "location"
+    t.boolean "free"
+    t.text "description"
     t.index ["admin_id"], name: "index_events_on_admin_id"
   end
 
@@ -167,12 +170,12 @@ ActiveRecord::Schema.define(version: 2020_04_04_125712) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "authentication_token", limit: 30
     t.string "provider"
     t.string "uid"
     t.string "name"
     t.text "image"
-    t.string "authentication_token", limit: 30
-    t.index ["authentication_token"], name: "index_users_on_authentication_token"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
