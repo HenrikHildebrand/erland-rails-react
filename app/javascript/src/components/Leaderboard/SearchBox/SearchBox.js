@@ -8,9 +8,6 @@ const searchBox = (props) => {
    
     return( 
         <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
             <InputBase
               placeholder="Sök ölsugna människor..."
               classes={{
@@ -18,6 +15,8 @@ const searchBox = (props) => {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(event) => props.change(event.target.value)}
+              color="primary"
             />
           </div>
     
