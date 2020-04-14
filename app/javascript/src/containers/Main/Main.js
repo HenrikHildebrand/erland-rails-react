@@ -20,7 +20,7 @@ class App extends React.Component {
                     swipe={this.props.swipe} 
                 >
                     <Leaderboard />
-                    <div><h2>other content</h2></div>
+                    <Quiz />
                 </Swiper>
             </Aux>
         )
