@@ -21,6 +21,8 @@ Rails.application.routes.draw do
         resources :alternatives
         resources :answers
         resources :songs
+
+        get '/events/:id/participants' => 'events#participants', as: :event_participants
     end
 
     get '/signed_out' => 'home#signed_out'

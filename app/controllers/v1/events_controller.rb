@@ -1,5 +1,5 @@
 class V1::EventsController < V1::BaseController
-    before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave]
+    before_action :set_event, only: [:show, :edit, :update, :destroy, :participants, :join, :leave]
 
     def index
         @events = V1::Event.all
@@ -58,6 +58,10 @@ class V1::EventsController < V1::BaseController
         else
             render json: {message: 'Unable to delete event.', error: get_error}, status: :unprocessable_entity
         end
+    end
+
+    def participants
+        render json: @event.participants, event: @event, status: :ok
     end
 
     def join
