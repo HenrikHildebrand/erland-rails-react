@@ -1,59 +1,59 @@
-import React, { Component, Suspense, lazy } from 'react'
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Swiper from './Swiper'
+// import React, { Component, Suspense, lazy } from 'react'
+// import CircularProgress from '@material-ui/core/CircularProgress';
+// import Swiper from './Swiper'
 
-const Leaderboard = lazy(() => import('./drinks/Leaderboard'))
-
-
-class ContentSlider extends Component {
-
-    state = {
-        loaded: true
-    }
-
-    componentDidMount() {
-
-    }
+// const Leaderboard = lazy(() => import('./drinks/Leaderboard'))
 
 
-    render(){
+// class ContentSlider extends Component {
 
-        return(
-            <div>
-                <Swiper>
-                    <div label="Drinks" style={{minHeight: 'fit-content'}}>
-                        <Suspense fallback={<CircularProgress />}>
-                            <Leaderboard />
-                        </Suspense>
-                    </div>
-                    <div label="Other">
-                        <Suspense fallback={<CircularProgress />}>
-                            <h3>Other stuff</h3>
-                        </Suspense>
-                    </div>
-                </Swiper>
-            </div>
-        );
-    }
-}
+//     state = {
+//         loaded: true
+//     }
+
+//     componentDidMount() {
+
+//     }
 
 
+//     render(){
 
-import { connect } from "react-redux";
-import { update } from "../actions/stateActions"
+//         return(
+//             <div>
+//                 <Swiper>
+//                     <div label="Drinks" style={{minHeight: 'fit-content'}}>
+//                         <Suspense fallback={<CircularProgress />}>
+//                             <Leaderboard />
+//                         </Suspense>
+//                     </div>
+//                     <div label="Other">
+//                         <Suspense fallback={<CircularProgress />}>
+//                             <h3>Other stuff</h3>
+//                         </Suspense>
+//                     </div>
+//                 </Swiper>
+//             </div>
+//         );
+//     }
+// }
 
-const mapStateToProps = (state) => {
-    return { ...state }
-}
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateUser: (currentUser) => { dispatch(update.user(currentUser)) },
-        updateState: (state) => {
-            console.log("[App.js] dispatch")
-            dispatch(update.state(state))
-        }
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContentSlider);
+// import { connect } from "react-redux";
+// import { update } from "../actions/stateActions"
+
+// const mapStateToProps = (state) => {
+//     return { ...state }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         updateUser: (currentUser) => { dispatch(update.user(currentUser)) },
+//         updateState: (state) => {
+//             console.log("[App.js] dispatch")
+//             dispatch(update.state(state))
+//         }
+//     }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(ContentSlider);
