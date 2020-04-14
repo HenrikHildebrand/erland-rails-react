@@ -4,12 +4,12 @@ import Aux from '../../hoc/Aux'
 import MenuButton from './MenuButton/MenuButton'
 import Drawer from './Drawer/Drawer'
 
-
-import classes from './Layout.module.css'
-import { Menu } from '@material-ui/core'
+import styles from './styles'
 
 const layout = (props) => {
     const [open, setOpen] = React.useState(false)
+
+    const classes = styles();
 
     return(
         <Aux>

@@ -8,12 +8,12 @@ import { Link } from "react-router-dom"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
-import classes from './Drawer.module.css'
+import styles from './styles'
 
 
 
 const drawer = (props) => {
-
+    const classes = styles();
     const select = (index) => {
         props.swipe(index)
         props.setOpen(false);
