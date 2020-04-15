@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     img: {
         width: 100,
         height: 100
+    },
+    rounded: {
+        borderRadius: "30px 0 0 30px",
     }
 }))
 

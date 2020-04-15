@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     },
     container: {overflowY: "scroll", maxHeight: 400},
     rounded: {
-        borderRadius: "30px 30px 0 0",
+        borderRadius: "20px 20px 0 0",
     }
 
 });

@@ -46,6 +46,7 @@ const drawer = (props) => {
             open={props.open}
             onClose={() => props.setOpen(false)}
             onOpen={() => props.setOpen(true)}
+            classes={{paper: classes.rounded}}
         >
             {sideList('right')}
         </SwipeableDrawer>
