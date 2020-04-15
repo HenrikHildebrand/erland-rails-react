@@ -24,7 +24,7 @@ const leaderboard = (props) => {
 
     return(
         <Aux>
-            <div style={{paddingBottom: 100}}>
+            <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto'}}>
                 <SearchBox change={searchInputHandler} />
                 <Suspense fallback={<PersonsSkeleton />}>
                     <Persons resource={resource} timeout={props.timeout>0}/>

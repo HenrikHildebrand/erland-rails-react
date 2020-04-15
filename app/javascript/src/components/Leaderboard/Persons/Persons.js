@@ -68,10 +68,8 @@ function fetchPersonsData(persons) {
   }
   
   function fetchPersons(persons) {
-    console.log("fetch user...");
     return new Promise(resolve => {
       setTimeout(() => {
-        console.log("fetched user", persons);
         resolve([...persons]);
       }, 1000);
     });

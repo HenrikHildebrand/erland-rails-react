@@ -15,9 +15,21 @@ import useStyles from './styles'
 const person = (props) => {
   const classes = useStyles();
 
+  const [open, setOpen] = React.useState(false)
+
+  const sendBeer = () => {
+    Swal.fire({
+      title: 'Din dryck skickades!',
+      text: 'Se till att den jäveln tar den också...',
+      type: 'success',
+      showConfirmButton: false,
+      timer: 3000,
+    })
+  }
+
   return (
     <div className={classes.root}>
-      <ExpansionPanel >
+      <ExpansionPanel expanded={open}>
 
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -51,8 +63,8 @@ const person = (props) => {
         <Divider />
         
         <ExpansionPanelActions>
-          <Button className={classes.btn} size="small">Stäng</Button>
-          <Button className={classes.btn} size="small" color="primary" variant="contained">
+          <Button className={classes.btn} size="small" onClick={()=>setOpen(false)}>Stäng</Button>
+          <Button className={classes.btn} size="small" color="primary" variant="contained" onClick={sendBeer}>
             Ge dryck
           </Button>
         </ExpansionPanelActions>
