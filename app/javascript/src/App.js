@@ -3,7 +3,7 @@ import Aux from './hoc/Aux'
 import Layout from './components/Layout/Layout'
 import Main from './containers/Main/Main'
 
-const modules = ['Leaderboard', 'Leaderboard-suspense', 'Quiz']
+const modules = ['Leaderboard', 'Quiz']
 
 class App extends React.Component{
     state = {

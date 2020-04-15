@@ -1,11 +1,11 @@
-import React, { useEffect, lazy, Suspense } from 'react'
+import React from 'react'
 // import { BrowserRouter as Router, Route } from "react-router-dom"
 import Aux from '../../hoc/Aux'
 import Swiper from '../../components/UI/Swiper/Swiper'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const Leaderboard = lazy(()=>import('../../components/Leaderboard/Leaderboard'));
-const Quiz = lazy(() => import('../../components/Quiz/Quiz'));
+import Leaderboard from '../../components/Leaderboard/Leaderboard';
+import Quiz from '../../components/Quiz/Quiz';
 
 class App extends React.Component {
     state = {
@@ -20,8 +20,8 @@ class App extends React.Component {
                     index={this.props.index} 
                     swipe={this.props.swipe} 
                 >
-                    <Suspense fallback={<CircularProgress />}><Leaderboard /></Suspense>
-                    <Suspense fallback={<CircularProgress />}><Quiz /></Suspense>
+                    <Leaderboard />
+                    <Quiz />
                 </Swiper>
             </Aux>
         )
