@@ -9,8 +9,15 @@ import styles from './styles'
 import Aux from '../../../hoc/Aux'
 
 
-const questionDrawer = (props) => {
+const questionDrawer = (props) => {     
   const classes = styles();
+
+  const onSelect = (position) => {
+    console.log("pos is:", position)
+    props.setCenter(position)
+    props.setOpen(false)
+  }
+
   const fullList = () => (
     <div
       className={classes.fullList}
@@ -20,7 +27,7 @@ const questionDrawer = (props) => {
       <List>
         {props.questions.map((question, index) => (
             <Aux key={index}>
-                <ListItem button onClick={() => props.setOpen(false)}>
+                <ListItem button onClick={() => onSelect(question.position)}>
                     <RoomIcon />
                     <ListItemText primary={question.title} />
                 </ListItem>

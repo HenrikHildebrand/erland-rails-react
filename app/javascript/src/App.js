@@ -20,7 +20,8 @@ class App extends React.Component{
     selectEventHandler = (event) => {
         this.setState({
             currentEvent: event,
-            eventSelected: true
+            eventSelected: true,
+            index: 0
         })
     } 
 

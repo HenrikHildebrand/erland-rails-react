@@ -15,8 +15,19 @@ class MapContainer extends React.Component {
                     google={this.props.google}
                     zoom={15}
                     initialCenter={ubit}
+                    center={this.props.center}
                 >
                     {this.props.children}
+                    {
+                        this.props.questions.map((question, index) => (
+                            <Marker
+                                key={index}
+                                onClick={()=>this.props.markerClick({open: true, index: index})}
+                                position={question.position}
+                                draggable={false}
+                            />
+                        ))
+                    }
                 </Map>
             </div>
         );
