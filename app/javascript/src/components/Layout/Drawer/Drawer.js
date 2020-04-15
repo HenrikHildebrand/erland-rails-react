@@ -32,7 +32,10 @@ const drawer = (props) => {
             // onClick={(event) => props.toggleDrawer(event, false)}
             onKeyDown={(event) => props.toggleDrawer(event, false)}
         >
-            <List style={{width: 200}}>
+            <List style={{width: 200, margin: 0}}>
+                <img style={{width: "100%", margin: 10}} alt="erland-logo" src="static/erland.png" />
+                <Divider />   
+                <Divider />   
                {props.modules.map((text, index) => (
                    <div key={index}>
                        <ListItem button onClick={() => select(index)}>
