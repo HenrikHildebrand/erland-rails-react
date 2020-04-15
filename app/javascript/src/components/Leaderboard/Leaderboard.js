@@ -7,17 +7,17 @@ import PersonsSkeleton from './Persons/PersonsSkeleton'
 const PERSONS = ['Henrik Hildebrand', 'Magnus Brattlöf', 'Andreas Erlandsson', 'Mikael Gordani', 'Victoria Karlsson', 'Jennifer Arvidsson', 'Christoffer Hildebrand']
 
 const leaderboard = (props) => {
-    const [persons, setPersons] = React.useState(PERSONS)
+    const [filteredPersons, setFilteredPersons] = React.useState(PERSONS)
 
     const searchInputHandler = (input) => {
-        setPersons(PERSONS.filter(person => person.toLowerCase().includes(input.toLowerCase())))
+        setFilteredPersons(PERSONS.filter(person => person.toLowerCase().includes(input.toLowerCase())))
     }
 
     return(
         <Aux>
             <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto'}}>
                 <SearchBox change={searchInputHandler} />
-                <Persons persons={persons}/>
+                <Persons persons={PERSONS} filteredPersons={filteredPersons} />
             </div>
         </Aux>
     );

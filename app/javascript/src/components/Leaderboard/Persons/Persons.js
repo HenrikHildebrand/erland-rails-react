@@ -2,22 +2,27 @@ import React, { useEffect } from 'react'
 import Aux from '../../../hoc/Aux'
 import Person from './Person/Person'
 import Fade from '@material-ui/core/Fade'
+import styles from './styles'
 
-const personsContainer = ({persons}) => {
-    const [fade, setFade] = React.useState(false)
+const personsContainer = ({persons, filteredPersons}) => {
+    const classes = styles();
 
-    useEffect(()=>{
-        setFade(true)
-    }, [])
-
-    if(persons.length > 0){
+    if(filteredPersons.length > 0){
         return(
             <Aux>
                 {   
                     persons.map((person, index) => (
-                        <Fade key={index} timeout={400} style={{transitionDelay: (10*index)}} in={fade} mountOnEnter unmountOnExit>
-                            <div><Person person={person} /></div>
-                        </Fade>
+                        
+                        <div 
+                            key={index} 
+                            className={classes.maxHeightTransition}
+                            style={{maxHeight: filteredPersons.includes(person) ? 1000 : 0}}>
+                            <Fade timeout={400} style={{transitionDelay: (10*index)}} in={filteredPersons.includes(person)} mountOnEnter unmountOnExit>
+                                <div>
+                                    <Person person={person} />
+                                </div>
+                            </Fade>
+                        </div>
                     ))
                 }
             </Aux>
