@@ -10,7 +10,7 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import useStyles from './styles'
-
+import Swal from 'sweetalert2'
 
 const person = (props) => {
   const classes = useStyles();
@@ -21,7 +21,7 @@ const person = (props) => {
     Swal.fire({
       title: 'Din dryck skickades!',
       text: 'Se till att den jäveln tar den också...',
-      type: 'success',
+      icon: 'success',
       showConfirmButton: false,
       timer: 3000,
     })
@@ -30,9 +30,9 @@ const person = (props) => {
   return (
     <div className={classes.root}>
       <ExpansionPanel expanded={open}>
-
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
+        <ExpansionPanelSummary 
+          onClick={()=>setOpen(!open)}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1c-content"
           id="panel1c-header"
         >

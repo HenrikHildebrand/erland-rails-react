@@ -4,19 +4,10 @@ import Persons from './Persons/Persons'
 import SearchBox from './SearchBox/SearchBox'
 import PersonsSkeleton from './Persons/PersonsSkeleton'
 
-
 const PERSONS = ['Henrik Hildebrand', 'Magnus Brattlöf', 'Andreas Erlandsson', 'Mikael Gordani', 'Victoria Karlsson', 'Jennifer Arvidsson', 'Christoffer Hildebrand']
 
 const leaderboard = (props) => {
     const [persons, setPersons] = React.useState(PERSONS)
-    
-    let resource;
-    if(props.timeout){
-        resource = fetchPersonsData(persons, props.timeout);
-    }else {
-        resource = persons
-    }
-
 
     const searchInputHandler = (input) => {
         setPersons(PERSONS.filter(person => person.toLowerCase().includes(input.toLowerCase())))
@@ -26,13 +17,13 @@ const leaderboard = (props) => {
         <Aux>
             <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto'}}>
                 <SearchBox change={searchInputHandler} />
-                <Suspense fallback={<PersonsSkeleton />}>
-                    <Persons resource={resource} timeout={props.timeout>0}/>
-                </Suspense>
+                <Persons persons={persons}/>
             </div>
         </Aux>
     );
 }
+
+
 
 export default leaderboard;
 
@@ -75,10 +66,8 @@ function fetchPersonsData(persons, timeout=1000) {
   }
   
   function fetchPersons(persons, timeout) {
-    console.log("fetch user...");
     return new Promise(resolve => {
       setTimeout(() => {
-        console.log("fetched user", persons);
         resolve([...persons]);
       }, timeout);
     });

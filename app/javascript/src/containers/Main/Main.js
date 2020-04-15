@@ -3,8 +3,8 @@ import React, { useEffect, lazy, Suspense } from 'react'
 import Aux from '../../hoc/Aux'
 import Swiper from '../../components/UI/Swiper/Swiper'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Leaderboard from '../../components/Leaderboard/Leaderboard';
 
+const Leaderboard = lazy(()=>import('../../components/Leaderboard/Leaderboard'));
 const Quiz = lazy(() => import('../../components/Quiz/Quiz'));
 
 class App extends React.Component {
@@ -20,11 +20,8 @@ class App extends React.Component {
                     index={this.props.index} 
                     swipe={this.props.swipe} 
                 >
-                    <Leaderboard />
-                    <Leaderboard timeout={1000}/>
-                    <Suspense fallback={<CircularProgress />} >
-                        <Quiz />
-                    </Suspense>
+                    <Suspense fallback={<CircularProgress />}><Leaderboard /></Suspense>
+                    <Suspense fallback={<CircularProgress />}><Quiz /></Suspense>
                 </Swiper>
             </Aux>
         )

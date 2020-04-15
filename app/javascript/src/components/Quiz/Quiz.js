@@ -3,7 +3,6 @@ import Aux from '../../hoc/Aux'
 import Map from './Map/Map'
 import QuestionDrawer from './QuestionDrawer/QuestionDrawer'
 import QuestionButton from './Buttons/QuestionButton'
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 
 const questions = [
     {
