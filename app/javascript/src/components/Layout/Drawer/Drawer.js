@@ -43,12 +43,15 @@ const drawer = (props) => {
                        </ListItem>
                        <Divider />   
                    </div>
-               ))}                 
-               <Divider />   
+               ))}           
                <Divider />   
                <ListItem button onClick={leave}>
                    <ExitToAppIcon />
                     <ListItemText primary="Lämna" />
+                </ListItem>
+               <Divider />   
+                <ListItem button onClick={() => {window.location.href = '/signed_out'}}>
+                    <ListItemText primary="Logga ut" />
                 </ListItem>
             </List>
         </div>
