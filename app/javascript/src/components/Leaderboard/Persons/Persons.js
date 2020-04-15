@@ -30,7 +30,7 @@ const personsContainer = ({persons, filteredPersons}) => {
     } else {
         return(
             <div style={{justifyContent: "center"}}>
-                <h3>No matches...</h3>
+                <h3 align="center">No matches... :(</h3>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Aux from '../../../hoc/Aux'
 
-const quiz = (props) => {
+const Questions = (props) => {
 
     return(
         <Aux>

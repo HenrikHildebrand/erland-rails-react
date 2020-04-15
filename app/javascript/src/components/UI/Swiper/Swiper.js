@@ -13,7 +13,7 @@ const swiper = (props) => {
                 onChangeIndex={props.swipe} 
                 className={styles.contentDiv} 
                 containerStyle={{minHeight: "100%"}} 
-                animateHeight animateTransitions 
+                animateHeight animateTransitions resistance 
             >   
                 {props.children}
             </SwipeableViews>

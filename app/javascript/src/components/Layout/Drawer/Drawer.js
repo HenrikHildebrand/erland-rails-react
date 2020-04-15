@@ -19,6 +19,11 @@ const drawer = (props) => {
         props.setOpen(false);
     }
 
+    const leave = (index) => {
+        props.leave(index)
+        props.setOpen(false);
+    }
+
     const sideList = side => (
         <div
             style={{padding: 10, minWidth: 200}}
@@ -36,6 +41,12 @@ const drawer = (props) => {
                        <Divider />   
                    </div>
                ))}                 
+               <Divider />   
+               <Divider />   
+               <ListItem button onClick={leave}>
+                   <ExitToAppIcon />
+                    <ListItemText primary="Lämna" />
+                </ListItem>
             </List>
         </div>
     );
