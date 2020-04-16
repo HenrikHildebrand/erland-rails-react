@@ -2,16 +2,18 @@ import React from 'react'
 import Swiper from '../../components/UI/Swiper/Swiper'
 import Events from '../../components/Events/Events'
 import Fade from '@material-ui/core/Fade'
+import Slide from '@material-ui/core/Slide'
 import EventsSkeleton from '../../components/Events/EventsSkeleton'
 
 import Swal from 'sweetalert2'
-import {getHeader, OK} from './requests'
+import {getHeader, OK} from '../../components/Requests/requests'
 import Skeleton from '@material-ui/lab/Skeleton';
 
 class EventsSelector extends React.Component {
 
     state = {
         loaded: false,
+        showSkeleton: true,
         userEvents: [],
         publicEvents: []
     }
@@ -30,19 +32,30 @@ class EventsSelector extends React.Component {
             .then(response => {
                 console.log(response)
                 console.log(response.my_events)
-                setTimeout(() => {
-                    this.setState({
-                        loaded: true,
-                        userEvents: response.my_events,
-                        publicEvents: response.all_events
-                    })
-                },1000)
+
+                this.toggleSkeleton(false)
+                this.setEvents(response)
             })
 
 
         )
     }
 
+    setEvents = (response) => {
+        setTimeout(() => {
+            this.setState({
+                loaded: true,
+                userEvents: response.my_events,
+                publicEvents: response.all_events
+            })
+        },600)
+    }
+
+    toggleSkeleton = (value) => {
+        setTimeout(()=>{
+            this.setState({showSkeleton: value})
+        }, 400)
+    }
 
     requestHandler = (event) => {
         Swal.fire({
@@ -61,7 +74,7 @@ class EventsSelector extends React.Component {
                     index={this.props.index} 
                     swipe={this.props.swipe}
                 >
-                    <Fade in={this.state.loaded} timeout={500} mountOnEnter unmountOnExit >
+                    <Fade in={this.state.loaded} timeout={400} mountOnEnter unmountOnExit >
                         <div>
                             <Events label="Publika" events={this.state.publicEvents}  select={this.props.select} request={this.requestHandler}/>
                         </div>
@@ -75,7 +88,7 @@ class EventsSelector extends React.Component {
                  
             );
         } else return(
-            <Fade in={!this.state.loaded} mountOnEnter unmountOnExit >
+            <Fade in={this.state.showSkeleton} timeout={400} unmountOnExit >
                 <div>
                     <Skeleton style={{margin: 'auto'}} animation="wave" width='50%' height={40} />
                     <EventsSkeleton />

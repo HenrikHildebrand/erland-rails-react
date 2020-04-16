@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Aux from '../../hoc/Aux'
 import Persons from './Persons/Persons'
 import SearchBox from './SearchBox/SearchBox'
@@ -7,7 +7,8 @@ import PersonsSkeleton from './Persons/PersonsSkeleton'
 const PERSONS = ['Henrik Hildebrand', 'Magnus Brattlöf', 'Andreas Erlandsson', 'Mikael Gordani', 'Victoria Karlsson', 'Jennifer Arvidsson', 'Christoffer Hildebrand']
 
 const leaderboard = (props) => {
-    const [filteredPersons, setFilteredPersons] = React.useState(PERSONS)
+    const [filteredPersons, setFilteredPersons] = React.useState([])
+    const [state, setState] = React.useState({loaded: false, })
 
     const searchInputHandler = (input) => {
         setFilteredPersons(PERSONS.filter(person => person.toLowerCase().includes(input.toLowerCase())))
