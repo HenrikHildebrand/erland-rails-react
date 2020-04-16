@@ -106,7 +106,10 @@ class V1::EventsController < V1::BaseController
 
     private
     def event_params
-        params.require(:event).permit(:title, :date, :admin_id, :admin, :initial_credits, :invite_only, :is_public)
+        params.require(:event).permit(:title, :date, :admin_id,
+                                      :admin, :initial_credits,
+                                      :invite_only, :is_public,
+                                      :free, :description, :location)
     end
 
     private

@@ -3,15 +3,6 @@ class EventSerializer < ActiveModel::Serializer
 
   has_many :participants
   has_many :collaborators
-  has_many :questions
-  has_many :facts
-  # attribute :collaborators, each_serializer: UserSerializer
-
-  has_many :songs
-
-  def facts
-    object.facts.shuffle.collect {|f| {headline: f.headline, text: f.text}}
-  end
 
   def is_admin
     object.admin == current_user
@@ -19,16 +10,6 @@ class EventSerializer < ActiveModel::Serializer
 
   def is_collaborator
     object.collaborators.include?(current_user)
-  end
-
-  def songs
-    object.songs.collect do |s|
-      {
-          id: s.id,
-          title: s.title,
-          text: s.text,
-      }
-    end
   end
 
   def participants
@@ -56,5 +37,4 @@ class EventSerializer < ActiveModel::Serializer
       }
     end
   end
-
 end

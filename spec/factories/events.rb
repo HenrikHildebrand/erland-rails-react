@@ -6,6 +6,9 @@ FactoryBot.define do
             association :admin, factory: [:user, :valid_user], strategy: :create
             invite_only { true }
             initial_credits { 10 }
+            free { true }
+            description { "This is an event that will celebrate Erland" }
+            location { "Gibraltargatan, 412 79 Göteborg" }
         end
         trait :invalid_event do
             title { "as" }

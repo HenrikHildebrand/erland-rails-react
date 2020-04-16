@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_045118) do
     t.boolean "invite_only"
     t.boolean "is_public"
     t.integer "initial_credits"
-    t.float "location"
+    t.string "location"
     t.boolean "free"
     t.text "description"
     t.index ["admin_id"], name: "index_events_on_admin_id"
