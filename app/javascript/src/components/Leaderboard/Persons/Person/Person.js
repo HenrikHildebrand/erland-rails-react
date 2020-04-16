@@ -12,6 +12,9 @@ import Divider from '@material-ui/core/Divider';
 import useStyles from './styles'
 import Swal from 'sweetalert2'
 
+
+const normalType = "?type=normal";
+
 const person = (props) => {
   const classes = useStyles();
 
@@ -37,7 +40,7 @@ const person = (props) => {
           id="panel1c-header"
         >
           <div className={classes.column}>
-              <img className={classes.img} src={ props.person.attributes.image ? props.person.attributes.image : "http://graph.facebook.com/v2.10/10156873242627252/picture"} />
+              <img className={classes.img} src={ props.person.attributes.image ? props.person.attributes.image+normalType : "http://graph.facebook.com/v2.10/10156873242627252/picture"+normalType} />
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>{props.person.attributes.name ? props.person.attributes.name : props.person.attributes.email }</Typography>
