@@ -10,6 +10,12 @@ const useStyles = makeStyles((theme) => ({
       media: {
         height: 100,
       },
+      mediaSkeleton: {
+        top: -25, 
+        right: 0,
+        left: 0,
+        height: 120
+      }
   }));
 
   export default useStyles;

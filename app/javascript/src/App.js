@@ -13,6 +13,15 @@ class App extends React.Component{
         eventSelected: false
     }
 
+    componentDidMount = () => {
+        localStorage.setItem("auth", JSON.stringify(
+            {
+                'X-User-Email': this.props.user.email,
+                'X-User-Token': this.props.user.authentication_token
+            }
+        ))
+    }
+
     swipeHandler = (index) => {
         this.setState({index: index})
     }

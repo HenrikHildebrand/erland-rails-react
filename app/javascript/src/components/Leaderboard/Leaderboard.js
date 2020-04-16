@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react'
+import React from 'react'
 import Aux from '../../hoc/Aux'
 import Persons from './Persons/Persons'
 import SearchBox from './SearchBox/SearchBox'
@@ -23,9 +23,38 @@ const leaderboard = (props) => {
     );
 }
 
-
-
 export default leaderboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function fetchPersonsData(persons, timeout=1000) {

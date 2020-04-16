@@ -1,17 +1,48 @@
 import React from 'react'
 import Swiper from '../../components/UI/Swiper/Swiper'
 import Events from '../../components/Events/Events'
-import Aux from '../../hoc/Aux'
+import Fade from '@material-ui/core/Fade'
+import EventsSkeleton from '../../components/Events/EventsSkeleton'
 
 import Swal from 'sweetalert2'
-import requests from './requests'
+import {getHeader, OK} from './requests'
+import Skeleton from '@material-ui/lab/Skeleton';
 
 class EventsSelector extends React.Component {
 
     state = {
-        userEvents: events,
-        publicEvents: events
+        loaded: false,
+        userEvents: [],
+        publicEvents: []
     }
+
+    componentDidMount = () => {
+        this.fetchEvents()
+        
+    }
+
+    fetchEvents = (namespace='v1') => {
+        return (
+            fetch(`/${namespace}/events`, {header: getHeader()})
+            .then(response => {
+                if(response.status === OK) return(response.json())
+            })
+            .then(response => {
+                console.log(response)
+                console.log(response.my_events)
+                setTimeout(() => {
+                    this.setState({
+                        loaded: true,
+                        userEvents: response.my_events,
+                        publicEvents: response.all_events
+                    })
+                },1000)
+            })
+
+
+        )
+    }
+
 
     requestHandler = (event) => {
         Swal.fire({
@@ -24,17 +55,33 @@ class EventsSelector extends React.Component {
     } 
 
     render(){
-        return(
-            <Aux>
+        if(this.state.loaded){
+            return(
                 <Swiper
                     index={this.props.index} 
                     swipe={this.props.swipe}
                 >
-                    <Events label="Mina" events={this.state.userEvents} select={this.props.select} request={this.requestHandler}/>
-                    <Events label="Publika" events={this.state.publicEvents}  select={this.props.select} request={this.requestHandler}/>
+                    <Fade in={this.state.loaded} timeout={500} mountOnEnter unmountOnExit >
+                        <div>
+                            <Events label="Publika" events={this.state.publicEvents}  select={this.props.select} request={this.requestHandler}/>
+                        </div>
+                    </Fade>
+                    <Fade in={this.state.loaded} mountOnEnter unmountOnExit >
+                        <div>
+                            <Events label="Mina" events={this.state.userEvents} select={this.props.select} request={this.requestHandler}/>
+                        </div>
+                    </Fade>
                 </Swiper>
-            </Aux>
-        );
+                 
+            );
+        } else return(
+            <Fade in={!this.state.loaded} mountOnEnter unmountOnExit >
+                <div>
+                    <Skeleton style={{margin: 'auto'}} animation="wave" width='50%' height={40} />
+                    <EventsSkeleton />
+                </div>                         
+            </Fade>
+        )
     }
 }
 

@@ -4,6 +4,7 @@ import Event from './Event/Event'
 
 const events = (props) => {
 
+    if(props.events.length <= 0) return <h2 align="center">Här fanns det inga event... :(</h2>
     return(
         <Aux>
             <div style={{paddingBottom: 100}}>
