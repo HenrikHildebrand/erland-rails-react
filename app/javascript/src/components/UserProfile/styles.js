@@ -2,10 +2,11 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   cardRoot: {
-    margin: "40px 10px 5px 10px",
+    margin: "60px 10px 50px 10px",
     overflow: 'visible !important',
     overflowY: 'visible !important',
     overflowX: 'hidden',
+    borderRadius: 20
   },
   root: {
     minWidth: 275,
@@ -27,16 +28,23 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(3),
   },
   large: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(20),
+    height: theme.spacing(20),
   },
   avatarContainer: {
-    width: 80,
+    width: 160,
+    height: 100,
     margin: 'auto',
   },
   avatar: {
-    top: -30,
+    top: -50,
     boxShadow: '0 2px 15px #aaa'
+  },
+  button: {
+    margin: 'auto',
+    width: '80%', 
+    bottom: -26,
+    boxShadow: '0 2px 3px #333'
   }
 }));
 

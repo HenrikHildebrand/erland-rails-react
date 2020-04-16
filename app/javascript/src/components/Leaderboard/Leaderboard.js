@@ -3,6 +3,7 @@ import Aux from '../../hoc/Aux'
 import Persons from './Persons/Persons'
 import SearchBox from './SearchBox/SearchBox'
 import UserProfile from '../UserProfile/UserProfile'
+import Slide from '@material-ui/core/Slide'
 
 const leaderboard = (props) => {
     const [filteredPersons, setFilteredPersons] = useState(props.persons)
@@ -28,20 +29,17 @@ const leaderboard = (props) => {
     },[props.persons])
 
     return(
-        <Aux>
+        <Slide direction='up' timeout={600} in={true} mountOnEnter>
             <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto', height: '100%', overflowY: 'auto'}}>
                 <UserProfile user={props.user} /> 
                 <SearchBox change={searchInputHandler} />
                 <Persons persons={props.persons} filteredPersons={filteredPersons} hasSearchInput={hasSearchInput} />
             </div>
-        </Aux>
+        </Slide>
     );
 }
 
 export default leaderboard;
-
-
-
 
 
 

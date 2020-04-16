@@ -9,6 +9,9 @@ import BeerDrawer from './BeerDrawer/BeerDrawer'
 import Aux from '../../hoc/Aux'
 
 import styles from './styles'
+
+const largeType = "?type=large";
+
 const userProfile = ({ user }) => {
   const [open, setOpen] = React.useState(false)
 
@@ -21,7 +24,7 @@ const userProfile = ({ user }) => {
     <Aux>
       <Card className={classes.root} classes={{root: classes.cardRoot}} variant="outlined">
         <div className={classes.avatarContainer}>
-          <Avatar alt="Remy Sharp" src={ user && user.image ? user.image : "http://graph.facebook.com/v2.10/10156873242627252/picture"} className={[classes.large, classes.avatar].join(' ')} elevation={4} />
+          <Avatar alt="Remy Sharp" src={ user && user.image ? user.image+largeType : "http://graph.facebook.com/v2.10/10156873242627252/picture" + largeType} className={[classes.large, classes.avatar].join(' ')} elevation={4} />
         </div>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom align="center">
@@ -37,8 +40,8 @@ const userProfile = ({ user }) => {
             Credits: <strong>0$</strong>
           </Typography>
         </CardContent>
-        <CardActions align="center">
-          <Button style={{margin: 'auto'}} size="large" color="primary" variant="contained" onClick={() => setOpen(true)}>Mina drycker</Button>
+        <CardActions >
+            <Button className={classes.button} size="large" color="primary" variant="contained" onClick={() => setOpen(true)}>Mina drycker</Button>
         </CardActions>
       </Card>
       <BeerDrawer 
