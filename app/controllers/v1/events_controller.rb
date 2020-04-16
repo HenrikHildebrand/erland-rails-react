@@ -122,6 +122,8 @@ class V1::EventsController < V1::BaseController
     private
     def add_participant_and_create_wallet
         current_user.wallets.find_or_create_by(event_id: @event.id, credits: @event.initial_credits)
-        @event.participants << current_user
+        unless @event.participants.include?(current_user)
+            @event.participants << current_user
+        end
     end
 end

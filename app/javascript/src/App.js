@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react'
-import Aux from './hoc/Aux'
 import Layout from './components/Layout/Layout'
 import Main from './containers/Main/Main'
 import EventSelector from './containers/EventsSelector/EventsSelector'
+import { getHeader, OK} from './components/Requests/requests'
+import { connect } from "react-redux";
+import { update } from "./actions/stateActions"
+import Swal from 'sweetalert2'
 
 const modules = ['Leaderboard', 'Quiz']
+
+const eventModules = ['Publika Event', 'Mina Event']
 
 class App extends React.Component{
     state = {
@@ -24,12 +29,25 @@ class App extends React.Component{
         this.setState({index: index})
     }
 
-    selectEventHandler = (event) => {
-        this.props.updateState({
-            currentEvent: event,
-            eventSelected: true,
-            index: 0
-        })
+    selectEventHandler = (event, namespace='v1') => {
+        fetch(`/${namespace}/events/${event.id}/join`, {method: 'POST', headers: getHeader()})
+            .then(response => {
+                if (response.status === OK){
+                    this.props.updateState({
+                        currentEvent: event,
+                        eventSelected: true,
+                        index: 0
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Något gick fel!',
+                        text: 'Gick inte att joina event... :(',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 3000,
+                    })
+                }
+            })
     } 
 
     leaveEventHandler = (event) => {
@@ -48,7 +66,9 @@ class App extends React.Component{
                     modules={modules} 
                     leave={this.leaveEventHandler} 
                 >
-                    <Main swipe={this.swipeHandler} index={this.state.index} />
+                    <Main 
+                        swipe={this.swipeHandler} 
+                        index={this.state.index} />
                 </Layout>
             );
         } else {
@@ -56,18 +76,17 @@ class App extends React.Component{
                 <Layout 
                     swipe={this.swipeHandler} 
                     index={this.state.index} 
-                    modules={modules} 
+                    modules={eventModules} 
                 >
-                    <EventSelector swipe={this.swipeHandler} index={this.state.index} select={this.selectEventHandler}/>
+                    <EventSelector 
+                        swipe={this.swipeHandler} 
+                        index={this.state.index} 
+                        select={this.selectEventHandler}/>
                 </Layout>
             )
         }
     }
 };
-
-
-import { connect } from "react-redux";
-import { update } from "./actions/stateActions"
 
 const mapStateToProps = (state) => {
     return { ...state }
