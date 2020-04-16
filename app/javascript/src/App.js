@@ -34,7 +34,7 @@ class App extends React.Component{
 
     leaveEventHandler = (event) => {
         this.props.updateState({
-            currentEvent: null,
+            currentEvent: initEvent,
             eventSelected: false
         })
     }
@@ -66,14 +66,6 @@ class App extends React.Component{
 };
 
 
-
-
-
-
-
-
-
-
 import { connect } from "react-redux";
 import { update } from "./actions/stateActions"
 
@@ -92,3 +84,15 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+
+
+const initEvent = {
+    "id": null,
+    "title": null,
+    "date": null,
+    "admin_id": null,
+    "invite_only": null,
+    "is_public": null,
+    "initial_credits": null
+};

@@ -1,8 +1,6 @@
 import React from 'react'
-// import { BrowserRouter as Router, Route } from "react-router-dom"
 import Aux from '../../hoc/Aux'
 import Swiper from '../../components/UI/Swiper/Swiper'
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {getHeader, OK} from '../../components/Requests/requests'
 import Leaderboard from '../../components/Leaderboard/Leaderboard';
@@ -22,7 +20,7 @@ class Main extends React.Component {
 
     fetchUsers = (namespace='v1') => {
         console.log(this.props)
-        fetch(`/${namespace}/events/${this.props.event.id}/participants`,{headers: getHeader()})
+        fetch(`/${namespace}/events/${this.props.state.event.id}/participants`,{headers: getHeader()})
             .then(response => {if(response.status === OK) return(response.json())})
             .then(response => {
                 console.log(response)
@@ -31,7 +29,7 @@ class Main extends React.Component {
     }
 
     fetchQuestions = () => {
-        fetch(`/events/${this.props.event.id}/participants`,{headers: getHeader()})
+        fetch(`/events/${this.props.state.event.id}/participants`,{headers: getHeader()})
             .then(response => {if(response.status === OK) return(response.json())})
             .then(response => {
                 this.setState({questions: response.data})
