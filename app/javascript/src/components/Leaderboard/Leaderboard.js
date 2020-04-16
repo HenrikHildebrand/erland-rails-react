@@ -15,7 +15,7 @@ const leaderboard = (props) => {
 
     return(
         <Aux>
-            <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto'}}>
+            <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto', height: '100%', overflowY: 'auto'}}>
                 <SearchBox change={searchInputHandler} />
                 <Persons persons={PERSONS} filteredPersons={filteredPersons} />
             </div>
