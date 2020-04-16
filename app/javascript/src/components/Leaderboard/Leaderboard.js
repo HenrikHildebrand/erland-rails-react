@@ -2,9 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Aux from '../../hoc/Aux'
 import Persons from './Persons/Persons'
 import SearchBox from './SearchBox/SearchBox'
-import PersonsSkeleton from './Persons/PersonsSkeleton'
-
-const PERSONS = ['Henrik Hildebrand', 'Magnus Brattlöf', 'Andreas Erlandsson', 'Mikael Gordani', 'Victoria Karlsson', 'Jennifer Arvidsson', 'Christoffer Hildebrand']
+import UserProfile from '../UserProfile/UserProfile'
 
 const leaderboard = (props) => {
     const [filteredPersons, setFilteredPersons] = useState(props.persons)
@@ -32,6 +30,7 @@ const leaderboard = (props) => {
     return(
         <Aux>
             <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto', height: '100%', overflowY: 'auto'}}>
+                <UserProfile user={props.user} /> 
                 <SearchBox change={searchInputHandler} />
                 <Persons persons={props.persons} filteredPersons={filteredPersons} hasSearchInput={hasSearchInput} />
             </div>

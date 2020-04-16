@@ -17,6 +17,7 @@ class App extends React.Component{
     }
 
     componentDidMount = () => {
+        console.log("User: ", this.props.user)
         localStorage.setItem("auth", JSON.stringify(
             {
                 'X-User-Email': this.props.user.email,
@@ -27,6 +28,15 @@ class App extends React.Component{
 
     swipeHandler = (index) => {
         this.setState({index: index})
+    }
+
+    logout = () => {
+        this.props.updateState({
+            currentEvent: initEvent,
+            eventSelected: false
+        })
+        localStorage.setItem("auth", null)
+        window.location.href = '/signed_out'
     }
 
     selectEventHandler = (event, namespace='v1') => {
@@ -65,10 +75,12 @@ class App extends React.Component{
                     index={this.state.index} 
                     modules={modules} 
                     leave={this.leaveEventHandler} 
+                    logout={this.logout}
                 >
                     <Main 
                         swipe={this.swipeHandler} 
-                        index={this.state.index} />
+                        index={this.state.index}    
+                        user={this.props.user} />
                 </Layout>
             );
         } else {
@@ -77,6 +89,7 @@ class App extends React.Component{
                     swipe={this.swipeHandler} 
                     index={this.state.index} 
                     modules={eventModules} 
+                    logout={this.logout}
                 >
                     <EventSelector 
                         swipe={this.swipeHandler} 

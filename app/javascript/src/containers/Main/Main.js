@@ -43,7 +43,7 @@ class Main extends React.Component {
                     index={this.props.index} 
                     swipe={this.props.swipe} 
                 >
-                    <Leaderboard persons={this.state.persons}/>
+                    <Leaderboard persons={this.state.persons} user={this.props.user}/>
                     <Quiz questions={this.state.questions}/>
                 </Swiper>
             </Aux>

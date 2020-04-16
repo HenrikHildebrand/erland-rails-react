@@ -50,7 +50,7 @@ const drawer = (props) => {
                     <ListItemText primary="Lämna" />
                 </ListItem>
                <Divider />   
-                <ListItem button onClick={() => {window.location.href = '/signed_out'}}>
+                <ListItem button onClick={props.logout}>
                     <ListItemText primary="Logga ut" />
                 </ListItem>
             </List>
