@@ -9,8 +9,6 @@ const modules = ['Leaderboard', 'Quiz']
 class App extends React.Component{
     state = {
         index: 0,
-        currentEvent: initEvent,
-        eventSelected: false
     }
 
     componentDidMount = () => {
@@ -27,7 +25,7 @@ class App extends React.Component{
     }
 
     selectEventHandler = (event) => {
-        this.setState({
+        this.props.updateState({
             currentEvent: event,
             eventSelected: true,
             index: 0
@@ -42,7 +40,7 @@ class App extends React.Component{
     }
 
     render(){
-        if (this.state.eventSelected){
+        if (this.props.state.eventSelected){
             return(
                 <Layout 
                     swipe={this.swipeHandler} 
@@ -50,7 +48,7 @@ class App extends React.Component{
                     modules={modules} 
                     leave={this.leaveEventHandler} 
                 >
-                    <Main swipe={this.swipeHandler} index={this.state.index} event={this.state.event} />
+                    <Main swipe={this.swipeHandler} index={this.state.index} event={this.props.state.currentEvent} />
                 </Layout>
             );
         } else {
@@ -67,8 +65,25 @@ class App extends React.Component{
     }
 };
 
-export default App;
 
+import { connect } from "react-redux";
+import { update } from "./actions/stateActions"
+
+const mapStateToProps = (state) => {
+    return { ...state }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (currentUser) => { dispatch(update.user(currentUser)) },
+        updateState: (state) => {
+            console.log("[App.js] dispatch")
+            dispatch(update.state(state))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const initEvent = {
     "id": null,

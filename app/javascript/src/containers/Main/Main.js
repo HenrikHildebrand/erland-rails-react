@@ -4,13 +4,38 @@ import Aux from '../../hoc/Aux'
 import Swiper from '../../components/UI/Swiper/Swiper'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import {getHeader, OK} from '../../components/Requests/requests'
 import Leaderboard from '../../components/Leaderboard/Leaderboard';
 import Quiz from '../../components/Quiz/Quiz';
 
-class App extends React.Component {
+class Main extends React.Component {
     state = {
         loaded: false,
         navOpen: false,
+        persons: [],
+        questions: []
+    }
+
+    componentDidMount = () => {
+        this.fetchUsers();
+    }
+
+    fetchUsers = (namespace='v1') => {
+        console.log(this.props)
+        fetch(`/${namespace}/events/${this.props.event.id}/participants`,{headers: getHeader()})
+            .then(response => {if(response.status === OK) return(response.json())})
+            .then(response => {
+                console.log(response)
+                this.setState({persons: response.data})
+            })
+    }
+
+    fetchQuestions = () => {
+        fetch(`/events/${this.props.event.id}/participants`,{headers: getHeader()})
+            .then(response => {if(response.status === OK) return(response.json())})
+            .then(response => {
+                this.setState({questions: response.data})
+            })
     }
 
     render(){   
@@ -20,8 +45,8 @@ class App extends React.Component {
                     index={this.props.index} 
                     swipe={this.props.swipe} 
                 >
-                    <Leaderboard />
-                    <Quiz />
+                    <Leaderboard persons={this.state.persons}/>
+                    <Quiz questions={this.state.questions}/>
                 </Swiper>
             </Aux>
         )
@@ -29,4 +54,4 @@ class App extends React.Component {
 }
 
 
-export default App;
+export default Main;

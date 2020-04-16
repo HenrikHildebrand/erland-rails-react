@@ -37,10 +37,10 @@ const person = (props) => {
           id="panel1c-header"
         >
           <div className={classes.column}>
-              <img className={classes.img} src="http://graph.facebook.com/v2.10/10156873242627252/picture" />
+              <img className={classes.img} src={ props.person.attributes.image ? props.person.attributes.image : "http://graph.facebook.com/v2.10/10156873242627252/picture"} />
           </div>
           <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>{props.person}</Typography>
+            <Typography className={classes.secondaryHeading}>{props.person.attributes.name ? props.person.attributes.name : props.person.attributes.email }</Typography>
           </div>
         </ExpansionPanelSummary>
         

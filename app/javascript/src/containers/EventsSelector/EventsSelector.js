@@ -14,6 +14,7 @@ class EventsSelector extends React.Component {
     state = {
         loaded: false,
         showSkeleton: true,
+        showEvents: false,
         userEvents: [],
         publicEvents: []
     }
@@ -45,6 +46,7 @@ class EventsSelector extends React.Component {
         setTimeout(() => {
             this.setState({
                 loaded: true,
+                showEvents: true,
                 userEvents: response.my_events,
                 publicEvents: response.all_events
             })
@@ -67,6 +69,15 @@ class EventsSelector extends React.Component {
           })
     } 
 
+    selectHandler = (event) => {
+        this.setState({showEvents: false})
+        setTimeout(()=>{
+            this.props.select(event)
+        }, 500)
+
+
+    }
+
     render(){
         if(this.state.loaded){
             return(
@@ -74,14 +85,14 @@ class EventsSelector extends React.Component {
                     index={this.props.index} 
                     swipe={this.props.swipe}
                 >
-                    <Fade in={this.state.loaded} timeout={400} mountOnEnter unmountOnExit >
+                    <Fade in={this.state.showEvents} timeout={400} mountOnEnter unmountOnExit >
                         <div>
-                            <Events label="Publika" events={this.state.publicEvents}  select={this.props.select} request={this.requestHandler}/>
+                            <Events label="Publika" events={this.state.publicEvents}  select={this.selectHandler} request={this.requestHandler}/>
                         </div>
                     </Fade>
-                    <Fade in={this.state.loaded} mountOnEnter unmountOnExit >
+                    <Fade in={this.state.showEvents} mountOnEnter unmountOnExit >
                         <div>
-                            <Events label="Mina" events={this.state.userEvents} select={this.props.select} request={this.requestHandler}/>
+                            <Events label="Mina" events={this.state.userEvents} select={this.selectHandler} request={this.requestHandler}/>
                         </div>
                     </Fade>
                 </Swiper>
