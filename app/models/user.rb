@@ -11,9 +11,11 @@ class User < ApplicationRecord
   has_many :sent_beers, :class_name => 'BeerPackage', :foreign_key => 'sender_id'
   has_many :received_beers, :class_name => 'BeerPackage', :foreign_key => 'receiver_id'
   has_many :events, class_name: 'Event', foreign_key: 'admin_id', dependent: :nullify
+  has_many :expenses, class_name: 'Expense', foreign_key: 'creator_id', dependent: :nullify
 
   has_and_belongs_to_many :events_as_participant, join_table: :events_participants, class_name: 'Event'
   has_and_belongs_to_many :events_as_collaborator, join_table: :events_collaborators, class_name: 'Event'
+  has_and_belongs_to_many :debts, join_table: :expenses_users, class_name: 'Expense'
 
   # TODO
     # implement that user can only belong to one event_id
