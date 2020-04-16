@@ -26,7 +26,8 @@ const layout = (props) => {
                 open={open} 
                 setOpen={setOpen} 
                 swipe={props.swipe} 
-                modules={props.modules} />
+                modules={props.modules} 
+                leave={props.leave} />
         </Aux>
     )
 }

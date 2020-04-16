@@ -10,9 +10,9 @@
 // import Swal from 'sweetalert2'
 // import AdminAddBtn from './AdminAddBtn'
 // import AddQuestionDialog from './AddQuestioonDialog'
-//
+
 // const api_key = "AIzaSyD0Mknc1_dWFz7iRLF24lVFm4edmyxw3g4";
-//
+
 // const buttonStyles = {
 //     fab: {
 //       position: "absolute",
@@ -34,9 +34,9 @@
 //       marginRight: "0px"
 //     },
 //   };
-//
+
 //   const ubit = {lat: 57.6982853, lng: 11.9752105}
-//
+
 // class Quiz extends Component {
 //     state = {
 //         dimensions: null,
@@ -57,7 +57,7 @@
 //         hasAuthority: false,
 //         addQuestionOpen: false
 //     }
-//
+
 //     componentDidMount() {
 //         fetch('/api/events/' + this.props.event + '/questions/all/?format=json',{
 //             method: "GET",
@@ -85,11 +85,11 @@
 //         }).catch(error => console.log(error));
 //         this.interval = setInterval(() => {this.setState({...this.state, currentLocation: (this.props.coords ? {lat: this.props.coords.latitude, lng: this.props.coords.longitude} : ubit)}); }, 5000);
 //     }
-//
+
 //     componentWillUnmount() {
 //         clearInterval(this.interval);
 //     }
-//
+
 //     calcDistance(point1, point2, unit) {
 //         if (point1 === point2) {
 //             return 0;
@@ -112,26 +112,26 @@
 //             return dist;
 //         }
 //     }
-//
-//
+
+
 //     toRadians = (degrees) => {
 //         var pi = Math.PI;
 //         return degrees * (pi/180);
 //     }
-//
+
 //     onCurrentPositionClick = () => {
 //         if(this.props.isGeolocationAvailable && this.props.isGeolocationEnabled) {
 //             this.setState({trackCurrent: true, currentLocation: ( this.props.coords ? {lat: this.props.coords.latitude, lng: this.props.coords.longitude} : ubit )})
 //         }
 //     }
-//
+
 //     drawerSelectedHandler = (event, newLocation) => {
 //         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
 //             return;
 //         }
 //         this.setState({ ...this.state, centerLocation: newLocation, trackCurrent: false, drawerOpen: false, zoom: 18 });
 //     }
-//
+
 //     markerClickedHandler = (pin, index, marker) => {
 //         const point2 = {lat: pin.latitude, lng: pin.longitude}
 //         const dist = this.calcDistance(this.state.currentLocation, point2, 'M')
@@ -153,7 +153,7 @@
 //               })
 //         }
 //     }
-//
+
 //     dialogCloseHandler = (save) => {
 //         if(save){
 //             fetch('/api/events/' + this.props.event + '/questions/' + this.state.activeQuestion.pin.id + '/answers',
@@ -197,9 +197,9 @@
 //         } else {
 //             this.setState({dialogOpen: false})
 //         }
-//
+
 //     }
-//
+
 //     calculateDistance = (point1, point2) => {
 //         const earthRadius = 6371e3;
 //         const latRad1 = point1.lat.toRadians();
@@ -213,14 +213,14 @@
 //         const d = earthRadius * c;
 //         return d
 //     }
-//
+
 //     toggleDrawer = (event, open) => {
 //         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
 //             return;
 //         }
 //         this.setState({ ...this.state, drawerOpen: open });
 //     };
-//
+
 //     handleAnswerChanged = (event, index, altId) => {
 //         const locations = [...this.state.locations]
 //         locations[index].answer = altId;
@@ -229,17 +229,17 @@
 //             locations: locations
 //         })
 //     }
-//
+
 //     getAnswers = (id) => {
 //         fetch('/api/locations/' + id + '/answers').then(response => response.json()).then(response => this.setState({activeQuestion:{...this.state.activeQuestion, answers: response, showAnswers: true}}))
 //     }
-//
+
 //     onNewMarkerClick(t, map, coord, addNewMarker) {
 //         if(addNewMarker){
 //             const { latLng } = coord;
 //             const lat = latLng.lat();
 //             const lng = latLng.lng();
-//
+
 //             this.setState({newMarker: {
 //                     title: "",
 //                     name: "",
@@ -249,15 +249,15 @@
 //             })
 //         }
 //     }
-//
+
 //     toggleNewMarker = (index) => {
 //         this.setState({addNewMarker: index === 1 })
 //     }
-//
+
 //     setAddQuestionOpen = (open) => {
 //         this.setState({addQuestionOpen: open})
 //     }
-//
+
 //     render() {
 //         const showLocation = this.state.trackCurrent === true ? this.state.currentLocation : this.state.centerLocation
 //         const markers = this.state.locations.map((pin, index) => {
@@ -320,7 +320,11 @@
 //                                             getAnswers={this.getAnswers}
 //                                             answers={this.state.activeQuestion.answers}
 //                                             />
-//                             <LocationDrawer toggleDrawer={this.toggleDrawer} open={this.state.drawerOpen} pinpoints={this.state.locations} setLocation={this.drawerSelectedHandler} />
+//                             <LocationDrawer 
+//                                 toggleDrawer={this.toggleDrawer} 
+//                                 open={this.state.drawerOpen} 
+//                                 pinpoints={this.state.locations} 
+//                                 setLocation={this.drawerSelectedHandler} />
 //                         </div>
 //                     </div>
 //                 )}
@@ -328,7 +332,7 @@
 //         );
 //     }
 // }
-//
+
 // export default geolocated({
 //     positionOptions: {
 //         enableHighAccuracy: false,

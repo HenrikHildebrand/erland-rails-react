@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     img: {
         height: 50,
         borderRadius: 25
+    },
+    skeleton: {
+      backgroundColor: '#fafafa'
     }
   }));
 

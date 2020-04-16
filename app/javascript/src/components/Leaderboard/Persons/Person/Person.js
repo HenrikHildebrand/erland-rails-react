@@ -10,25 +10,37 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import useStyles from './styles'
-
+import Swal from 'sweetalert2'
 
 const person = (props) => {
   const classes = useStyles();
 
+  const [open, setOpen] = React.useState(false)
+
+  const sendBeer = () => {
+    Swal.fire({
+      title: 'Din dryck skickades!',
+      text: 'Se till att den jäveln tar den också...',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 3000,
+    })
+  }
+
   return (
     <div className={classes.root}>
-      <ExpansionPanel >
-
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
+      <ExpansionPanel expanded={open}>
+        <ExpansionPanelSummary 
+          onClick={()=>setOpen(!open)}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1c-content"
           id="panel1c-header"
         >
           <div className={classes.column}>
-              <img className={classes.img} src="http://graph.facebook.com/v2.10/10156873242627252/picture" />
+              <img className={classes.img} src={ props.person.attributes.image ? props.person.attributes.image : "http://graph.facebook.com/v2.10/10156873242627252/picture"} />
           </div>
           <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>{props.person}</Typography>
+            <Typography className={classes.secondaryHeading}>{props.person.attributes.name ? props.person.attributes.name : props.person.attributes.email }</Typography>
           </div>
         </ExpansionPanelSummary>
         
@@ -51,8 +63,8 @@ const person = (props) => {
         <Divider />
         
         <ExpansionPanelActions>
-          <Button className={classes.btn} size="small">Stäng</Button>
-          <Button className={classes.btn} size="small" color="primary" variant="contained">
+          <Button className={classes.btn} size="small" onClick={()=>setOpen(false)}>Stäng</Button>
+          <Button className={classes.btn} size="small" color="primary" variant="contained" onClick={sendBeer}>
             Ge dryck
           </Button>
         </ExpansionPanelActions>
