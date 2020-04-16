@@ -54,4 +54,22 @@ class Main extends React.Component {
 }
 
 
-export default Main;
+
+import { connect } from "react-redux";
+import { update } from "../../actions/stateActions"
+
+const mapStateToProps = (state) => {
+    return { ...state }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (currentUser) => { dispatch(update.user(currentUser)) },
+        updateState: (state) => {
+            console.log("[App.js] dispatch")
+            dispatch(update.state(state))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

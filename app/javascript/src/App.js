@@ -33,8 +33,8 @@ class App extends React.Component{
     } 
 
     leaveEventHandler = (event) => {
-        this.setState({
-            currentEvent: initEvent,
+        this.props.updateState({
+            currentEvent: null,
             eventSelected: false
         })
     }
@@ -48,7 +48,7 @@ class App extends React.Component{
                     modules={modules} 
                     leave={this.leaveEventHandler} 
                 >
-                    <Main swipe={this.swipeHandler} index={this.state.index} event={this.props.state.currentEvent} />
+                    <Main swipe={this.swipeHandler} index={this.state.index} />
                 </Layout>
             );
         } else {
@@ -64,6 +64,14 @@ class App extends React.Component{
         }
     }
 };
+
+
+
+
+
+
+
+
 
 
 import { connect } from "react-redux";
@@ -84,13 +92,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-const initEvent = {
-    "id": null,
-    "title": null,
-    "date": null,
-    "admin_id": null,
-    "invite_only": null,
-    "is_public": null,
-    "initial_credits": null
-};
