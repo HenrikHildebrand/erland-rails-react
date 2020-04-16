@@ -1,20 +1,20 @@
 {
-  "short_name": "Erland25",
-  "name": "Välkommen till Jannes 25 årsfest",
+  "short_name": "erland",
+  "name": "Party with erland!",
   "icons": [
     {
-      "src": "janne.jpg",
+      "src": "erland.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/jpg"
+      "type": "image/png"
     },
     {
-      "src": "janne.jpg",
-      "type": "image/jpg",
+      "src": "erland.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "janne.jpg",
-      "type": "image/jpg",
+      "src": "erland.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
