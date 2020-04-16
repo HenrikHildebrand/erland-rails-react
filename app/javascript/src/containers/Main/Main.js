@@ -20,7 +20,7 @@ class Main extends React.Component {
 
     fetchUsers = (namespace='v1') => {
         console.log(this.props)
-        fetch(`/${namespace}/events/${this.props.state.event.id}/participants`,{headers: getHeader()})
+        fetch(`/${namespace}/events/${this.props.state.currentEvent.id}/participants`,{headers: getHeader()})
             .then(response => {if(response.status === OK) return(response.json())})
             .then(response => {
                 console.log(response)
@@ -29,7 +29,7 @@ class Main extends React.Component {
     }
 
     fetchQuestions = () => {
-        fetch(`/events/${this.props.state.event.id}/participants`,{headers: getHeader()})
+        fetch(`/events/${this.props.state.currentEvent.id}/questions`,{headers: getHeader()})
             .then(response => {if(response.status === OK) return(response.json())})
             .then(response => {
                 this.setState({questions: response.data})
