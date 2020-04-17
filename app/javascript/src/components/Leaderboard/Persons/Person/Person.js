@@ -13,7 +13,7 @@ import useStyles from './styles'
 import Swal from 'sweetalert2'
 
 
-const normalType = "?type=normal";
+const normalType = "?type=large";
 
 const person = (props) => {
   const classes = useStyles();
@@ -32,7 +32,7 @@ const person = (props) => {
 
   return (
     <div className={classes.root}>
-      <ExpansionPanel expanded={open}>
+      <ExpansionPanel classes={{root: classes.expansionRoot}} expanded={open}>
         <ExpansionPanelSummary 
           onClick={()=>setOpen(!open)}
           expandIcon={<ExpandMoreIcon/>}
@@ -53,7 +53,7 @@ const person = (props) => {
             <Chip label="Öl från Henke" onDelete={() => {}} />
           </div>
           <div className={clsx(classes.column, classes.helper)}>
-            <Typography variant="caption">
+            <Typography style={{color: "#eee"}} variant="caption">
               Motto för användare
               <br />
               <a href="#secondary-heading-and-columns" className={classes.link}>
@@ -66,7 +66,7 @@ const person = (props) => {
         <Divider />
         
         <ExpansionPanelActions>
-          <Button className={classes.btn} size="small" onClick={()=>setOpen(false)}>Stäng</Button>
+          <Button className={classes.btnCancel} size="small" onClick={()=>setOpen(false)}>Stäng</Button>
           <Button className={classes.btn} size="small" color="primary" variant="contained" onClick={sendBeer}>
             Ge dryck
           </Button>

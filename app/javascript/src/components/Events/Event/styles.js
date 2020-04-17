@@ -5,7 +5,11 @@ const useStyles = makeStyles((theme) => ({
     card: {
         width: '90%',
         maxWidth: 350,
-        margin: "10px auto 10px auto"
+        margin: "10px auto 10px auto",
+        backgroundColor: '#555',
+        border: '1px solid #666',
+        borderRadius: 30,
+
       },
       media: {
         height: 100,

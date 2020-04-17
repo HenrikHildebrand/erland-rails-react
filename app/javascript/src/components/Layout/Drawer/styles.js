@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     },
     rounded: {
         borderRadius: "30px 0 0 30px",
+        backgroundColor: 'rgba(50, 50, 50, 0.95)', 
+        color: '#eee'
     }
 }))
 

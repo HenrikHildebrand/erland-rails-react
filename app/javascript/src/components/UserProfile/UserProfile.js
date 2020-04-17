@@ -30,13 +30,13 @@ const userProfile = ({ user }) => {
           <Typography className={classes.title} color="textSecondary" gutterBottom align="center">
             {user.email}
           </Typography>
-          <Typography variant="h5" component="h2" align="center">
+          <Typography style={{color: '#eee'}} variant="h5" component="h2" align="center">
             {user.name ? user.name : "<Namn saknas...>"}
           </Typography>
           <Typography className={classes.pos} color="textSecondary" align="center">
             Öl som väntar på dig: <strong>0 st</strong>
           </Typography>
-          <Typography variant="body2" component="p" align="center">
+          <Typography style={{color: '#eee'}} variant="body2" component="p" align="center">
             Credits: <strong>0$</strong>
           </Typography>
         </CardContent>

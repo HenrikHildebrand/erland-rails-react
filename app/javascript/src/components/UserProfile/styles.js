@@ -6,11 +6,13 @@ const useStyles = makeStyles(theme => ({
     overflow: 'visible !important',
     overflowY: 'visible !important',
     overflowX: 'hidden',
-    borderRadius: 20
+    borderRadius: 20,
+    backgroundColor: '#555',
+    border: '1px solid #666',
   },
   root: {
     minWidth: 275,
-    boxShadow: '0 2px 5px #ccc'
+    boxShadow: '0 2px 15px #000'
   },
   bullet: {
     display: 'inline-block',
@@ -19,9 +21,12 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: 14,
+    color: '#aaa'
   },
   pos: {
     marginBottom: 12,
+    color: '#ddd'
+
   },
   small: {
     width: theme.spacing(3),
@@ -38,13 +43,14 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     top: -50,
-    boxShadow: '0 2px 15px #aaa'
+    boxShadow: '0 2px 15px #111'
   },
   button: {
     margin: 'auto',
     width: '80%', 
     bottom: -26,
-    boxShadow: '0 2px 3px #333'
+    outline: 'none !important',
+    boxShadow: '0 2px 5px #000'
   }
 }));
 

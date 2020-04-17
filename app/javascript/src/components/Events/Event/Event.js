@@ -25,20 +25,20 @@ const EventCard = ({ event, select, request }) => {
             title="erland"
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography style={{color: '#fff'}} gutterBottom variant="h5" component="h2">
                     {event.title}
                 </Typography>
-                <Typography covariant="body2" style={{color: event.invite_only ? "red" : "green"}} component="p">
+                <Typography covariant="body2" style={{color: event.invite_only ? "lightred" : "lightgreen"}} component="p">
                     {event.invite_only ? "Ḱräver inbjudan" : "Öppen"}
                 </Typography>
-                <Typography covariant="body2" style={{color: "gray"}} component="p">
+                <Typography covariant="body2" style={{color: "lightgray"}} component="p">
                     {event.date ? date  + " " + time : null}
                 </Typography>
             </CardContent>
             <CardActions>
                 { ((!event.invite_only && event.is_public) || event.admin_id) ?  
-                <Button className="no-outline" size="small" color="primary" onClick={() => select(event)}>
-                Välj
+                <Button style={{height: 50, borderRadius: 25}} className="no-outline" size="small" variant="contained" onClick={() => select(event)} fullWidth>
+                    Välj
                 </Button> : null}
                 { event.invite_only && event.is_public ? 
                 <Button className="no-outline" size="small" color="primary" onClick={() => request(event)}>

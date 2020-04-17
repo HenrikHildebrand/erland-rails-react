@@ -12,7 +12,7 @@ const personSkeleton = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <ExpansionPanel classes={{root: classes.skeleton}}>
+      <ExpansionPanel classes={{root: classes.expansionRoot}}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"

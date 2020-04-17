@@ -6,12 +6,16 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       marginBottom: 5
     },
+    expansionRoot: {
+      backgroundColor: '#555',
+      margin: '0 5px 0 5px ',
+    },
     heading: {
       fontSize: theme.typography.pxToRem(15),
     },
     secondaryHeading: {
       fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary,
+      color: '#eee',
     },
     icon: {
       verticalAlign: 'bottom',
@@ -29,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(1, 2),
     },
     link: {
-      color: theme.palette.primary.main,
+      color: "#9999ff",
+      fontStyle: 'bold',
       textDecoration: 'none',
       '&:hover': {
         textDecoration: 'underline',
@@ -38,10 +43,15 @@ const useStyles = makeStyles((theme) => ({
     btn: {
         outline: 'none !important'
     },
+    btnCancel: {
+      outline: 'none !important',
+      color: '#eee'
+    },
     img: {
         height: 50,
         borderRadius: 25,
-        transition: 'transform 0.2s ease-out'
+        transition: 'transform 0.25s ease-out',
+        boxShadow: '0 0 5px #000'
     },
     skeleton: {
       backgroundColor: '#fafafa'
