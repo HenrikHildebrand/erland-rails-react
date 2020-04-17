@@ -40,7 +40,7 @@ const person = (props) => {
           id="panel1c-header"
         >
           <div className={classes.column}>
-              <img className={classes.img} src={ props.person.attributes.image ? props.person.attributes.image+normalType : "http://graph.facebook.com/v2.10/10156873242627252/picture"+normalType} />
+              <img style={open ? {transform: 'scale(1.5)'} : null } className={classes.img} src={ props.person.attributes.image ? props.person.attributes.image+normalType : "http://graph.facebook.com/v2.10/10156873242627252/picture"+normalType} />
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>{props.person.attributes.name ? props.person.attributes.name : props.person.attributes.email }</Typography>

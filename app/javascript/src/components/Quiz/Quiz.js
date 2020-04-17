@@ -1,17 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Aux from '../../hoc/Aux'
 import Map from './Map/Map'
 import QuestionDialogs from './QuestionDialogs/QuestionDialogs'
 import QuestionDrawer from './QuestionDrawer/QuestionDrawer'
 import QuestionButton from './Buttons/QuestionButton'
+import NavButton from './Buttons/NavButton'
 import Swal from 'sweetalert2'
 
 
 const quiz = (props) => {
-    const [open, setOpen] = React.useState(false)
-    const [center, setCenter] = React.useState(ubit)
-    const [current, setCurrent] = React.useState({open: false, index: null})
-    
+    const [open, setOpen] = useState(false)
+    const [center, setCenter] = useState(ubit)
+    const [current, setCurrent] = useState({open: false, index: null})
+    const [trackCurrent, setTrackCurrent] = useState(false)
+
     const dialogClose = (save, altIndex) => {
         setCurrent({open: false})
         if(save){
@@ -27,8 +29,9 @@ const quiz = (props) => {
 
     return(
         <Aux>
-            <Map center={center} questions={questions} markerClick={setCurrent}>
+            <Map center={center} questions={questions} markerClick={setCurrent} trackCurrentPosition={trackCurrent}>
                 <QuestionButton click={() => setOpen(true)}/>
+                <NavButton click={() => {console.log("TrackCurrent:", !trackCurrent); setTrackCurrent(!trackCurrent); }} />
             </Map>
             <QuestionDialogs questions={questions} current={current} onClose={dialogClose} />
             <QuestionDrawer 

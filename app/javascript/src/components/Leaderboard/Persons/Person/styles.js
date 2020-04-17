@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     },
     img: {
         height: 50,
-        borderRadius: 25
+        borderRadius: 25,
+        transition: 'transform 0.2s ease-out'
     },
     skeleton: {
       backgroundColor: '#fafafa'
