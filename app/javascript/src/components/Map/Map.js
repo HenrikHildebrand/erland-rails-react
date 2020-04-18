@@ -14,7 +14,11 @@ const mapContainer = (props) => {
     const geoAvailable = () => (props.isGeolocationAvailable && props.isGeolocationEnabled)
   
     const setCurrentPosition = () => {
+      try {
         if(geoAvailable() && props.coords) setPos({lat: props.coords.latitude, lng: props.coords.longitude})
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     const extractPosition = (question) => (
