@@ -1,8 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :email, :beers
 
-
-
   def beers
     event = @instance_options[:event]
     if event
