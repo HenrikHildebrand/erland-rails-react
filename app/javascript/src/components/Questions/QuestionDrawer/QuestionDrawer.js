@@ -8,6 +8,12 @@ import Divider from '@material-ui/core/Divider/index';
 import styles from './styles'
 import Aux from '../../../hoc/Aux'
 
+const extractPosition = (question) => (
+  {
+    lat: question.attributes.lat,
+    lng: question.attributes.lng,
+  }
+) 
 
 const questionDrawer = (props) => {     
   const classes = styles();
@@ -18,6 +24,7 @@ const questionDrawer = (props) => {
     props.setOpen(false)
   }
 
+
   const fullList = () => (
     <div
       className={classes.fullList}
@@ -27,9 +34,9 @@ const questionDrawer = (props) => {
       <List>
         {props.questions.map((question, index) => (
             <Aux key={index}>
-                <ListItem button onClick={() => onSelect(question.position)}>
+                <ListItem button onClick={() => onSelect(extractPosition(question))}>
                     <RoomIcon />
-                    <ListItemText primary={question.title} />
+                    <ListItemText primary={question.attributes.title} />
                 </ListItem>
                 <div style={{width: "90%", margin: "auto"}}>
                     {index !== props.questions.length-1 ? <Divider /> : null }

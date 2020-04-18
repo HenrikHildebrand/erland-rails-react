@@ -16,6 +16,7 @@ class Main extends React.Component {
 
     componentDidMount = () => {
         this.fetchUsers();
+        this.fetchQuestions();
     }
 
     fetchUsers = (namespace='v1') => {
@@ -28,8 +29,8 @@ class Main extends React.Component {
             })
     }
 
-    fetchQuestions = () => {
-        fetch(`/events/${this.props.state.currentEvent.id}/questions`,{headers: getHeader()})
+    fetchQuestions = (namespace='v1') => {
+        fetch(`/${namespace}/events/${this.props.state.currentEvent.id}/questions`,{headers: getHeader()})
             .then(response => {if(response.status === OK) return(response.json())})
             .then(response => {
                 this.setState({questions: response.data})

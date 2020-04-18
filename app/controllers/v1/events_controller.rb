@@ -1,5 +1,5 @@
 class V1::EventsController < V1::BaseController
-    before_action :set_event, only: [:show, :edit, :update, :destroy, :participants, :join, :leave]
+    before_action :set_event, only: [:show, :edit, :update, :destroy, :participants, :questions, :join, :leave]
 
     def index
         @events = V1::Event.all
@@ -62,6 +62,10 @@ class V1::EventsController < V1::BaseController
 
     def participants
         render json: @event.participants, event: @event, status: :ok
+    end
+
+    def questions
+        render json: @event.questions, event: @event, status: :ok
     end
 
     def join

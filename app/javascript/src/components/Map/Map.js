@@ -17,6 +17,13 @@ const mapContainer = (props) => {
         if(geoAvailable() && props.coords) setPos({lat: props.coords.latitude, lng: props.coords.longitude})
     }
 
+    const extractPosition = (question) => (
+      {
+        lat: question.attributes.lat,
+        lng: question.attributes.lng,
+      }
+    ) 
+
     useEffect(() => {
         if(map && map.map){
             map.map.setOptions(mapOptions);
@@ -26,7 +33,7 @@ const mapContainer = (props) => {
     useEffect(() => {
         setInterval(()=>{
             setCurrentPosition()
-        }, 1000)
+        }, 5000)
     }, [])
 
 
@@ -59,7 +66,7 @@ const mapContainer = (props) => {
                         <Marker
                             key={index}
                             onClick={() => props.markerClick(question)}
-                            position={question.position}
+                            position={extractPosition(question)}
                             draggable={false}
                             icon="http://maps.google.com/mapfiles/ms/micons/question.png"
                         />

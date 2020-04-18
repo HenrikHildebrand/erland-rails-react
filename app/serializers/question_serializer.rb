@@ -1,8 +1,8 @@
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :title, :lat, :lng, :event_id
+  attributes :id, :title, :lat, :lng, :event_id, :alternatives
   belongs_to :event
-  has_many :alternatives
-  has_many :answers, through: :alternatives
+  # has_many :alternatives
+  # has_many :answers, through: :alternatives
 
   def answers
     object.answers.collect do |a|
