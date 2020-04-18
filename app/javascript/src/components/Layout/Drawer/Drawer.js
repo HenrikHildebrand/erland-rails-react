@@ -19,6 +19,11 @@ const drawer = (props) => {
         props.setOpen(false);
     }
 
+    const leave = (index) => {
+        props.leave(index)
+        props.setOpen(false);
+    }
+
     const sideList = side => (
         <div
             style={{padding: 10, minWidth: 200}}
@@ -27,7 +32,10 @@ const drawer = (props) => {
             // onClick={(event) => props.toggleDrawer(event, false)}
             onKeyDown={(event) => props.toggleDrawer(event, false)}
         >
-            <List style={{width: 200}}>
+            <List style={{width: 200, margin: 0}}>
+                <img style={{width: "100%", margin: 10}} alt="erland-logo" src="static/erland.png" />
+                <Divider />   
+                <Divider />   
                {props.modules.map((text, index) => (
                    <div key={index}>
                        <ListItem button onClick={() => select(index)}>
@@ -35,7 +43,16 @@ const drawer = (props) => {
                        </ListItem>
                        <Divider />   
                    </div>
-               ))}                 
+               ))}           
+               <Divider />   
+               <ListItem button onClick={leave}>
+                   <ExitToAppIcon />
+                    <ListItemText primary="Lämna" />
+                </ListItem>
+               <Divider />   
+                <ListItem button onClick={props.logout}>
+                    <ListItemText primary="Logga ut" />
+                </ListItem>
             </List>
         </div>
     );
@@ -46,6 +63,7 @@ const drawer = (props) => {
             open={props.open}
             onClose={() => props.setOpen(false)}
             onOpen={() => props.setOpen(true)}
+            classes={{paper: classes.rounded}}
         >
             {sideList('right')}
         </SwipeableDrawer>
