@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import { geolocated } from 'react-geolocated'
-import QuestionMarker from '@material-ui/icons/NotListedLocationRounded'
 
 const ubit = {lat: 57.6982853, lng: 11.9752105}
 const api_key = "AIzaSyD0Mknc1_dWFz7iRLF24lVFm4edmyxw3g4";
@@ -20,7 +19,6 @@ const mapContainer = (props) => {
 
     useEffect(() => {
         if(map && map.map){
-            console.log("setting map options")
             map.map.setOptions(mapOptions);
         } 
     }, [map])
@@ -35,15 +33,12 @@ const mapContainer = (props) => {
     // pan to new position
     useEffect(() => {
         if(map){
-            console.log("pan to questions")
             map.map.panTo(center)
         } 
     },[center])
 
     useEffect(() => {
-        console.log("trakc current changed")
         if(map){
-            console.log("pan to current")
             map.map.panTo(pos)
         } 
     },[props.trackCurrentPosition])
@@ -63,7 +58,7 @@ const mapContainer = (props) => {
                     questions.map((question, index) => (
                         <Marker
                             key={index}
-                            onClick={() => props.markerClick({open: true, index: index})}
+                            onClick={() => props.markerClick(question)}
                             position={question.position}
                             draggable={false}
                             icon="http://maps.google.com/mapfiles/ms/micons/question.png"

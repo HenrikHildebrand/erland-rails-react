@@ -22,6 +22,7 @@
     "date-fns": "^2.11.0",
     "google-map-react": "^1.1.7",
     "google-maps-react": "^2.0.2",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "radium": "^0.26.0",
     "react": "^16.13.1",
@@ -34,7 +35,7 @@
     "react-swipeable-views": "^0.13.9",
     "react_ujs": "^2.6.1",
     "redux": "^4.0.5",
-    "sweetalert2": "^9.10.6",
+    "sweetalert2": "^9.10.12",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

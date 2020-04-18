@@ -3,8 +3,8 @@ import Aux from '../../hoc/Aux'
 import Swiper from '../../components/UI/Swiper/Swiper'
 
 import {getHeader, OK} from '../../components/Requests/requests'
-import Leaderboard from '../../components/Leaderboard/Leaderboard';
-import Quiz from '../../components/Quiz/Quiz';
+import Leaderboard from '../../views/Leaderboard';
+import Quiz from '../../views/Quiz';
 
 class Main extends React.Component {
     state = {

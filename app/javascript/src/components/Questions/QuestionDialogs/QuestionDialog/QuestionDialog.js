@@ -1,17 +1,17 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles/index';
+import Button from '@material-ui/core/Button/index';
+import Dialog from '@material-ui/core/Dialog/index';
+import MuiDialogTitle from '@material-ui/core/DialogTitle/index';
+import MuiDialogContent from '@material-ui/core/DialogContent/index';
+import MuiDialogActions from '@material-ui/core/DialogActions/index';
+import IconButton from '@material-ui/core/IconButton/index';
 import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography/index';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import List from '@material-ui/core/List/index';
+import ListItem from '@material-ui/core/ListItem/index';
+import ListItemText from '@material-ui/core/ListItemText/index';
 const styles = theme => ({
   root: {
     margin: 0,

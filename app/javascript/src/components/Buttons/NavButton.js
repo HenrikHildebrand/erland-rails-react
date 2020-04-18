@@ -1,6 +1,6 @@
 import React from 'react'
 import NavigationIcon from '@material-ui/icons/Navigation';
-import Fab from '@material-ui/core/Fab';
+import Fab from '@material-ui/core/Fab/index';
 import styles from './styles'
 
 

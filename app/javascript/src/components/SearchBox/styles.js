@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles/index';
 
 const useStyles = makeStyles((theme) => ({
     grow: {

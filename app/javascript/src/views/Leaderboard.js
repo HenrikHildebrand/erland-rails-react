@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import Aux from '../../hoc/Aux'
-import Persons from './Persons/Persons'
-import SearchBox from './SearchBox/SearchBox'
-import UserProfile from '../UserProfile/UserProfile'
-import Slide from '@material-ui/core/Slide'
+import Aux from '../hoc/Aux'
+import Persons from '../components/Persons/Persons'
+import SearchBox from '../components/SearchBox/SearchBox'
+import UserProfile from '../components/UserProfile/UserProfile'
+import Slide from '@material-ui/core/Slide/index'
 
 const leaderboard = (props) => {
     const [filteredPersons, setFilteredPersons] = useState(props.persons)

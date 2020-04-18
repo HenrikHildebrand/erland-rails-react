@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import Aux from '../../hoc/Aux'
-import Map from './Map/Map'
-import QuestionDialogs from './QuestionDialogs/QuestionDialogs'
-import QuestionDrawer from './QuestionDrawer/QuestionDrawer'
-import QuestionButton from './Buttons/QuestionButton'
-import NavButton from './Buttons/NavButton'
+import Aux from '../hoc/Aux'
+import Map from '../components/Map/Map'
+import QuestionDialogs from '../components/Questions/QuestionDialogs/QuestionDialogs'
+import QuestionDrawer from '../components/Questions/QuestionDrawer/QuestionDrawer'
+import QuestionButton from '../components/Buttons/QuestionButton'
+import NavButton from '../components/Buttons/NavButton'
 import Swal from 'sweetalert2'
+
 
 
 const quiz = (props) => {
@@ -25,11 +26,43 @@ const quiz = (props) => {
                 timer: 3000,
               })
         }
-    } 
+    }
+
+    const openQuestionDialog = async (question) => {
+        const inputOptions = new Promise((resolve) => {
+            let alternatives = {}
+            question.alternatives.map(alt => {
+                alternatives[alt] = alt
+            })
+            resolve(alternatives)
+          });
+          
+          const { value: answer } = await Swal.fire({
+            title: question.title,
+            input: 'radio',
+            inputOptions: inputOptions,
+            inputValidator: (value) => {
+              if (!value) {
+                return 'Du måste välja ett alternativ'
+              }
+            }
+          })
+          if(answer){
+            Swal.fire({
+                title: 'Ditt svar skickades!',
+                text: `Du svarade: ${answer}`,
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+              })
+          }
+
+    }
+
 
     return(
         <Aux>
-            <Map center={center} questions={questions} markerClick={setCurrent} trackCurrentPosition={trackCurrent}>
+            <Map center={center} questions={questions} markerClick={openQuestionDialog} trackCurrentPosition={trackCurrent}>
                 <QuestionButton click={() => setOpen(true)}/>
                 <NavButton click={() => {console.log("TrackCurrent:", !trackCurrent); setTrackCurrent(!trackCurrent); }} />
             </Map>

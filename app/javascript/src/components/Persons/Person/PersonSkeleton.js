@@ -1,11 +1,11 @@
 
 
 import React from 'react';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel/index';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary/index';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useStyles from './styles'
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@material-ui/lab/Skeleton/index';
 
 
 const personSkeleton = (props) => {

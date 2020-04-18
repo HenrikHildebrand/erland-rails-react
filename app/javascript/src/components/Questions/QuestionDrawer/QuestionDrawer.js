@@ -1,10 +1,10 @@
 import React from 'react';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer/index';
+import List from '@material-ui/core/List/index';
+import ListItem from '@material-ui/core/ListItem/index';
+import ListItemText from '@material-ui/core/ListItemText/index';
 import RoomIcon from '@material-ui/icons/Room';
-import Divider from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider/index';
 import styles from './styles'
 import Aux from '../../../hoc/Aux'
 

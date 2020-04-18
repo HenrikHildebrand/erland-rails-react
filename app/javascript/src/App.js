@@ -5,6 +5,7 @@ import EventSelector from './containers/EventsSelector/EventsSelector'
 import { getHeader, OK} from './components/Requests/requests'
 import { connect } from "react-redux";
 import { update } from "./actions/stateActions"
+import './App.scss'
 import Swal from 'sweetalert2'
 
 const modules = ['Leaderboard', 'Quiz']
@@ -17,7 +18,6 @@ class App extends React.Component{
     }
 
     componentDidMount = () => {
-        console.log("User: ", this.props.user)
         localStorage.setItem("auth", JSON.stringify(
             {
                 'X-User-Email': this.props.user.email,

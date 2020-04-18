@@ -1,5 +1,4 @@
 import React from 'react'
-import Aux from '../../../hoc/Aux'
 import QuestionDialog from './QuestionDialog/QuestionDialog'
 
 const QuestionDialogs = (props) => {
