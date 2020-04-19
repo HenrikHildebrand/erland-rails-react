@@ -74,4 +74,4 @@ gem 'active_admin_role'
 gem 'omniauth-facebook'
 gem 'simple_token_authentication'
 gem 'active_model_serializers', '~> 0.10.0'
-
+gem 'sprockets', '~> 3.7.2'
