@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
     contentDiv: { 
         position: 'absolute', 
-        top: 48, 
+        top: 43, 
         bottom: 0, 
         left: 0, 
         right: 0, 

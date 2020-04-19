@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         background: 'rgba(75, 75, 75, 0.95)',
-        boxShadow: '0 1px 2px #000',
+        boxShadow: '0 4px 8px #000',
+        zIndex: 100
     }
 }))
 
