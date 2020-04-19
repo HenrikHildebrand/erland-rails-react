@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     Content: {
-        margin: '16px auto',
+        margin: 'auto',
         maxWidth: 600,
-        background: 'static/erland.png'
+        url: 'static/erland.png'
     },
     Header: {
         height: 42

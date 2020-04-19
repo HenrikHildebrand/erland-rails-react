@@ -30,10 +30,13 @@ const leaderboard = (props) => {
 
     return(
         <Slide direction='up' timeout={600} in={true} mountOnEnter>
-            <div style={{paddingBottom: 100, maxWidth: 500, margin: 'auto', height: '100%', overflowY: 'auto'}}>
-                <UserProfile user={props.user} /> 
-                <SearchBox change={searchInputHandler} />
-                <Persons persons={props.persons} filteredPersons={filteredPersons} hasSearchInput={hasSearchInput} />
+            <div style={{paddingBottom: 100, height: '100%', overflowY: 'auto'}}>
+                <div style={{maxWidth: 500, margin: 'auto'}}>
+                  <UserProfile user={props.user} /> 
+                  <SearchBox change={searchInputHandler} />
+                  <Persons persons={props.persons} filteredPersons={filteredPersons} hasSearchInput={hasSearchInput} />
+                </div>
+
             </div>
         </Slide>
     );
