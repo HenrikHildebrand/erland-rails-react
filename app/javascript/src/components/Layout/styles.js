@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     },
     MenuButton: {
         position: "absolute",
-        right: 36,
-        bottom: 36,
+        right: 18,
+        bottom: 18,
     }
 }))
 

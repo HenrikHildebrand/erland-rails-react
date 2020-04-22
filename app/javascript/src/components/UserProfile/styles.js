@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     margin: 'auto',
   },
   avatar: {
+    backgroundColor: '#2f2f2f',
     top: -50,
     boxShadow: '0 2px 15px #111'
   },

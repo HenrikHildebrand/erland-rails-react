@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import { geolocated } from 'react-geolocated'
+import mapOptions from './mapStyles'
+import ToggleDarkMode from '../Buttons/MapModeButton'
 
 const ubit = {lat: 57.6982853, lng: 11.9752105}
 const api_key = "AIzaSyD0Mknc1_dWFz7iRLF24lVFm4edmyxw3g4";
@@ -14,11 +16,9 @@ const mapContainer = (props) => {
     const geoAvailable = () => (props.isGeolocationAvailable && props.isGeolocationEnabled)
   
     const setCurrentPosition = () => {
-      try {
-        if(geoAvailable() && props.coords) setPos({lat: props.coords.latitude, lng: props.coords.longitude})
-      } catch (error) {
-        console.log(error)
-      }
+      if(geoAvailable() && props.coords){
+        setPos({lat: props.coords.latitude, lng: props.coords.longitude})
+      } 
     }
 
     const extractPosition = (question) => (
@@ -30,30 +30,49 @@ const mapContainer = (props) => {
 
     useEffect(() => {
         if(map && map.map){
-            map.map.setOptions(mapOptions);
+            map.map.setOptions(mapOptions.dark);
         } 
     }, [map])
 
     useEffect(() => {
-        setInterval(()=>{
-            setCurrentPosition()
-        }, 5000)
-    }, [])
+      setCurrentPosition()  
+    }, [props.coords])
 
 
     // pan to new position
     useEffect(() => {
         if(map){
             map.map.panTo(center)
+            const zoomFluid = map.map.getZoom()
+            zoomTo(zoomFluid);
         } 
     },[center])
 
     useEffect(() => {
         if(map){
-            map.map.panTo(pos)
+            try {
+              map.map.panTo(pos)
+              const zoomFluid = map.map.getZoom()
+              zoomTo(zoomFluid);
+            } catch (error) {
+              console.log("ERROR: ", error)
+            }
         } 
     },[props.trackCurrentPosition])
 
+    const zoomTo = (zoom) => {
+      if(zoom >= 15){
+        return 0;
+      } 
+      else {
+        map.map.setZoom(zoom + 1);
+        setTimeout(() => zoomTo(zoom + 1), 50);
+      }
+    }
+
+    const toggleDarkMode = (index) => {
+        map.map.setOptions( index % 2 === 0 ? mapOptions.dark : mapOptions.light );
+    }
 
     return(
         <div>
@@ -63,6 +82,8 @@ const mapContainer = (props) => {
                 zoom={15}
                 ref={(m) => {setMap(m);}}
                 initialCenter={ubit}
+                zoomControl={false}
+                streetViewControl={false}
             >
                 {children}
                 {
@@ -80,6 +101,7 @@ const mapContainer = (props) => {
                     name={'Current location'}  
                     position={pos} 
                     icon="static/bluecircle.png" />
+                <ToggleDarkMode toggle={toggleDarkMode} />
                 
             </Map>
         </div>
@@ -87,245 +109,8 @@ const mapContainer = (props) => {
 }
 
 export default geolocated({
-    positionOptions: {
-        enableHighAccuracy: true,
-    },
     watchPosition: true,
-    userDecisionTimeout: 500,
-})(GoogleApiWrapper( { apiKey: api_key } )(mapContainer));
-
-
-const myStyles = [
-    {
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#212121"
-        }
-      ]
-    },
-    {
-      "elementType": "labels",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "elementType": "labels.icon",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#757575"
-        }
-      ]
-    },
-    {
-      "elementType": "labels.text.stroke",
-      "stylers": [
-        {
-          "color": "#212121"
-        }
-      ]
-    },
-    {
-      "featureType": "administrative",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#757575"
-        },
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "featureType": "administrative.country",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#9e9e9e"
-        }
-      ]
-    },
-    {
-      "featureType": "administrative.land_parcel",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "featureType": "administrative.locality",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#bdbdbd"
-        }
-      ]
-    },
-    {
-      "featureType": "administrative.neighborhood",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "featureType": "poi",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "featureType": "poi",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#757575"
-        }
-      ]
-    },
-    {
-      "featureType": "poi.park",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#181818"
-        }
-      ]
-    },
-    {
-      "featureType": "poi.park",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#616161"
-        }
-      ]
-    },
-    {
-      "featureType": "poi.park",
-      "elementType": "labels.text.stroke",
-      "stylers": [
-        {
-          "color": "#1b1b1b"
-        }
-      ]
-    },
-    {
-      "featureType": "road",
-      "elementType": "geometry.fill",
-      "stylers": [
-        {
-          "color": "#2c2c2c"
-        }
-      ]
-    },
-    {
-      "featureType": "road",
-      "elementType": "labels.icon",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "featureType": "road",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#8a8a8a"
-        }
-      ]
-    },
-    {
-      "featureType": "road.arterial",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#373737"
-        }
-      ]
-    },
-    {
-      "featureType": "road.highway",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#3c3c3c"
-        }
-      ]
-    },
-    {
-      "featureType": "road.highway.controlled_access",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#4e4e4e"
-        }
-      ]
-    },
-    {
-      "featureType": "road.local",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#616161"
-        }
-      ]
-    },
-    {
-      "featureType": "transit",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
-    },
-    {
-      "featureType": "transit",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#757575"
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#000000"
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "color": "#3d3d3d"
-        }
-      ]
-    }
-  ];
-
-const mapOptions = {
-    styles: myStyles 
-};
+    userDecisionTimeout: 1000,
+})(GoogleApiWrapper( { 
+  apiKey: api_key 
+} )(mapContainer));
