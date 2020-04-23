@@ -31,6 +31,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'rspec_api_documentation'
 end
 
 group :development do
@@ -41,8 +43,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
-  # for tests
-  gem 'rspec-rails'
 end
 
 group :test do
@@ -58,7 +58,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'database_cleaner'
-  gem 'rspec_api_documentation'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -74,4 +73,4 @@ gem 'active_admin_role'
 gem 'omniauth-facebook'
 gem 'simple_token_authentication'
 gem 'active_model_serializers', '~> 0.10.0'
-
+gem 'apipie-rails'

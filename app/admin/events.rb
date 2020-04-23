@@ -5,7 +5,7 @@ ActiveAdmin.register Event do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :date, :admin_id, :initial_credits, :invite_only, :public,
+  permit_params :title, :date, :admin_id, :initial_credits, :invite_only, :is_public,
                 collaborator_ids: [], participant_ids: [], song_ids: []
 
   sidebar "Event details", only: :show do
@@ -28,7 +28,7 @@ ActiveAdmin.register Event do
       f.input :collaborators, collection: User.all
       f.input :participants, collection: User.all
       f.input :invite_only
-      f.input :public
+      f.input :is_public
     end
     f.actions
   end

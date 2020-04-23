@@ -6,12 +6,14 @@ Rails.application.routes.draw do
     devise_for :admin_users, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
 
+    apipie
     namespace :v1 do
         resources :users
         resources :events do
             member do
                 post 'join' => 'events#join'
                 post 'leave' => 'events#leave'
+                get 'user_expenses' => 'events#user_expenses'
             end
         end
         resources :beer_packages
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
         resources :alternatives
         resources :answers
         resources :songs
+        resources :expenses do
+        end
 
         get '/events/:id/participants' => 'events#participants', as: :event_participants
     end

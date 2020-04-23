@@ -11,7 +11,7 @@ class Event < ApplicationRecord
   has_many :beer_packages, dependent: :destroy
   has_many :wallets, dependent: :destroy
   has_many :invites, dependent: :destroy
-  has_one :expense
+  has_many :expenses, dependent: :destroy
 
   validates_presence_of :title, :admin_id
   validates :invite_only, :is_public, inclusion: { in: [true, false] }

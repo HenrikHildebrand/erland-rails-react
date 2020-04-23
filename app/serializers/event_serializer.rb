@@ -1,5 +1,6 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :title, :date, :invite_only, :is_public, :initial_credits, :is_admin, :is_collaborator, :admin_id
+  attributes :id, :title, :date, :invite_only, :is_public, :initial_credits, :is_admin,
+             :is_collaborator, :admin_id, :total_event_expenses
 
   has_many :participants
   has_many :collaborators
@@ -37,4 +38,9 @@ class EventSerializer < ActiveModel::Serializer
       }
     end
   end
+
+  def total_event_expenses
+    object.expenses.sum(:grand_total)
+  end
+
 end

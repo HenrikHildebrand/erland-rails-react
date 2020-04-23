@@ -13,13 +13,14 @@ RSpec.describe Expense, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it 'has a grand_total' do
+  it 'has a grand_total and is not less than 0' do
+    subject.grand_total = nil
+    expect(subject).to_not be_valid
+    subject.grand_total = -100
+    expect(subject).to_not be_valid
   end
 
-  it 'has only one creator' do
-  end
-
-  it 'has either custom_debt or equal percentage' do
+  it 'if debtors no custom_debt must exist and vice versa' do
   end
 
   it 'has either debtors else split on all participants in event' do

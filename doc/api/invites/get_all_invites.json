@@ -1,0 +1,63 @@
+{
+  "resource": "Invites",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/v1/invites",
+  "description": "Get all invites",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "token",
+      "description": "Private token"
+    },
+    {
+      "required": false,
+      "name": "starts_with",
+      "description": "Starts with slug"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/v1/invites?token=YOUR_TEST_TOKEN&starts_with=de&event_id=80",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-User-Email": "zandra@nienow.info",
+        "X-User-Token": "SbTb2CFpBtWoWjeCU5fi",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "token": "YOUR_TEST_TOKEN",
+        "starts_with": "de",
+        "event_id": "80"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"cf26a306cb131610fe3749eaf5fd3dc7\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "dac7e532-ffce-49cb-926a-62808f7401ab",
+        "X-Runtime": "0.064359",
+        "Content-Length": "196"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl -g \"http://localhost:3000/v1/invites?token=YOUR_TEST_TOKEN&starts_with=de&event_id=80\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-User-Email: zandra@nienow.info\" \\\n\t-H \"X-User-Token: SbTb2CFpBtWoWjeCU5fi\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

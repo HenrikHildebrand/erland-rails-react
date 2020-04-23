@@ -1,6 +1,7 @@
 class V1::UsersController < V1::BaseController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  #TODO
+  # REFACTOR ALL CODE HERE!!
   def index
     if params[:event_id]
       @event = find_event
@@ -19,6 +20,8 @@ class V1::UsersController < V1::BaseController
     end
   end
 
+  api!
+  description "shows user"
   def show
     if @user
       render json: @user

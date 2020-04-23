@@ -2,7 +2,7 @@ class V1::InvitesController < V1::BaseController
     before_action :set_invite, only: [:show, :edit, :update, :destroy]
 
     def index
-        @invites = V1::Invite.all
+        @invites = current_event.invites
         render json: @invites
     end
 
@@ -25,7 +25,7 @@ class V1::InvitesController < V1::BaseController
             render json: @invite, status: :created
         else
             error = @invite.errors.messages
-            render json: {message: 'Unable to create new invite.', error: error}, status: :unprocessable_entity
+            render json: {message: 'Unable to create new invite.',   error: error}, status: :unprocessable_entity
         end
     end
 

@@ -1,0 +1,17 @@
+{
+  "resources": [
+    {
+      "name": "Invites",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Get all invites",
+          "link": "invites/get_all_invites.json",
+          "groups": "all",
+          "route": "/v1/invites",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}

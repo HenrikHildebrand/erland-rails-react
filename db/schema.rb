@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_041615) do
+ActiveRecord::Schema.define(version: 2020_04_16_143530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_041615) do
     t.float "percentage"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.json "custom_debt"
     t.index ["creator_id"], name: "index_expenses_on_creator_id"
     t.index ["event_id"], name: "index_expenses_on_event_id"
   end
